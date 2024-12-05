@@ -6,6 +6,7 @@ app.use('/public', express.static('public'));
 const cors = require("cors");
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
+require("./model/db")
 app.use(
   cors({
     credentials: true,
