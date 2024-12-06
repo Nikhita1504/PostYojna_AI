@@ -1,0 +1,54 @@
+.card {
+    background: white;
+    border-radius: 20px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  }
+  
+  .iconWrapper {
+    width: 60px;
+    height: 60px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: white;
+  }
+  
+  .blue {
+    background: #4318FF;
+  }
+  
+  .green {
+    background: #05CD99;
+  }
+  
+  .purple {
+    background: #6C5DD3;
+  }
+  
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  
+  .title {
+    font-size: 0.875rem;
+    color: #666;
+  }
+  
+  .value {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  

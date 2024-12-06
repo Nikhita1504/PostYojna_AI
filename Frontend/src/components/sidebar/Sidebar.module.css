@@ -1,0 +1,117 @@
+.sidebar {
+    width: 280px;
+    height: 100vh;
+    background: white;
+    border-right: 1px solid #eee;
+    padding: 1rem;
+    position: fixed;
+    left: 0;
+    top: 0;
+    overflow-y: auto; /* Scrollable sidebar */
+    transition: all 0.3s;
+    z-index: 10; /* Ensure the sidebar is below the header */
+}
+
+.closed {
+    width: 85px;
+}
+
+.open {
+    width: 280px; /* Expanded width when open */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
+
+.logoIcon img {
+    width: 50px;
+    height: 50px;
+    background: #4318ff;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.logoText {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.hidden {
+    display: none;
+}
+
+.toggleButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    position: absolute;
+    right: 0;
+    color: #4318ff;
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.sectionTitle {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #666;
+    padding: 0 1rem;
+    margin-bottom: 0.5rem;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.navItem {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    color: #666;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+    position: relative;
+}
+
+.navItem:hover {
+    background: #3A57E8;
+    opacity: 0.8;
+    color: white;
+}
+
+.navItem.active {
+    background: #4318ff;
+    color: white;
+}
+
+.icon {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.iconRight {
+    margin-left: auto;
+    font-size: 1.2rem;
+}

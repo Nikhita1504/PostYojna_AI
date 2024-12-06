@@ -1,0 +1,9 @@
+.mapsContainer {
+    width: 100%;
+    height: 100vw;
+    border: 1px solid #ccc;
+    margin-left: 20%;
+    position: relative;
+    z-index: -10;
+    cursor: pointer;
+}

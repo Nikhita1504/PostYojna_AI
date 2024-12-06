@@ -1,0 +1,286 @@
+.dashboard {
+  background-color: #F2F3FA;
+  color: #333;
+  font-family: Arial, sans-serif;
+  padding-top: 70px;
+  /*padding-left: 320px;
+  padding-right: 20px; */
+  overflow: hidden;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.backgroundImage {
+  width: 100%;
+  height: 170px;
+  margin: 0 !important;
+  object-fit: cover;
+  /* Ensures the image covers the container */
+}
+
+.dashboardHeader {
+  position: absolute;
+  top: 50%;
+  /* Vertically centers content */
+  left: 23%;
+  /* Aligns content to the left */
+  transform: translateY(-50%);
+  /* Centers vertically within the image */
+  width: 70%;
+  /* Spans the entire width of the container */
+  display: flex;
+  justify-content: space-between;
+  /* Separates "Hey! Welcome" and dropdown */
+  align-items: center;
+  /* Aligns items in the same row */
+  padding: 0 20px;
+  /* Adds padding for spacing */
+  color: white;
+  /* Makes text visible on the background image */
+}
+
+.dashboardHeader h1 {
+  font-size: 3rem;
+  margin: 0;
+}
+
+.dashboardHeader p {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.controls {
+
+  display: flex;
+  gap: 10px;
+}
+
+.dropdown {
+  padding: 10px 15px;
+
+  border: 1px solid #ccc;
+
+  border-radius: 8px;
+
+  background-color: #ffffff;
+
+  color: #333;
+
+  font-size: 0.9rem;
+
+  cursor: pointer;
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  transition: all 0.3s ease;
+
+}
+
+.dropdown:focus {
+  outline: none;
+  /* Removes default blue outline */
+  border: 1px solid #007bff;
+  /* Adds a blue border on focus */
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.5);
+  /* Focus glow */
+}
+
+.dropdown:hover {
+  background-color: #F2F3FA;
+  cursor: pointer;
+  /* Slightly lighter background on hover */
+}
+
+.dropdown option {
+  padding: 5px;
+  /* Adds padding for dropdown options */
+  background-color: #fff;
+  /* White background for dropdown options */
+  color: #333;
+  /* Text color for options */
+}
+
+/* location */
+.inputWrapper {
+  position: relative; /* Ensure suggestions dropdown aligns with the input */
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding: 0.8rem 1rem;
+  border-radius: 50px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  z-index: 2; /* Ensure it stays above other content */
+}
+
+.input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 1rem;
+  color: #333;
+}
+
+.input::placeholder {
+  color: #aaa;
+  font-size: 0.95rem;
+}
+.icon {
+  color: #ff6347;
+  margin-right: 10px;
+  font-size: 1.2rem;
+}
+
+
+.suggestions {
+  position: absolute;
+  top: calc(100% + 5px); /* Place suggestions right below the input */
+  left: 50%; /* Center relative to the input */
+  transform: translateX(-50%); /* Center align */
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  border-radius: 8px;
+
+  max-height: 460px;
+  z-index: 9997; /* Higher than most elements but below the loader */
+}
+
+.suggestionItem {
+  padding: 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: #333;
+  display: flex;
+  align-items: center;
+}
+
+.suggestionItem:hover {
+  background-color: #f1f1f1;
+}
+
+
+.locationIcon {
+  color: #ff6347;
+  margin-right: 10px;
+  font-size: 1.2rem;
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* Cover the entire page width */
+  height: 100vh; /* Cover the entire page height */
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999; /* Highest z-index to cover everything */
+  background-color: rgba(128, 128, 128, 0.514);
+}
+
+.spinner {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid #1961CE;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+.content {
+  background-color: #F2F3FA;
+  color: #333;
+  font-family: Arial, sans-serif;
+
+  padding-left: 320px;
+  padding-right: 20px;
+  overflow: hidden;
+}
+
+
+
+.currentTime {
+  font-size: 14px;
+  color: #888;
+}
+
+.metricsSection {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.metricCard {
+  flex: 1;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.metricCard h3 {
+  margin-bottom: 10px;
+}
+
+.chartsSection {
+  display: flex;
+  gap: 20px;
+}
+
+.chartContainer {
+  flex: 1;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.transactionsContainer {
+  flex: 1;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.transactionsTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.transactionsTable th,
+.transactionsTable td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+.transactionsTable th {
+  background-color: #f4f4f4;
+}
+
+.viewButton {
+  background-color: #007bff;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
