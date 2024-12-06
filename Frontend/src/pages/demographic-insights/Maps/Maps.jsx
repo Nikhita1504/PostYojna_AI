@@ -116,6 +116,7 @@ const Maps = () => {
   }, [currentCity, markerInstance]);
 
   return (
+
     <div style={{ paddingLeft: "21.6%" }}>
   <h1>MapTiler Vector Map Example</h1>
   <div
@@ -132,3 +133,4 @@ const Maps = () => {
 };
 
 export default Maps;
+
