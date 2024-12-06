@@ -1,63 +1,61 @@
-.graphContainer {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Two columns in the first row */
-gap: 1rem;
-    margin: 2rem 0;
-    padding-left: 280px; /* Account for the sidebar width */
-    padding: 70px 20%;
-     /* Account for the header height */
-    width: calc(100% - 280px); /* Adjust the width to fit the space left by the sidebar */
-    height: calc(100vh - 70px); /* Adjust the height to fit the space left by the header */
-    overflow-y: auto; /* Ensure the content is scrollable if necessary */
-  }
-  
-  .graphCard1{
-    background-color: #1e1e2f;
-    padding: 1.5rem;
-    margin: 0 1.5rem;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    color: #fff;
-    height: 300px;
-    width: 500px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  .graphCard {
-    background-color: #1e1e2f;
-    padding: 1.5rem;
-    margin: 0 1.5rem;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    color: #fff;
-    height: 300px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.chartContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto auto;
+  gap: 20px;
+  background-color: #F2F3FA;
+  padding-top: 30px;
+  padding-left: 320px;
+  height: 100vh;
+}
+
+.chartBox {
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  text-align: center;
+}
+.chartBox:nth-child(1){
+  display: flex;
+  flex-direction: column;
+}
+
+.chartBox:nth-child(1),
+.chartBox:nth-child(2) {
+  height: 250px; /* Reduced height */
+}
 
 
-  }
-  
-  .graphCard h3 {
-    text-align: center;
-    margin-bottom: 1rem;
-  }
-  
-  .fullWidth {
-    grid-column: span 2; /* Make the last card span across both columns */
-  }
-  
-  @media (max-width: 768px) {
-    .graphContainer {
-      grid-template-columns: 1fr; /* Stack the cards vertically on smaller screens */
-      padding-left: 0; /* Remove the left padding on smaller screens */
-    }
-  
-    .fullWidth {
-      grid-column: span 1; /* Keep the fullWidth card at full width on mobile */
-    }
-  }
-  
+.chartBox.thirdChart {
+  grid-column: span 2; /* Makes the third chart span across both columns */
+  height: 650px; /* Increase the height for the third chart */
+}
+
+.chartBox:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal {
+display: flex;
+flex-direction: column;
+justify-content: center;
+
+
+width: 500px;
+  background: rgb(255, 255, 255);
+ margin-top: 170px;
+  margin-left: 37%;
+  border-radius: 8px;
+  padding: 1rem;
+  overflow: auto;
+}

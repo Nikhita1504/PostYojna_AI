@@ -4,6 +4,8 @@
     background: white;
     border-right: 1px solid #eee;
     padding: 1rem;
+    display: flex;
+    flex-direction: column;
     position: fixed;
     left: 0;
     top: 0;
@@ -30,11 +32,11 @@
 }
 
 .logoIcon img {
-    width: 50px;
+    width: 70px;
     height: 50px;
     background: #4318ff;
     color: white;
-    border-radius: 10px;
+    /* border-radius: 10px; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -95,14 +97,15 @@
     position: relative;
 }
 
+
 .navItem:hover {
-    background: #3A57E8;
-    opacity: 0.8;
-    color: white;
+    background: #A5C5FF;
+
+
 }
 
 .navItem.active {
-    background: #4318ff;
+    background: #174EB3;
     color: white;
 }
 
@@ -115,3 +118,36 @@
     margin-left: auto;
     font-size: 1.2rem;
 }
+
+.Profile {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    align-items: center;
+    padding: 10px;
+    margin: 20px 0; /* Adds some spacing around the profile section */
+    border-radius: 8px;
+  }
+  
+  .Profile img {
+    width: 85px; /* Profile image size */
+    height: 85px;
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover; /* Ensures image doesn't stretch */
+    margin-right: 15px; /* Space between image and text */
+    border: 2px solid #ddd; /* Optional border for the image */
+  }
+  
+  .Profile h4 {
+    margin: 0; /* Remove default margin */
+    font-size: 16px;
+    color: #333; /* Darker text color for better readability */
+    font-weight: bold;
+  }
+  
+  .Profile p {
+    margin: 0;
+    font-size: 14px;
+    color: #666; /* Softer text color for the role */
+  }
+  

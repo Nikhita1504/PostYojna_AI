@@ -29,6 +29,10 @@ const router = createBrowserRouter([
             {
                 path:'/demographic-insights/maps/graphs',
                 element:<GraphComponent/>
+            },
+            {
+                path:'/calender',
+                element:<Dashboard/>
             }
         ]
 
