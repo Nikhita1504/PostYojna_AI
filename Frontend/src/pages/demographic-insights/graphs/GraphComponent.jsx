@@ -58,27 +58,36 @@ const GraphComponent = () => {
       <h2 className={styles.title}>Demographic Insights of {villageData.villageName}</h2>
       <div className={styles.chartContainer}>
         {/* Population Pie Chart */}
-        <div className={styles.chartBox} onClick={() => openModal("population")}>
-          <ResponsiveContainer width="100%" height={200}>
-            <PieChart>
-              <Pie
-                data={getPopulationData()}
-                dataKey="value"
-                nameKey="name"
-                outerRadius={100}
-                fill="#8884d8"
-                
-              >
-                {getPopulationData().map((_, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                ))}
-              </Pie>
-              <Tooltip />
-              <Legend />
-            </PieChart>
-          </ResponsiveContainer>
-          <p>Population Chart</p>
+        <div className={`${styles.chartBox} ${styles.firstChart}`} onClick={() => openModal("population")}>
+          
+            <ResponsiveContainer width="100%" height={200}>
+              <PieChart>
+                <Pie
+                  data={getPopulationData()}
+                  dataKey="value"
+                  nameKey="name"
+                  outerRadius={100}
+                  innerRadius={50}
+                  fill="#8884d8"
+                >
+                  {getPopulationData().map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                  ))}
+                </Pie>
+                <Tooltip />
+                <Legend
+                  layout="vertical"
+                  align="right"
+                  verticalAlign="middle"
+                  iconType="square"
+                  formatter={(value, entry) => `${value} (${entry.payload.value})`}
+                />
+              </PieChart>
+            </ResponsiveContainer>
+            <p>Population Based Chart</p>
+
         </div>
+
 
         {/* Age Group Bar Chart */}
         <div className={styles.chartBox} onClick={() => openModal("ageGroup")}>
@@ -114,7 +123,7 @@ const GraphComponent = () => {
       </div>
 
       {/* Modal */}
-      
+
       <Modal
         isOpen={hoveredChart !== null}
         onRequestClose={closeModal}

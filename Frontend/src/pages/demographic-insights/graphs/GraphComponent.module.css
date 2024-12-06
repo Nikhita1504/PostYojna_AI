@@ -1,7 +1,15 @@
+.bigCon{
+  padding-top: 50px;
+  padding-left: 320px;
+  height: 100vh;
+  background-color: #F2F3FA;
+  overflow: hidden;
+}
 .title {
   text-align: center;
   font-size: 24px;
   margin-bottom: 20px;
+  color: black;
 }
 
 .chartContainer {
@@ -10,8 +18,8 @@
   grid-template-rows: auto auto;
   gap: 20px;
   background-color: #F2F3FA;
-  padding-top: 30px;
-  padding-left: 320px;
+  /* padding-top: 30px;
+  padding-left: 320px; */
   height: 100vh;
 }
 
@@ -21,6 +29,7 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s ease;
   text-align: center;
 }
@@ -37,7 +46,7 @@
 
 .chartBox.thirdChart {
   grid-column: span 2; /* Makes the third chart span across both columns */
-  height: 650px; /* Increase the height for the third chart */
+  height: 550px; /* Increase the height for the third chart */
 }
 
 .chartBox:hover {
@@ -58,4 +67,26 @@ width: 500px;
   border-radius: 8px;
   padding: 1rem;
   overflow: auto;
+}
+
+.chartBox .firstChart{
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  text-align: center;
+  height: 200px;
+}
+
+.chartWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.legendWrapper {
+  text-align: left; /* Aligns the legend text on the left */
+  padding-left: 10px; /* Optional, add spacing between the chart and the legend */
 }
