@@ -116,18 +116,21 @@ const Maps = () => {
   }, [currentCity, markerInstance]);
 
   return (
-    <div>
-      <h1>MapTiler Vector Map Example</h1>
-      <div
-        id="map"
-        style={{
-          width: "100%",
-          height: "100vh",
-          border: "1px solid #ccc",
-        }}
-      ></div>
-    </div>
+
+    <div style={{ paddingLeft: "21.6%" }}>
+  <h1>MapTiler Vector Map Example</h1>
+  <div
+    id="map"
+    style={{
+      width: "100%",
+      height: "100vh",
+      border: "1px solid #ccc",
+    }}
+  ></div>
+</div>
+
   );
 };
 
 export default Maps;
+

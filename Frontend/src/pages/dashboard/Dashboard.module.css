@@ -1,16 +1,22 @@
 .dashboard {
   background-color: #F2F3FA;
+
   color: #333;
   font-family: Arial, sans-serif;
   padding-top: 70px;
-  /*padding-left: 320px;
-  padding-right: 20px; */
+  height: calc(100vh-70px);
+
   overflow: hidden;
+}
+.header{
+  background-color: red;
+  height: 100vh;
 }
 
 .imageWrapper {
   position: relative;
   width: 100%;
+  height: fit-content;
   overflow: hidden;
 }
 
@@ -19,28 +25,28 @@
   height: 170px;
   margin: 0 !important;
   object-fit: cover;
-  /* Ensures the image covers the container */
+
 }
 
 .dashboardHeader {
   position: absolute;
   top: 50%;
-  /* Vertically centers content */
+
   left: 23%;
-  /* Aligns content to the left */
+
   transform: translateY(-50%);
-  /* Centers vertically within the image */
+
   width: 70%;
-  /* Spans the entire width of the container */
+
   display: flex;
   justify-content: space-between;
-  /* Separates "Hey! Welcome" and dropdown */
+
   align-items: center;
-  /* Aligns items in the same row */
+
   padding: 0 20px;
-  /* Adds padding for spacing */
+  
   color: white;
-  /* Makes text visible on the background image */
+
 }
 
 .dashboardHeader h1 {
@@ -57,6 +63,8 @@
 
   display: flex;
   gap: 10px;
+
+
 }
 
 .dropdown {
@@ -82,46 +90,158 @@
 
 .dropdown:focus {
   outline: none;
-  /* Removes default blue outline */
+
   border: 1px solid #007bff;
-  /* Adds a blue border on focus */
+
   box-shadow: 0 0 6px rgba(0, 123, 255, 0.5);
-  /* Focus glow */
+
 }
 
 .dropdown:hover {
   background-color: #F2F3FA;
   cursor: pointer;
-  /* Slightly lighter background on hover */
+
 }
 
 .dropdown option {
   padding: 5px;
-  /* Adds padding for dropdown options */
+
   background-color: #fff;
-  /* White background for dropdown options */
+
   color: #333;
-  /* Text color for options */
+
+}
+.searchContainer{
+  background-color: red;
+}
+.content {
+  background-color: #F2F3FA;
+  color: #333;
+  font-family: Arial, sans-serif;
+  padding-left: 320px;
+  padding-right: 20px;
+  overflow: hidden;
+  margin-top: 35px;
+  opacity: 0; /* Initially hidden */
+  transform: translateY(20px); /* Start from below */
+  animation: slideUp 1s ease-out forwards; /* Apply animation */
 }
 
-/* location */
-.inputWrapper {
-  position: relative; /* Ensure suggestions dropdown aligns with the input */
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(150px); /* Start from below */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0); /* End at its normal position */
+  }
+}
+
+
+
+.currentTime {
+  font-size: 14px;
+  color: #888;
+}
+
+.metricsSection {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.metricCard {
+  flex: 1;
+  background-color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between; /* Align content to sides */
+  align-items: center; /* Center vertically */
+}
+
+.metricContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.metricContentHeader {
   display: flex;
   align-items: center;
-  background-color: white;
-  padding: 0.8rem 1rem;
-  border-radius: 50px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
-  z-index: 2; /* Ensure it stays above other content */
+}
+
+.metricCard svg {
+  margin-right: 15px; /* Space between icon and heading */
+  flex-shrink: 0; /* Prevent the icon from shrinking */
+}
+.metricCardData p{
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.metricContent h3 {
+  margin-bottom: 5px;
+  font-size: 1.25rem;
+}
+
+
+
+
+
+
+.chartsSection {
+  display: flex;
+  gap: 20px;
+}
+
+.chartContainer {
+  flex: 1;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+.viewButton {
+  background-color: #007bff;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.inputWrapper {
+ width: 300px;
+ position: absolute;
+ right: 30%;
+ top: 27%;
+display: flex;
+justify-content: center;
+align-items: center;
+ background-color: white;
+ border-radius: 28px;
+ padding: 0.5rem;
+ box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+}
+
+.icon {
+  color: #ff6347;
+
+  font-size: 1.2rem;
 }
 
 .input {
   border: none;
   outline: none;
-  width: 100%;
+  width: 70%;
   font-size: 1rem;
+  padding: 0.5rem;
+  border-radius: 20px;
   color: #333;
 }
 
@@ -129,26 +249,22 @@
   color: #aaa;
   font-size: 0.95rem;
 }
-.icon {
-  color: #ff6347;
-  margin-right: 10px;
-  font-size: 1.2rem;
-}
-
 
 .suggestions {
   position: absolute;
-  top: calc(100% + 5px); /* Place suggestions right below the input */
-  left: 50%; /* Center relative to the input */
-  transform: translateX(-50%); /* Center align */
-  background-color: white;
+  top: calc(100% + 10px); /* Place suggestions below the input */
+  left: 50%;
+  transform: translateX(-50%); /* Center align the dropdown */
+  background-color:white;
+ 
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  width: 100%;
+  width: 90%;
   max-width: 400px;
+  padding: 0.5rem;
   border-radius: 8px;
-
-  max-height: 460px;
-  z-index: 9997; /* Higher than most elements but below the loader */
+  overflow-y: auto;
+  max-height: 250px;
+  z-index: 9998; /* Ensure it's above other content */
 }
 
 .suggestionItem {
@@ -158,12 +274,12 @@
   color: #333;
   display: flex;
   align-items: center;
+
 }
 
 .suggestionItem:hover {
   background-color: #f1f1f1;
 }
-
 
 .locationIcon {
   color: #ff6347;
@@ -175,12 +291,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%; /* Cover the entire page width */
-  height: 100vh; /* Cover the entire page height */
+  width: 100%;
+  height: 100%;
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9999; /* Highest z-index to cover everything */
+  z-index: 10000;
   background-color: rgba(128, 128, 128, 0.514);
 }
 
@@ -202,85 +318,91 @@
   }
 }
 
+.charts {
+  display: flex;
+  gap: 20px;
+  margin-top: 30px;
+}
 
-.content {
-  background-color: #F2F3FA;
+.progresschart{
+
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  height: 350px;
+  width: 60%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.progresschart h3{
+  margin-bottom: 20px;
+  font-size: 1.25rem;
   color: #333;
-  font-family: Arial, sans-serif;
-
-  padding-left: 320px;
-  padding-right: 20px;
-  overflow: hidden;
 }
 
-
-
-.currentTime {
-  font-size: 14px;
-  color: #888;
+.progresschart canvas {
+  max-width: 100%; /* Ensure charts are responsive */
+}
+.recentTransactions {
+  padding: 20px;
+  width: 40%;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-height: 350px; /* Adjust this height to suit your layout */
+  overflow-y: auto; /* Makes the container scrollable */
 }
 
-.metricsSection {
+.transactionList {
   display: flex;
-  gap: 20px;
-  margin-bottom: 30px;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.metricCard {
-  flex: 1;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
-.metricCard h3 {
-  margin-bottom: 10px;
-}
-
-.chartsSection {
+.transactionItem {
   display: flex;
-  gap: 20px;
-}
-
-.chartContainer {
-  flex: 1;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.transactionsContainer {
-  flex: 1;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.transactionsTable {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.transactionsTable th,
-.transactionsTable td {
-  border: 1px solid #ccc;
+  justify-content: space-between;
+  align-items: center;
   padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+.transactiondata{
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.transactiondata .id{
+  font-weight: bold;
   text-align: left;
 }
+.transactiondata .user{
+  text-align: left;
 
-.transactionsTable th {
-  background-color: #f4f4f4;
+}
+.transactionItem div {
+  flex: 1;
+  text-align: center;
+  font-size: 14px;
 }
 
+h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
 .viewButton {
-  background-color: #007bff;
-  color: #fff;
-  padding: 5px 10px;
+  padding: 6px 12px;
+  background-color: #2873E5; /* Button color */
+  color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.viewButton:hover {
+  background-color: #1d5cb7; /* Slightly darker shade on hover */
 }

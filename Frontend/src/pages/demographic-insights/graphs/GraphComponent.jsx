@@ -1,94 +1,191 @@
-import React from "react";
-import { Doughnut, Bar } from "react-chartjs-2";
+import React, { useState } from "react";
+
 import {
-  Chart as ChartJS,
-  ArcElement,
+  PieChart,
+  Pie,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
   Tooltip,
   Legend,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-} from "chart.js";
+  CartesianGrid,
+  ResponsiveContainer,
+} from "recharts";
+import { Cell } from "recharts";
+
+import Modal from "react-modal";
 import styles from "./GraphComponent.module.css";
+import villageData from "./villageData";
 
-ChartJS.register(
-  ArcElement,
-  Tooltip,
-  Legend,
-  CategoryScale,
-  LinearScale,
-  BarElement
-);
+const GraphComponent = () => {
+  const [hoveredChart, setHoveredChart] = useState(null);
 
-function GraphComponent() {
-  // Example data for graphs
-  const populationData = {
-    labels: ["Male Population", "Female Population"],
-    datasets: [
-      {
-        data: [1271, 1265],
-        backgroundColor: ["#4CAF50", "#00BCD4"],
-        hoverBackgroundColor: ["#388E3C", "#00838F"],
-      },
-    ],
+  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+
+  const getPopulationData = () => [
+    { name: "Male Population", value: villageData.demographics.totalPopulation.male },
+    { name: "Female Population", value: villageData.demographics.totalPopulation.female },
+  ];
+
+  const getAgeGroupData = () => {
+    const { ageGroups } = villageData.demographics;
+    return Object.keys(ageGroups).map((group) => ({
+      name: group,
+      Male: ageGroups[group].male,
+      Female: ageGroups[group].female,
+    }));
   };
 
-  const ageGroupData = {
-    labels: ["0-10", "11-18", "19-59", "60+"],
-    datasets: [
-      {
-        label: "Male",
-        data: [100, 150, 750, 50],
-        backgroundColor: "#4CAF50",
-      },
-      {
-        label: "Female",
-        data: [90, 120, 700, 70],
-        backgroundColor: "#00BCD4",
-      },
-    ],
-  };
+  const getOccupationData = () => [
+    {
+      name: "Agricultural Labourers",
+      Male: villageData.occupations.agriculturalLabourers.main.male + villageData.occupations.agriculturalLabourers.marginal.male,
+      Female: villageData.occupations.agriculturalLabourers.main.female + villageData.occupations.agriculturalLabourers.marginal.female,
+    },
+    {
+      name: "Non-working Population",
+      Male: villageData.occupations.nonWorkingPopulation.male,
+      Female: villageData.occupations.nonWorkingPopulation.female,
+    },
+  ];
 
-  const occupationData = {
-    labels: [
-      "Agricultural Labourers",
-      "Marginal Agricultural Labourers",
-      "Main Household Industries",
-      "Marginal Household Industries",
-      "Other Workers Population",
-      "Non-working Population",
-    ],
-    datasets: [
-      {
-        label: "Value",
-        data: [350, 200, 150, 100, 400, 1400],
-        backgroundColor: "#FFC107",
-      },
-    ],
-  };
+  const openModal = (chartType) => setHoveredChart(chartType);
+  const closeModal = () => setHoveredChart(null);
 
   return (
-    <div className={styles.graphContainer}>
-      <div className={styles.graphCard1}>
-        <Doughnut data={populationData} />
-        <p>Population Based Chart</p>
+    <div className={styles.bigCon}>
+     <div className={styles.titleContainer}>
+     <h2 className={styles.title}>Demographic Insights of {villageData.villageName}</h2>
+     </div>
+      <div className={styles.chartContainer}>
+        {/* Population Pie Chart */}
+        <div className={`${styles.chartBox} ${styles.firstChart}`} onClick={() => openModal("population")}>
+          
+            <ResponsiveContainer width="100%" height={200}>
+              <PieChart>
+                <Pie
+                  data={getPopulationData()}
+                  dataKey="value"
+                  nameKey="name"
+                  outerRadius={100}
+                  innerRadius={50}
+                  fill="#8884d8"
+                >
+                  {getPopulationData().map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                  ))}
+                </Pie>
+                <Tooltip />
+                <Legend
+                  layout="vertical"
+                  align="right"
+                  verticalAlign="middle"
+                  iconType="square"
+                  formatter={(value, entry) => `${value} (${entry.payload.value})`}
+                />
+              </PieChart>
+            </ResponsiveContainer>
+            <p>Population Based Chart</p>
 
+        </div>
+
+
+        {/* Age Group Bar Chart */}
+        <div className={styles.chartBox} onClick={() => openModal("ageGroup")}>
+          <ResponsiveContainer width="100%" height={200}>
+            <BarChart data={getAgeGroupData()}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="Male" fill="#8884d8" />
+              <Bar dataKey="Female" fill="#82ca9d" />
+            </BarChart>
+          </ResponsiveContainer>
+          <p>Age Group Chart</p>
+        </div>
+
+        {/* Occupation Bar Chart */}
+        <div className={`${styles.chartBox} ${styles.thirdChart}`} onClick={() => openModal("occupation")}>
+          <ResponsiveContainer width="100%" height={200}>
+            <BarChart data={getOccupationData()}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="Male" fill="#FFBB28" />
+              <Bar dataKey="Female" fill="#FF8042" />
+            </BarChart>
+          </ResponsiveContainer>
+          <p>Occupation Chart</p>
+        </div>
       </div>
 
-      <div className={styles.graphCard}>
-        <Bar data={ageGroupData} options={{ responsive: true }} />
-        <p>Age Groups Based Chart</p>
+      {/* Modal */}
 
-      </div>
+      <Modal
+        isOpen={hoveredChart !== null}
+        onRequestClose={closeModal}
+        className={styles.modal}
+      >
+        <div >
+          {hoveredChart === "population" && (
+            <ResponsiveContainer width="60%" height={350}>
+              <PieChart>
+                <Pie
+                  data={getPopulationData()}
+                  dataKey="value"
+                  nameKey="name"
+                  outerRadius={120}
+                  fill="#8884d8"
+                >
+                  {getPopulationData().map((_, index) => (
+                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                  ))}
+                </Pie>
+                <Tooltip />
+                <Legend />
+              </PieChart>
+            </ResponsiveContainer>
+          )}
 
-      <div className={`${styles.graphCard} ${styles.fullWidth}`}>
+          {hoveredChart === "ageGroup" && (
+            <ResponsiveContainer width="60%" height={350}>
+              <BarChart data={getAgeGroupData()}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="Male" fill="#8884d8" />
+                <Bar dataKey="Female" fill="#82ca9d" />
+              </BarChart>
+            </ResponsiveContainer>
+          )}
 
-        <Bar data={occupationData} options={{ responsive: true }} />
-        <p>Occupation Based Chart</p>
+          {hoveredChart === "occupation" && (
+            <ResponsiveContainer width="60%" height={350}>
+              <BarChart data={getOccupationData()}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="Male" fill="#FFBB28" />
+                <Bar dataKey="Female" fill="#FF8042" />
+              </BarChart>
+            </ResponsiveContainer>
+          )}
 
-      </div>
+          <button onClick={closeModal}>Close</button>
+        </div>
+      </Modal>
+
     </div>
   );
-}
+};
 
 export default GraphComponent;
