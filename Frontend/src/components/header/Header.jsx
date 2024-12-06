@@ -61,9 +61,9 @@ const Header = () => {
         <button className={styles.actionButton}>
           <Bell className={styles.actionIcon} />
         </button>
-        <div className={styles.profile}>
+        {/* <div className={styles.profile}>
           <img src="/assets/user.jpeg" alt="Profile" className={styles.profileImage} />
-        </div>
+        </div> */}
       </div>
     </header>
   );

@@ -55,7 +55,9 @@ const GraphComponent = () => {
 
   return (
     <div className={styles.bigCon}>
-      <h2 className={styles.title}>Demographic Insights of {villageData.villageName}</h2>
+     <div className={styles.titleContainer}>
+     <h2 className={styles.title}>Demographic Insights of {villageData.villageName}</h2>
+     </div>
       <div className={styles.chartContainer}>
         {/* Population Pie Chart */}
         <div className={`${styles.chartBox} ${styles.firstChart}`} onClick={() => openModal("population")}>

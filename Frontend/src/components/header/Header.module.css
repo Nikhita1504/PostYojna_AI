@@ -4,7 +4,9 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 2rem;
-    background: #F2F3FA;
+    /* background: #F2F3FA;
+     */
+     background-color: white;
     border-bottom: 1px solid #eee;
     position: fixed;
     top: 0;
