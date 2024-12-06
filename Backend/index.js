@@ -4,6 +4,7 @@ const app = express();
 const bodyparser = require("body-parser");
 app.use('/public', express.static('public'));
 const cors = require("cors");
+const { default: axios } = require("axios");
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 require("./model/db")
