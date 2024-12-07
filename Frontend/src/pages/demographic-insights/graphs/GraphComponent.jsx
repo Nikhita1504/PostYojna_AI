@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   PieChart,
@@ -17,6 +17,7 @@ import { Cell } from "recharts";
 import Modal from "react-modal";
 import styles from "./GraphComponent.module.css";
 import villageData from "./villageData";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const GraphComponent = () => {
   const [hoveredChart, setHoveredChart] = useState(null);
@@ -52,47 +53,83 @@ const GraphComponent = () => {
 
   const openModal = (chartType) => setHoveredChart(chartType);
   const closeModal = () => setHoveredChart(null);
+  const location = useLocation();
+  const navigate=useNavigate();
+  const { locationName, locationpoint } = location.state || {};
+  console.log(locationName);
+  console.log(locationpoint);
+  const [currlocation,setcurrlocation]=useState("");
 
+  useEffect(()=>{
+    if (locationName) {
+      console.log(locationName); 
+      console.log(locationpoint);
+    
+  
+      const words = locationName.split(",");
+      const lastThreeWords = words.slice(-5);
+    setcurrlocation(lastThreeWords[0])
+  
+      console.log(lastThreeWords); 
+    
+      
+      const lastThreeWordsObject = {
+       city: lastThreeWords[0],
+        state: lastThreeWords[1],
+        country: lastThreeWords[2],
+      };
+    
+      console.log(lastThreeWordsObject);
+    }
+  },[currlocation]);
+
+const handleNavigate=()=>{
+  navigate('/recommendations')
+}
   return (
     <div className={styles.bigCon}>
-     <div className={styles.titleContainer}>
-     <h2 className={styles.title}>Demographic Insights of {villageData.villageName}</h2>
-     </div>
+      <div className={styles.titleContainer}>
+        <h2 className={styles.title}>
+          Demographic Insights for {currlocation}
+        </h2>     
+        
+      </div>
+      <button onClick={handleNavigate} className={styles.recommendationbtn}>Show Recommendations</button>
       <div className={styles.chartContainer}>
         {/* Population Pie Chart */}
         <div className={`${styles.chartBox} ${styles.firstChart}`} onClick={() => openModal("population")}>
-          
-            <ResponsiveContainer width="100%" height={200}>
-              <PieChart>
-                <Pie
-                  data={getPopulationData()}
-                  dataKey="value"
-                  nameKey="name"
-                  outerRadius={100}
-                  innerRadius={50}
-                  fill="#8884d8"
-                >
-                  {getPopulationData().map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                  ))}
-                </Pie>
-                <Tooltip />
-                <Legend
-                  layout="vertical"
-                  align="right"
-                  verticalAlign="middle"
-                  iconType="square"
-                  formatter={(value, entry) => `${value} (${entry.payload.value})`}
-                />
-              </PieChart>
-            </ResponsiveContainer>
-            <p>Population Based Chart</p>
+
+          <ResponsiveContainer width="100%" height={200}>
+            <PieChart>
+              <Pie
+                data={getPopulationData()}
+                dataKey="value"
+                nameKey="name"
+                outerRadius={100}
+                innerRadius={50}
+                fill="#8884d8"
+              >
+                {getPopulationData().map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
+              </Pie>
+              <Tooltip />
+              <Legend
+                layout="vertical"
+                align="right"
+                verticalAlign="middle"
+                iconType="square"
+                formatter={(value, entry) => `${value} (${entry.payload.value})`}
+              />
+            </PieChart>
+          </ResponsiveContainer>
+          <p>Population Based Chart</p>
 
         </div>
 
 
         {/* Age Group Bar Chart */}
-        <div className={styles.chartBox} onClick={() => openModal("ageGroup")}>
+        <div className={`${styles.chartBox} ${styles.secondChart}`} onClick={() => openModal("ageGroup")}>
           <ResponsiveContainer width="100%" height={200}>
             <BarChart data={getAgeGroupData()}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -133,31 +170,38 @@ const GraphComponent = () => {
       >
         <div >
           {hoveredChart === "population" && (
-            <ResponsiveContainer width="60%" height={350}>
+            <ResponsiveContainer width="100%" height={200}>
               <PieChart>
                 <Pie
                   data={getPopulationData()}
                   dataKey="value"
                   nameKey="name"
-                  outerRadius={120}
+                  outerRadius={100}
+                  innerRadius={50}
                   fill="#8884d8"
                 >
-                  {getPopulationData().map((_, index) => (
+                  {getPopulationData().map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
                 <Tooltip />
-                <Legend />
+                <Legend
+                  layout="vertical"
+                  align="right"
+                  verticalAlign="middle"
+                  iconType="square"
+                  formatter={(value, entry) => `${value} (${entry.payload.value})`}
+                />
               </PieChart>
             </ResponsiveContainer>
           )}
 
           {hoveredChart === "ageGroup" && (
-            <ResponsiveContainer width="60%" height={350}>
+            <ResponsiveContainer width="80%" height={350}>
               <BarChart data={getAgeGroupData()}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
+                <XAxis dataKey="name" stroke="#FFFFFF" />
+                <YAxis stroke="#FFFFFF" />
                 <Tooltip />
                 <Legend />
                 <Bar dataKey="Male" fill="#8884d8" />
@@ -167,11 +211,11 @@ const GraphComponent = () => {
           )}
 
           {hoveredChart === "occupation" && (
-            <ResponsiveContainer width="60%" height={350}>
+            <ResponsiveContainer width="80%" height={350}>
               <BarChart data={getOccupationData()}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
+                <XAxis dataKey="name" stroke="#FFFFFF" />
+                <YAxis stroke="#FFFFFF" />
                 <Tooltip />
                 <Legend />
                 <Bar dataKey="Male" fill="#FFBB28" />

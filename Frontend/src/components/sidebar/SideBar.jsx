@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import { faAngleRight, faCalendarAlt, faChartPie, faHome } from "@fortawesome/free-solid-svg-icons";
 import { Dashboard, Menu, Palette } from "@mui/icons-material"; // Valid Material UI icons
 import styles from "./Sidebar.module.css";
 
@@ -37,10 +37,11 @@ const Sidebar = () => {
             }`}
             id={styles.dashboard}
           >
-            <Dashboard className={styles.icon} />
+               <FontAwesomeIcon icon={faHome} className={styles.icon} />
             Dashboard
             <FontAwesomeIcon icon={faAngleRight} className={styles.iconRight} />
           </Link>
+          <h3 className={styles.sectionTitle}>Visualizations</h3>
 
           <Link
             to="/demographic-insights"
@@ -48,17 +49,18 @@ const Sidebar = () => {
               location.pathname === "/demographic-insights" ? styles.active : ""
             }`}
           >
-            <Menu className={styles.icon} />
+             <FontAwesomeIcon icon={faChartPie} className={styles.icon} />
             Demographic Insights
             <FontAwesomeIcon icon={faAngleRight} className={styles.iconRight} />
           </Link>
+          <h3 className={styles.sectionTitle}>Add Event</h3>
           <Link
             to="/calendar"
             className={`${styles.navItem} ${
               location.pathname === "/calendar" ? styles.active : ""
             }`}
           >
-            <Palette className={styles.icon} />
+            <FontAwesomeIcon icon={faCalendarAlt} className={styles.icon} />
             Calendar
             <FontAwesomeIcon icon={faAngleRight} className={styles.iconRight} />
           </Link>

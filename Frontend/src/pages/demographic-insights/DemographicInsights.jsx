@@ -20,7 +20,7 @@ function DemographicInsights() {
     setLoading(true);
 
     try {
-      const response = await axios.get('http://localhost:3000/search', {
+      const response = await axios.get('http://localhost:3000/search/location', {
         params: { query: searchQuery },
       });
 
@@ -66,23 +66,31 @@ function DemographicInsights() {
     }
   }, [searchQuery]);
 
+  const handleMapNavigate=()=>{
+    navigate('/demographic-insights/maps')
+  }
+
   return (
     <div className={styles.container}>
 
       <div className={styles.imageWrapper}>
 
         <img src="/assets/bg.png" alt="Background" className={styles.bannerImage} />
-        <h2>View Insights</h2>
-        {/* Input Field on the Image */}
-        <div className={styles.inputWrapper}>
-          <FaMapMarkerAlt className={styles.icon} />
-          <input
-            type="text"
-            placeholder="Search for a location..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className={styles.input}
-          />
+        <div className={styles.searchContainer}>
+          <h2>View Demographic and Economic Visualization of any Region</h2>
+
+
+          <div className={styles.inputWrapper}>
+            <FaMapMarkerAlt className={styles.icon} />
+            <input
+              type="text"
+              placeholder="Search for a location..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className={styles.input}
+            />
+
+          </div>
           {locations.length > 0 && (
             <div className={styles.suggestions}>
               {locations.map((location, index) => (
@@ -97,6 +105,7 @@ function DemographicInsights() {
               ))}
             </div>
           )}
+          <button onClick={handleMapNavigate}>Directly Search in Map</button>
         </div>
 
       </div>

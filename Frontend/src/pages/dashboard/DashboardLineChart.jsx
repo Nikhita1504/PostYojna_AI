@@ -34,7 +34,7 @@ const DashboardBarChart = ({ isCustomBarColors = false, isDashboard = false }) =
   const colors = {
     grey: "#B0B0B0", // Lighter grey for axes
     primaryStart: "#079AA2", // Start color for gradient (light blue)
-    primaryEnd: "#F36325", // End color for gradient (dark teal)
+    primaryEnd: "#00C49F", // End color for gradient (dark teal)
     background: "#F0F0F5", // Light lavender background color
     axisText: "#999999", // Lighter grey for axis text
   };

@@ -15,8 +15,9 @@ const Maps = () => {
   const location = useLocation();
 
   const locationpoint = location.state?.locationpoint;
-  const coordinatess = [locationpoint.lat, locationpoint.lon];
-
+  const coordinatess = locationpoint
+  ? [locationpoint.lat, locationpoint.lon]
+  : [23.2599, 77.4126]; // Default to India's center
   function createPopupContent(city) {
     return `
       <div>
@@ -98,7 +99,7 @@ const Maps = () => {
       markerInstance.bindPopup(createPopupContent(currentCity)).openPopup();
       const button = document.getElementById("viewDataButton");
       button.addEventListener("click", () => {
-        Navigate("/demographic-insights/maps/graphs");
+        Navigate("/demographic-insights/maps/graphs",{state:{locationName:cityRef.current}});
         console.log("View data for:", cityRef.current);
       });
       markerInstance.on("popupopen", () => {

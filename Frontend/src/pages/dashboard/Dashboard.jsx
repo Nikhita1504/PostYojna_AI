@@ -184,29 +184,40 @@ const Dashboard = () => {
   const [Feedback, SetFeedback] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [locations, setLocations] = useState([]);
-  const [selectedLocation, setSelectedLocation] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const [selectedScheme, setSelectedScheme] = useState(schemes[0]);
+  const [debouncedSearchQuery, setDebouncedSearchQuery] = useState('');
+
+  // Debounce logic
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearchQuery(searchQuery);
+    }, 500); // 500ms debounce
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [searchQuery]);
 
   const handleSchemeChange = (e) => {
-    e.preventDefault();
+
     setSelectedScheme(e.target.value);
   };
 
-  const handleSearch = async (e) => {
-    e.preventDefault();
-    if (searchQuery.trim() === "" || searchQuery.length <= 3) return;
+
+  const handleSearch = async (query) => {
+    if (!query || query.trim() === '' || query.length <= 3) return;
 
     setLoading(true);
-
     try {
-      const response = await axios.get("http://localhost:3000/search", {
-        params: { query: searchQuery },
+      const response = await axios.get('http://localhost:3000/search/location', {
+        params: { query },
       });
 
       setLocations(response.data);
+      console.log(debouncedSearchQuery);
     } catch (error) {
       console.error("Error fetching location data:", error);
     } finally {
@@ -214,17 +225,10 @@ const Dashboard = () => {
     }
   };
 
-  // Function to handle selecting a location from the list
-  const handleSelectLocation = (location) => {
-    setSelectedLocation({
-      display_name: location.display_name,
-      lat: location.lat,
-      lon: location.lon,
-    });
 
-    setLocations([]);
-    setSearchQuery(location.display_name);
-  };
+  useEffect(() => {
+    handleSearch(debouncedSearchQuery);
+  }, [debouncedSearchQuery]);
 
   const fetchfeedback = async () => {
     console.log(selectedScheme);
@@ -240,22 +244,25 @@ const Dashboard = () => {
     fetchfeedback();
     console.log("called");
   }, [selectedScheme]);
-
-  // Reset selectedLocation if user navigates back from the graph page
   useEffect(() => {
-    if (location.pathname !== "/demographic-insights/graphs") {
-      setSelectedLocation(null);
-    }
-  }, [location.pathname]);
-  
-  useEffect(() => {
-  
-    if (searchQuery.length > 3) {
-      handleSearch({ preventDefault: () => {} });
-    } else {
+    if (location.pathname !== '/demographic-insights/graphs') {
       setLocations([]);
     }
-  }, [searchQuery]);
+  }, [location.pathname]);
+
+  const getDashboardData=async()=>{
+    try {
+      console.log(selectedScheme);
+      console.log(debouncedSearchQuery);
+
+    } catch (error) {
+      console.log(error)
+    }
+
+  }
+  useEffect(()=>{
+    getDashboardData
+  },[debouncedSearchQuery,selectedScheme])
 
   return (
     <div className={styles.dashboard}>
@@ -284,6 +291,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+
       <div className={styles.inputWrapper}>
         <FaMapMarkerAlt className={styles.icon} />
         <input
@@ -299,7 +307,10 @@ const Dashboard = () => {
               <div
                 key={index}
                 className={styles.suggestionItem}
-                onClick={() => handleSelectLocation(location)}
+                onClick={() => {
+                  setSearchQuery(location.display_name); // Update search query
+                  setLocations([]); // Clear suggestions
+                }}
               >
                 <FaMapMarkerAlt className={styles.locationIcon} />
                 {location.display_name}
@@ -308,14 +319,11 @@ const Dashboard = () => {
           </div>
         )}
       </div>
-      {loading && (
-        <div className={styles.loader}>
-          <div className={styles.spinner}></div>
-        </div>
-      )}
+
+      {loading && <div className={styles.loader}><HashLoader size={50} color="#3A57E8" /></div>}
 
       {/* Metrics Section */}
-      <div className={styles.content}>
+    <div className={styles.content}>
         <div className={styles.metricsSection}>
           {metrics.map((metric, index) => (
             <div className={styles.metricCard} key={index}>
