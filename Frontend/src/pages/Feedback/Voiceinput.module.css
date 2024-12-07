@@ -1,0 +1,8 @@
+.div{
+
+  padding-top: 150px;
+  padding-left: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

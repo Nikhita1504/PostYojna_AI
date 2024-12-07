@@ -118,7 +118,7 @@
   background-color: #F2F3FA;
   color: #333;
   font-family: Arial, sans-serif;
-  padding-left: 320px;
+  padding-left: 340px;
   padding-right: 20px;
   overflow: hidden;
   margin-top: 35px;
@@ -182,7 +182,7 @@
   font-size: 1.5rem;
 }
 
-.metricContent h3 {
+.metricContent h4 {
   margin-bottom: 5px;
   font-size: 1.25rem;
 }

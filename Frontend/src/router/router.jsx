@@ -7,6 +7,7 @@ import GraphComponent from "../pages/demographic-insights/graphs/GraphComponent"
 import Maps from "../pages/demographic-insights/Maps/Maps";
 import Recommendations from "../pages/recommendations/Recommendations";
 import Calendar from "../pages/calender/Calendar";
+import Voiceinput from "../pages/Feedback/Voiceinput";
 
 
 const router = createBrowserRouter([
@@ -40,7 +41,12 @@ const router = createBrowserRouter([
                 path:"/recommendations",
                 element:<Recommendations/>
 
-            }
+        },{
+  path:'/Feedback',
+  element:<Voiceinput></Voiceinput>
+        },
+
+          
         ]
 
     },

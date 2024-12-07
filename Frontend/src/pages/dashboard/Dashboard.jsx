@@ -1,49 +1,89 @@
 import React, { useEffect, useState } from "react";
 import { ResponsivePie } from "@nivo/pie"; // For the pie chart
-import styles from './Dashboard.module.css'; // Import the CSS module
+import styles from "./Dashboard.module.css"; // Import the CSS module
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import HashLoader from "react-spinners/HashLoader";
 import {
   Chart as ChartJS,
-  ArcElement,        // Required for Pie Chart
-  LineElement,      // Required for Line Chart
-  CategoryScale,    // X-axis scale
-  LinearScale,      // Y-axis scale
-  PointElement,     // Points on Line Chart
-  Tooltip,          // Tooltip plugin
-  Legend,           // Legend plugin
-} from 'chart.js';
-import { Line } from 'react-chartjs-2';
-import { Pie } from 'react-chartjs-2';
+  ArcElement, // Required for Pie Chart
+  LineElement, // Required for Line Chart
+  CategoryScale, // X-axis scale
+  LinearScale, // Y-axis scale
+  PointElement, // Points on Line Chart
+  Tooltip, // Tooltip plugin
+  Legend, // Legend plugin
+} from "chart.js";
+import { Line } from "react-chartjs-2";
+import { Pie } from "react-chartjs-2";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import { FaUsers, FaChartLine, FaUserPlus, FaDollarSign } from 'react-icons/fa'; // Import the icons
-import { BiRupee } from 'react-icons/bi';
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
+import { FaUsers, FaChartLine, FaUserPlus, FaDollarSign } from "react-icons/fa"; // Import the icons
+import { BiRupee } from "react-icons/bi";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 import DashboardBarChart from "./DashboardLineChart";
 
 ChartJS.register(
-  ArcElement,        // Needed for Pie chart
-  LineElement,       // Needed for Line chart
-  CategoryScale,     // X-axis scale for categorical data
-  LinearScale,       // Y-axis scale
-  PointElement,      // Points on Line chart
-  Tooltip,           // Tooltip plugin
-  Legend             // Legend plugin
+  ArcElement, // Needed for Pie chart
+  LineElement, // Needed for Line chart
+  CategoryScale, // X-axis scale for categorical data
+  LinearScale, // Y-axis scale
+  PointElement, // Points on Line chart
+  Tooltip, // Tooltip plugin
+  Legend // Legend plugin
 );
 // Mock data
 const mockTransactions = [
-  { txId: "SSA Mela", user: "GyanJyoti Public School", date: "15-10-24", cost: "View" },
-  { txId: "SCSS Awareness", user: "Jamburi maidan", date: "29-12-24", cost: "View" },
+  {
+    txId: "SSA Mela",
+    user: "GyanJyoti Public School",
+    date: "15-10-24",
+    cost: "View",
+  },
+  {
+    txId: "SCSS Awareness",
+    user: "Jamburi maidan",
+    date: "29-12-24",
+    cost: "View",
+  },
   { txId: "PLI Drive", user: "Jamburi Maidan", date: "17-01-25", cost: "View" },
   { txId: "Codeathon", user: "Tech Society", date: "01-12-24", cost: "View" },
-  { txId: "AI Summit", user: "LNCT University", date: "22-11-24", cost: "View" },
-  { txId: "Hackathon 2023", user: "LNCT University", date: "12-11-23", cost: "View" },
-  { txId: "Web Dev Workshop", user: "LNCT College", date: "03-10-23", cost: "View" },
-  { txId: "Data Science Meetup", user: "Indore Techies", date: "25-08-23", cost: "View" },
-  { txId: "Cybersecurity Seminar", user: "AIIMS", date: "10-07-23", cost: "View" },
-  { txId: "Startup Pitch", user: "Startup Hub", date: "16-06-23", cost: "View" },
+  {
+    txId: "AI Summit",
+    user: "LNCT University",
+    date: "22-11-24",
+    cost: "View",
+  },
+  {
+    txId: "Hackathon 2023",
+    user: "LNCT University",
+    date: "12-11-23",
+    cost: "View",
+  },
+  {
+    txId: "Web Dev Workshop",
+    user: "LNCT College",
+    date: "03-10-23",
+    cost: "View",
+  },
+  {
+    txId: "Data Science Meetup",
+    user: "Indore Techies",
+    date: "25-08-23",
+    cost: "View",
+  },
+  {
+    txId: "Cybersecurity Seminar",
+    user: "AIIMS",
+    date: "10-07-23",
+    cost: "View",
+  },
+  {
+    txId: "Startup Pitch",
+    user: "Startup Hub",
+    date: "16-06-23",
+    cost: "View",
+  },
 ];
 
 const customerDemographicsData = [
@@ -60,41 +100,42 @@ const schemes = [
   "Public Provident Fund",
   "Postal Life Insurance",
   "Rural Postal Life Insurance",
+  "Post Office Savings Account",
 ];
 const metrics = [
   {
     icon: <FaUsers size={43} color="#3A57E8" />,
-    title: 'Total Population',
-    value: '44,441',
+    title: "Total Population",
+    value: "44,441",
     progress: 75, // Progress in percentage
   },
   {
     icon: <FaChartLine size={43} color="#3A57E8" />,
-    title: 'Traffic Generated',
-    value: '25,134',
+    title: "Traffic Generated",
+    value: "25,134",
     progress: 50,
   },
   {
     icon: <FaUserPlus size={43} color="#3A57E8" />,
-    title: 'Total Accounts Opened',
-    value: '15,345',
+    title: "Total Accounts Opened",
+    value: "15,345",
     progress: 60,
   },
   {
     icon: <BiRupee size={43} color="#3A57E8" />,
-    title: 'Total Funds Deposited',
-    value: 'Rs 1,12,361',
+    title: "Total Funds Deposited",
+    value: "Rs 1,12,361",
     progress: 90,
   },
 ];
 const lineData = {
-  labels: ['1 Year', '5 Years', '10 Years'], // X-axis labels
+  labels: ["1 Year", "5 Years", "10 Years"], // X-axis labels
   datasets: [
     {
-      label: 'Scheme Progress',
+      label: "Scheme Progress",
       data: [30, 70, 120], // Example data
-      borderColor: '#3A57E8',
-      backgroundColor: 'rgba(58, 87, 232, 0.1)',
+      borderColor: "#3A57E8",
+      backgroundColor: "rgba(58, 87, 232, 0.1)",
       borderWidth: 2,
       tension: 0.4, // Makes line smooth
     },
@@ -113,19 +154,19 @@ const lineOptions = {
       grid: { display: false },
     },
     y: {
-      grid: { color: '#e5e5e5' },
+      grid: { color: "#e5e5e5" },
     },
   },
 };
 
 // Data for Pie Chart
 const pieData = {
-  labels: ['Funds Used', 'Funds Remaining'],
+  labels: ["Funds Used", "Funds Remaining"],
   datasets: [
     {
-      label: 'Fund Allocation',
+      label: "Fund Allocation",
       data: [60, 40], // Example data
-      backgroundColor: ['#3A57E8', '#d6d6d6'], // Colors
+      backgroundColor: ["#3A57E8", "#d6d6d6"], // Colors
       borderWidth: 0,
     },
   ],
@@ -135,12 +176,13 @@ const pieOptions = {
   responsive: true,
   plugins: {
     legend: {
-      position: 'bottom', // Position the legend
+      position: "bottom", // Position the legend
     },
   },
 };
 const Dashboard = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [Feedback, SetFeedback] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [locations, setLocations] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -159,7 +201,11 @@ const Dashboard = () => {
     };
   }, [searchQuery]);
 
-  const handleSchemeChange = (e) => setSelectedScheme(e.target.value);
+  const handleSchemeChange = (e) => {
+
+    setSelectedScheme(e.target.value);
+  };
+
 
   const handleSearch = async (query) => {
     if (!query || query.trim() === '' || query.length <= 3) return;
@@ -173,7 +219,7 @@ const Dashboard = () => {
       setLocations(response.data);
       console.log(debouncedSearchQuery);
     } catch (error) {
-      console.error('Error fetching location data:', error);
+      console.error("Error fetching location data:", error);
     } finally {
       setLoading(false);
     }
@@ -184,7 +230,20 @@ const Dashboard = () => {
     handleSearch(debouncedSearchQuery);
   }, [debouncedSearchQuery]);
 
+  const fetchfeedback = async () => {
+    console.log(selectedScheme);
+    const response = await axios(
+      `http://localhost:3000/feedback/scheme/${selectedScheme}`
+    );
+    console.log(response.data);
+    SetFeedback(response.data);
+  };
 
+  //fetch feedback
+  useEffect(() => {
+    fetchfeedback();
+    console.log("called");
+  }, [selectedScheme]);
   useEffect(() => {
     if (location.pathname !== '/demographic-insights/graphs') {
       setLocations([]);
@@ -207,6 +266,8 @@ const Dashboard = () => {
 
   return (
     <div className={styles.dashboard}>
+      {/* Header Section */}
+
       <div className={styles.imageWrapper}>
         <img src="/assets/bg.png" className={styles.backgroundImage} alt="" />
         <div className={styles.dashboardHeader}>
@@ -214,8 +275,13 @@ const Dashboard = () => {
             <h1>Hey!</h1>
             <p>Welcome to your Dashboard</p>
           </div>
+
           <div className={styles.controls}>
-            <select value={selectedScheme} onChange={handleSchemeChange} className={styles.dropdown}>
+            <select
+              value={selectedScheme}
+              onChange={handleSchemeChange}
+              className={styles.dropdown}
+            >
               {schemes.map((scheme, index) => (
                 <option key={index} value={scheme}>
                   {scheme}
@@ -261,7 +327,6 @@ const Dashboard = () => {
         <div className={styles.metricsSection}>
           {metrics.map((metric, index) => (
             <div className={styles.metricCard} key={index}>
-
               <div className={styles.metricCardData}>
                 <div className={styles.metricIcon}>{metric.icon}</div>
 
@@ -269,21 +334,19 @@ const Dashboard = () => {
                 <p>{metric.value}</p>
               </div>
 
-              <div style={{ width: '80px', height: '80px' }}>
+              <div style={{ width: "80px", height: "80px" }}>
                 <CircularProgressbar
                   value={metric.progress}
                   text={`${metric.progress}%`}
                   styles={buildStyles({
-                    pathColor: '#3A57E8',
-                    textColor: '#3A57E8',
-                    trailColor: '#d6d6d6',
-                    textSize: '20px', // Font size of the text inside the circle
+                    pathColor: "#3A57E8",
+                    textColor: "#3A57E8",
+                    trailColor: "#d6d6d6",
+                    textSize: "20px", // Font size of the text inside the circle
                   })}
                 />
               </div>
-
             </div>
-
           ))}
         </div>
 
@@ -291,9 +354,8 @@ const Dashboard = () => {
         <div className={styles.charts}>
           <div className={styles.progresschart}>
             <DashboardBarChart isDashboard={true} scheme={selectedScheme} />
-
           </div>
-          <div className={styles.recentTransactions}>
+          {/* <div className={styles.recentTransactions}>
             <h3>Recent Transactions</h3>
             <div className={styles.transactionList}>
               {mockTransactions.map((transaction, index) => (
@@ -308,13 +370,22 @@ const Dashboard = () => {
               ))}
             </div>
 
+          </div> */}
+          <div className={styles.recentTransactions}>
+            <h3>Feedbacks</h3>
+            <div className={styles.transactionList}>
+              {Feedback.map((feedback, index) => (
+                <div className={styles.transactionItem} key={index}>
+                  <div className={styles.transactiondata}>
+                    <div className={styles.id}>{feedback.location}</div>
+                  </div>  
+                </div>
+
+              ))}
+            </div>
           </div>
         </div>
-
-
-
       </div>
-
     </div>
   );
 };
