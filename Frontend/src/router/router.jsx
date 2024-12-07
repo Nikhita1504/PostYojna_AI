@@ -5,6 +5,7 @@ import Dashboard from "../pages/dashboard/Dashboard";
 import DemographicInsights from "../pages/demographic-insights/DemographicInsights";
 import GraphComponent from "../pages/demographic-insights/graphs/GraphComponent";
 import Maps from "../pages/demographic-insights/Maps/Maps";
+import Voiceinput from "../pages/Feedback/Voiceinput";
 
 
 const router = createBrowserRouter([
@@ -33,7 +34,12 @@ const router = createBrowserRouter([
             {
                 path:'/calender',
                 element:<Dashboard/>
-            }
+        },{
+  path:'/Feedback',
+  element:<Voiceinput></Voiceinput>
+        },
+
+          
         ]
 
     },
