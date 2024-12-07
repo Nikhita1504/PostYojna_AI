@@ -62,6 +62,16 @@ const Sidebar = () => {
             Calendar
             <FontAwesomeIcon icon={faAngleRight} className={styles.iconRight} />
           </Link>
+          <Link
+            to="/Feedback"
+            className={`${styles.navItem} ${
+              location.pathname === "/Feedback" ? styles.active : ""
+            }`}
+          >
+            <Menu className={styles.icon} />
+            Feedback
+            <FontAwesomeIcon icon={faAngleRight} className={styles.iconRight} />
+          </Link>
         </div>
       </nav>
     </div>

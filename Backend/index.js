@@ -5,15 +5,13 @@ const bodyparser = require("body-parser");
 app.use('/public', express.static('public'));
 const cors = require("cors");
 const { default: axios } = require("axios");
+const chatgptRouter = require("./Router/chatgpt");
+const feedbackRouter = require("./Router/feedback");
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 require("./model/db")
 app.use(
-  cors({
-    credentials: true,
-    methods: ["POST", "GET", "PUT", "DELETE"],
-    origin: "http://localhost:5173",
-  })
+  cors()
 );
 
 app.get('/search', async (req, res) => {
@@ -42,7 +40,8 @@ app.get('/search', async (req, res) => {
   }
 });
 
-
+app.use("/chatgpt" , chatgptRouter);
+app.use("/feedback" , feedbackRouter);
 
 const Port = process.env.PORT || 3000;
 app.listen(Port, () => {
