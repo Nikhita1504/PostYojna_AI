@@ -1,5 +1,5 @@
 const express = require("express");
-const {FeedbackModel }= require("../model/db");
+const {FeedbackModel} = require("../model/db");
 const feedbackRouter = express.Router();
 require("dotenv").config();
 

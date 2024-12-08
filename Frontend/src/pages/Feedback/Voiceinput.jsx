@@ -106,7 +106,7 @@ const Voiceinput = () => {
     Setprompt(newPrompt);
     try {
       const res = await axios.post(
-        "http://localhost:3000/chatgpt/listen",
+        "http://localhost:3000/Gemini/listen",
         newPrompt
       );
     } catch (error) {

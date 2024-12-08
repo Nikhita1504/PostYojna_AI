@@ -106,7 +106,7 @@ const Dashboard = () => {
   }, [debouncedSearchQuery]);
 
   const fetchfeedback = async () => {
-    console.log(selectedScheme);
+    // console.log(selectedScheme);
     const response = await axios(
       `http://localhost:3000/feedback/scheme/${selectedScheme}`
     );
@@ -119,6 +119,7 @@ const Dashboard = () => {
     fetchfeedback();
 
   }, [selectedScheme]);
+
   useEffect(() => {
     if (location.pathname !== '/demographic-insights/graphs') {
       setLocations([]);
@@ -182,7 +183,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className={styles.inputWrapper}>
+      {/* <div className={styles.inputWrapper}>
         <FaMapMarkerAlt className={styles.icon} />
         <input
           type="text"
@@ -208,7 +209,7 @@ const Dashboard = () => {
             ))}
           </div>
         )}
-      </div>
+      </div> */}
 
       {loading && <div className={styles.loader}><HashLoader size={50} color="#3A57E8" /></div>}
 

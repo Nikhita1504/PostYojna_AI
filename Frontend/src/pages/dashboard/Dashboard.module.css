@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Merriweather:wght@700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Ubuntu&display=swap');
 .dashboard {
-  background-color: #F2F3FA;
+  background-color: #D3D3D3;
 
   color: #333;
   font-family: Arial, sans-serif;
-  padding-top: 70px;
+  padding-top: 68px;
   height: 110vh
 
 
@@ -17,6 +17,7 @@
 .imageWrapper {
   position: relative;
   width: 100%;
+  
   height: fit-content;
   overflow: hidden;
 }
@@ -116,13 +117,13 @@
   background-color: red;
 }
 .content {
-  background-color: #F2F3FA;
+  background-color: #D3D3D3;
   color: #333;
   font-family: Arial, sans-serif;
   padding-left: 340px;
   padding-right: 20px;
   overflow: hidden;
-  margin-top: 35px;
+
   opacity: 0; /* Initially hidden */
   transform: translateY(20px); /* Start from below */
   animation: slideUp 1s ease-out forwards; /* Apply animation */

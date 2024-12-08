@@ -14,6 +14,28 @@ mongoose
     console.log("User database connection error", e);
   });
 
+  const userSchema = new mongoose.Schema(
+    {
+      name: {
+        type: String,
+        required: true,
+      },
+      email: {
+        type: String,
+        required: true,
+        unique: true,
+      },
+      password: {
+        type: String,
+      },
+      profilePicture: {
+        type: String,
+        default: "",
+      },
+    },
+    { timestamps: true }
+  );
+
   const dashboardDataSchema = new mongoose.Schema({
     schemeName: { type: String, required: true },
     metrics: [
@@ -113,17 +135,17 @@ const DemographicsSchema = new mongoose.Schema({
   ]
 });
 
-const DemographicModel = mongoose.model("Demographic", DemographicsSchema);
+
 
 
 const EventModel = mongoose.model('Event', eventSchema);
 
 
 
+const DemographicModel = mongoose.model("Demographic", DemographicsSchema);
 
 const DashboardModel = mongoose.model('Dashboard', dashboardDataSchema);
 const FeedbackModel = mongoose.model('Feedback', feedbackSchema);
+const UserModel = mongoose.model("UserModel", userSchema);
 
-module.exports = {EventModel,FeedbackModel,DashboardModel,DemographicModel};
-
-
+module.exports = {FeedbackModel , UserModel , DashboardModel,EventModel,DemographicModel};

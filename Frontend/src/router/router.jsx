@@ -8,51 +8,58 @@ import Maps from "../pages/demographic-insights/Maps/Maps";
 import Recommendations from "../pages/recommendations/Recommendations";
 import Calendar from "../pages/calender/Calendar";
 import Voiceinput from "../pages/Feedback/Voiceinput";
-
+import Login from "../LoginPage/login";
+import Home from "../pages/Home";
 
 const router = createBrowserRouter([
-    {
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      {
         path: "/",
-        element: <App />,
+        element: <Navigate to="/login" />,
+      },
+      {
+        path: "login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/Home",
+        element: <Home></Home>,
         children: [
-            {
-                path: "/",
-                element: <Dashboard />
-            },
-            {
-                path: "/demographic-insights",
-                element: <DemographicInsights />,
-
-            },
-            {
-                path: "/demographic-insights/maps",
-                element: <Maps />,
-
-            },
-            {
-                path: '/demographic-insights/maps/graphs',
-                element: <GraphComponent />
-            },
-            {
-                path: '/calendar',
-                element: <Calendar />
-            }, 
-            {
-                path:"/recommendations",
-                element:<Recommendations/>
-
-        },{
-  path:'/Feedback',
-  element:<Voiceinput></Voiceinput>
-        },
-
-          
-        ]
-
-    },
-
-
-
+          {
+            path: "Dashboard",
+            element: <Dashboard />,
+          },
+          {
+            path: "demographic-insights",
+            element: <DemographicInsights />,
+          },
+          {
+            path: "demographic-insights/maps",
+            element: <Maps />,
+          },
+          {
+            path: "demographic-insights/maps/graphs",
+            element: <GraphComponent />,
+          },
+          {
+            path: "calendar",
+            element: <Calendar />,
+          },
+          {
+            path: "recommendations",
+            element: <Recommendations />,
+          },
+          {
+            path: "Feedback",
+            element: <Voiceinput></Voiceinput>,
+          },
+        ],
+      },
+    ],
+  },
 ]);
 
 export default router;

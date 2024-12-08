@@ -44,7 +44,7 @@ function DemographicInsights() {
     console.log(location.lon);
     setLocations([]);
     setSearchQuery(location.display_name);
-    navigate('/demographic-insights/maps', { state: { locationpoint: location } });
+    navigate('/Home/demographic-insights/maps', { state: { locationpoint: location } });
   };
 
 
@@ -122,4 +122,3 @@ function DemographicInsights() {
 }
 
 export default DemographicInsights;
-

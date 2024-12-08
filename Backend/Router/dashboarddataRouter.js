@@ -11,7 +11,7 @@ dashboarddataRouter.get('/getData', async (req, res) => {
     try {
 
         const {  scheme } = req.query;
-        console.log("hello")
+        // console.log("hello")
         const data = await DashboardModel.findOne({
 
             'schemeName': scheme // Case-insensitive match
@@ -21,7 +21,7 @@ dashboarddataRouter.get('/getData', async (req, res) => {
         if (!data) {
             return res.status(404).json({ message: "No data found for the given city and scheme" });
         }
-        console.log(data.data);
+        // console.log(data.data);
         res.status(200).json(data);
     } catch (error) {
         console.error("Error fetching data:", error);
