@@ -18,9 +18,11 @@ import Modal from "react-modal";
 import styles from "./GraphComponent.module.css";
 import villageData from "./villageData";
 import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const GraphComponent = () => {
   const [hoveredChart, setHoveredChart] = useState(null);
+  const [datat , Setdata] = useState({})
 
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
@@ -55,33 +57,50 @@ const GraphComponent = () => {
   const closeModal = () => setHoveredChart(null);
   const location = useLocation();
   const navigate=useNavigate();
-  const { locationName, locationpoint } = location.state || {};
+  const { locationName } = location.state || {};
   console.log(locationName);
-  console.log(locationpoint);
+  
   const [currlocation,setcurrlocation]=useState("");
 
+  const fetchdistrict = async() =>{
+    const newPrompt = {
+      address: locationName,
+      myprompt:
+        "You have been provided with a full address. Your task is to analyze the address and extract the district and state from it. Return only the following JSON object: { district: <district>, state: <state> }. Do not include any other data in the response. If the district or state cannot be determined, leave the corresponding field empty (e.g., district:  or state: )"
+    };
+
+try {
+  const response = await axios.post("http://localhost:3000/Gemini/get-district" , {newPrompt})
+  console.log(response.data)
+  setcurrlocation(response.data)
+} catch (error) {
+  console.log(error)
+}
+  }
+
   useEffect(()=>{
-    if (locationName) {
-      console.log(locationName); 
-      console.log(locationpoint);
-    
-  
-      const words = locationName.split(",");
-      const lastThreeWords = words.slice(-5);
-    setcurrlocation(lastThreeWords[0])
-  
-      console.log(lastThreeWords); 
-    
-      
-      const lastThreeWordsObject = {
-       city: lastThreeWords[0],
-        state: lastThreeWords[1],
-        country: lastThreeWords[2],
-      };
-    
-      console.log(lastThreeWordsObject);
-    }
+   fetchdistrict(locationName);
+  },[]);
+
+
+
+  const fetchdata = async() =>{
+    if(currlocation != ""){
+      const district = currlocation.district;
+      const state = currlocation.state;
+try {
+  const response = await axios.post("http://localhost:3000/Gemini/get-data" , {district,state})
+  console.log(response.data)
+  Setdata(response.data)
+} catch (error) {
+  console.log(error)
+}}
+  }
+  useEffect(() =>{
+  fetchdata();
   },[currlocation]);
+
+
 
 const handleNavigate=()=>{
   navigate('/recommendations')
@@ -90,7 +109,7 @@ const handleNavigate=()=>{
     <div className={styles.bigCon}>
       <div className={styles.titleContainer}>
         <h2 className={styles.title}>
-          Demographic Insights for {currlocation}
+          Demographic Insights for {currlocation.district}
         </h2>     
         
       </div>
@@ -100,6 +119,7 @@ const handleNavigate=()=>{
         <div className={`${styles.chartBox} ${styles.firstChart}`} onClick={() => openModal("population")}>
 
           <ResponsiveContainer width="100%" height={200}>
+
             <PieChart>
               <Pie
                 data={getPopulationData()}

@@ -12,6 +12,28 @@ mongoose
     console.log("User database connection error", e);
   });
 
+  const userSchema = new mongoose.Schema(
+    {
+      name: {
+        type: String,
+        required: true,
+      },
+      email: {
+        type: String,
+        required: true,
+        unique: true,
+      },
+      password: {
+        type: String,
+      },
+      profilePicture: {
+        type: String,
+        default: "",
+      },
+    },
+    { timestamps: true }
+  );
+
   const dashboardDataSchema = new mongoose.Schema(
     {
       location: {
@@ -38,8 +60,8 @@ mongoose
   );
   
   // Create the Mongoose model
-  const DashboardData = mongoose.model('DashboardData', dashboardDataSchema);
-  module.exports = DashboardData;
+
+
 
 const Schema = mongoose.Schema;
 
@@ -69,5 +91,6 @@ const feedbackSchema = new Schema({
 
 // Create the Feedback model
 const FeedbackModel = mongoose.model('Feedback', feedbackSchema);
-
-module.exports = FeedbackModel;
+const UserModel = mongoose.model("UserModel", userSchema);
+const DashboardData = mongoose.model('DashboardData', dashboardDataSchema);
+module.exports = {FeedbackModel , UserModel , DashboardData};
