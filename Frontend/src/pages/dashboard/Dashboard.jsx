@@ -22,79 +22,17 @@ import { BiRupee } from "react-icons/bi";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import DashboardBarChart from "./DashboardLineChart";
+import CountUp from 'react-countup';
+import CylindricalColumn from "../demographic-insights/graphs/charts/CylindricalColumn";
+import CylindricalColumnDashboard from "./DashboardLineChart";
 
-ChartJS.register(
-  ArcElement, // Needed for Pie chart
-  LineElement, // Needed for Line chart
-  CategoryScale, // X-axis scale for categorical data
-  LinearScale, // Y-axis scale
-  PointElement, // Points on Line chart
-  Tooltip, // Tooltip plugin
-  Legend // Legend plugin
-);
-// Mock data
-const mockTransactions = [
-  {
-    txId: "SSA Mela",
-    user: "GyanJyoti Public School",
-    date: "15-10-24",
-    cost: "View",
-  },
-  {
-    txId: "SCSS Awareness",
-    user: "Jamburi maidan",
-    date: "29-12-24",
-    cost: "View",
-  },
-  { txId: "PLI Drive", user: "Jamburi Maidan", date: "17-01-25", cost: "View" },
-  { txId: "Codeathon", user: "Tech Society", date: "01-12-24", cost: "View" },
-  {
-    txId: "AI Summit",
-    user: "LNCT University",
-    date: "22-11-24",
-    cost: "View",
-  },
-  {
-    txId: "Hackathon 2023",
-    user: "LNCT University",
-    date: "12-11-23",
-    cost: "View",
-  },
-  {
-    txId: "Web Dev Workshop",
-    user: "LNCT College",
-    date: "03-10-23",
-    cost: "View",
-  },
-  {
-    txId: "Data Science Meetup",
-    user: "Indore Techies",
-    date: "25-08-23",
-    cost: "View",
-  },
-  {
-    txId: "Cybersecurity Seminar",
-    user: "AIIMS",
-    date: "10-07-23",
-    cost: "View",
-  },
-  {
-    txId: "Startup Pitch",
-    user: "Startup Hub",
-    date: "16-06-23",
-    cost: "View",
-  },
-];
 
-const customerDemographicsData = [
-  { id: "Children", label: "Children", value: 25, color: "hsl(348, 70%, 50%)" },
-  { id: "Adults", label: "Adults", value: 50, color: "hsl(91, 70%, 50%)" },
-  { id: "Seniors", label: "Seniors", value: 25, color: "hsl(209, 70%, 50%)" },
-];
+
 
 const schemes = [
-  "Senior Citizens Savings Scheme Account",
   "Sukanya Samriddhi Account",
+  "Senior Citizens Savings Scheme Account",
+
   "Kisan Vikas Patra",
   "Mahila Samman Savings Certificate",
   "Public Provident Fund",
@@ -102,84 +40,23 @@ const schemes = [
   "Rural Postal Life Insurance",
   "Post Office Savings Account",
 ];
-const metrics = [
-  {
-    icon: <FaUsers size={43} color="#3A57E8" />,
-    title: "Total Population",
-    value: "44,441",
-    progress: 75, // Progress in percentage
-  },
-  {
-    icon: <FaChartLine size={43} color="#3A57E8" />,
-    title: "Traffic Generated",
-    value: "25,134",
-    progress: 50,
-  },
-  {
-    icon: <FaUserPlus size={43} color="#3A57E8" />,
-    title: "Total Accounts Opened",
-    value: "15,345",
-    progress: 60,
-  },
-  {
-    icon: <BiRupee size={43} color="#3A57E8" />,
-    title: "Total Funds Deposited",
-    value: "Rs 1,12,361",
-    progress: 90,
-  },
-];
-const lineData = {
-  labels: ["1 Year", "5 Years", "10 Years"], // X-axis labels
-  datasets: [
-    {
-      label: "Scheme Progress",
-      data: [30, 70, 120], // Example data
-      borderColor: "#3A57E8",
-      backgroundColor: "rgba(58, 87, 232, 0.1)",
-      borderWidth: 2,
-      tension: 0.4, // Makes line smooth
-    },
-  ],
+
+
+const getIcon = (iconName) => {
+  switch (iconName) {
+    case "FaUsers":
+      return <FaUsers size={43} color="#3A57E8" />;
+    case "FaChartLine":
+      return <FaChartLine size={43} color="#3A57E8" />;
+    case "FaUserPlus":
+      return <FaUserPlus size={43} color="#3A57E8" />;
+    case "BiRupee":
+      return <BiRupee size={43} color="#3A57E8" />;
+    default:
+      return null; // Fallback in case the icon name is not recognized
+  }
 };
 
-const lineOptions = {
-  responsive: true,
-  plugins: {
-    legend: {
-      display: false, // Hide legend
-    },
-  },
-  scales: {
-    x: {
-      grid: { display: false },
-    },
-    y: {
-      grid: { color: "#e5e5e5" },
-    },
-  },
-};
-
-// Data for Pie Chart
-const pieData = {
-  labels: ["Funds Used", "Funds Remaining"],
-  datasets: [
-    {
-      label: "Fund Allocation",
-      data: [60, 40], // Example data
-      backgroundColor: ["#3A57E8", "#d6d6d6"], // Colors
-      borderWidth: 0,
-    },
-  ],
-};
-
-const pieOptions = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: "bottom", // Position the legend
-    },
-  },
-};
 const Dashboard = () => {
   const [Feedback, SetFeedback] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -189,7 +66,8 @@ const Dashboard = () => {
   const location = useLocation();
   const [selectedScheme, setSelectedScheme] = useState(schemes[0]);
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState('');
-
+  const [locationName, setlocationName] = useState("");
+  const [dashboardData, setDashboardData] = useState({});
   // Debounce logic
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -215,16 +93,13 @@ const Dashboard = () => {
       const response = await axios.get('http://localhost:3000/search/location', {
         params: { query },
       });
-
       setLocations(response.data);
-      console.log(debouncedSearchQuery);
     } catch (error) {
       console.error("Error fetching location data:", error);
     } finally {
       setLoading(false);
     }
   };
-
 
   useEffect(() => {
     handleSearch(debouncedSearchQuery);
@@ -242,7 +117,7 @@ const Dashboard = () => {
   //fetch feedback
   useEffect(() => {
     fetchfeedback();
-    console.log("called");
+
   }, [selectedScheme]);
   useEffect(() => {
     if (location.pathname !== '/demographic-insights/graphs') {
@@ -250,19 +125,34 @@ const Dashboard = () => {
     }
   }, [location.pathname]);
 
-  const getDashboardData=async()=>{
+  const getDashboardData = async (locationname, schemeName) => {
     try {
-      console.log(selectedScheme);
-      console.log(debouncedSearchQuery);
+      if (locationname) {
+        const words = locationname.split(',');
+        const locationArr = words.slice(-6);
+        setlocationName(locationArr[0]);
+
+      }
+
+
+      const response = await axios.get('http://localhost:3000/dashboard/getData', {
+        params: {
+          // city: locationName,
+          scheme: schemeName,
+        },
+      });
+      console.log(response.data)
+      setDashboardData(response.data);
 
     } catch (error) {
       console.log(error)
     }
 
   }
-  useEffect(()=>{
-    getDashboardData
-  },[debouncedSearchQuery,selectedScheme])
+
+  useEffect(() => {
+    getDashboardData(debouncedSearchQuery, selectedScheme);
+  }, [debouncedSearchQuery, selectedScheme])
 
   return (
     <div className={styles.dashboard}>
@@ -323,54 +213,54 @@ const Dashboard = () => {
       {loading && <div className={styles.loader}><HashLoader size={50} color="#3A57E8" /></div>}
 
       {/* Metrics Section */}
-    <div className={styles.content}>
+      <div className={styles.content}>
         <div className={styles.metricsSection}>
-          {metrics.map((metric, index) => (
-            <div className={styles.metricCard} key={index}>
-              <div className={styles.metricCardData}>
-                <div className={styles.metricIcon}>{metric.icon}</div>
+          {dashboardData.metrics && dashboardData.metrics.length > 0 ? (
+            dashboardData.metrics.map((metric, index) => (
+              <div className={styles.metricCard} key={index}>
+                <div className={styles.metricCardData}>
+                  <div className={styles.metricIcon}>
+                    {getIcon(metric.icon)}
+                  </div>
 
-                <h4>{metric.title}</h4>
-                <p>{metric.value}</p>
-              </div>
+                  <div className={styles.metricValues}>
+                    <h4>{metric.title}</h4>
+                    <p>
+                      <CountUp
+                        start={0}
+                        end={parseInt(metric.value.replace(/[^0-9]/g, ''))} // Convert value to a number, removing non-numeric characters (like Rs)
+                        duration={3.5} // Duration of the animation in seconds
+                        separator="," // For thousand separator
+                      />
+                    </p>
+                  </div>
+                </div>
 
-              <div style={{ width: "80px", height: "80px" }}>
-                <CircularProgressbar
-                  value={metric.progress}
-                  text={`${metric.progress}%`}
-                  styles={buildStyles({
-                    pathColor: "#3A57E8",
-                    textColor: "#3A57E8",
-                    trailColor: "#d6d6d6",
-                    textSize: "20px", // Font size of the text inside the circle
-                  })}
-                />
+                {/* <div style={{ width: "80px", height: "80px" }}>
+                  <CircularProgressbar
+                    value={metric.progress}
+                    text={`${metric.progress}%`}
+                    styles={buildStyles({
+                      pathColor: "#3A57E8",
+                      textColor: "#3A57E8",
+                      trailColor: "#d6d6d6",
+                      textSize: "20px", // Font size of the text inside the circle
+                    })}
+                  />
+                </div> */}
               </div>
-            </div>
-          ))}
+            ))
+          ) : (
+            <p>No data Found</p> // Displayed if no metrics data is found
+          )}
         </div>
 
         {/* Charts Section */}
         <div className={styles.charts}>
           <div className={styles.progresschart}>
-            <DashboardBarChart isDashboard={true} scheme={selectedScheme} />
+            <DashboardBarChart isDashboard={true} scheme={selectedScheme} registrationsOverYears={dashboardData.registrationsOverYears} />
+            {/* <CylindricalColumnDashboard className={styles.barChart} data={dashboardData.registrationsOverYears} /> */}
           </div>
-          {/* <div className={styles.recentTransactions}>
-            <h3>Recent Transactions</h3>
-            <div className={styles.transactionList}>
-              {mockTransactions.map((transaction, index) => (
-                <div className={styles.transactionItem} key={index}>
-                 <div className={styles.transactiondata}>
-                 <div className={styles.id}>{transaction.txId}</div>
-                  <div className={styles.user}>{transaction.user}</div>
-                 </div>
-                  <div>{transaction.date}</div>
-                  <button className={styles.viewButton}>{transaction.cost}</button>
-                </div>
-              ))}
-            </div>
-
-          </div> */}
           <div className={styles.recentTransactions}>
             <h3>Feedbacks</h3>
             <div className={styles.transactionList}>
@@ -378,7 +268,7 @@ const Dashboard = () => {
                 <div className={styles.transactionItem} key={index}>
                   <div className={styles.transactiondata}>
                     <div className={styles.id}>{feedback.location}</div>
-                  </div>  
+                  </div>
                 </div>
 
               ))}

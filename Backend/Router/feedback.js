@@ -1,5 +1,5 @@
 const express = require("express");
-const FeedbackModel = require("../model/db");
+const {FeedbackModel }= require("../model/db");
 const feedbackRouter = express.Router();
 require("dotenv").config();
 
@@ -14,7 +14,7 @@ feedbackRouter.get("/scheme/:scheme" , async(req,res) =>{
 
     // If feedbacks are found, return them as JSON
     if (feedbacks.length > 0) {
-      console.log(feedbacks);
+      // console.log(feedbacks);
       res.json(feedbacks);
       
     } else {

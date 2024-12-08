@@ -1,112 +1,198 @@
-.CalendarContainer {
-    background-color: red;
+.calendarContainer {
+
     height: 100vh;
-    padding-top: 70px;
-    padding-left: 310px;
     position: relative;
-    z-index: -1000;
-    overflow-x: hidden;
-  }
-  
-  .imageWrapper {
-    position: relative;
+    background-color: #F2F3FA;
+    margin-top: 70px;
+
+}
+
+.imageWrapper img {
     width: 100%;
-    height: 100%;
-    overflow: hidden;
-    object-fit: cover;
-  }
-  
-  .imageWrapper img {
-    height: 170px;
-    width: 100%;
-  }
-  
-  .header {
-    position: absolute;
-    right: 5%;
-    background-color: white;
-    top: 22%;
-    width: 60%;
+    height: 200px;
+
+
+}
+
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 2rem;
+    position: absolute;
+    right: 8%;
+    top: 21%;
+   
+    background-color: white;
+    padding: 3px 15px;
     border-radius: 10px;
-  }
-  
-  .header p {
+    width: 60%;
+}
+
+.header p {
     font-size: 24px;
-  }
-  
-  .addBtn {
+    font-weight: bold;
+}
+
+.headerBtns {
     display: flex;
-    gap: 10px;
+    gap: 15px;
+}
+
+.addBtn {
+    background-color: #FFBB28;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.addBtn:hover {
+    background-color: #FF9B00;
+}
+
+.calendarBox{
+    padding-left: 320px;
+    margin-top: 50px;
+}
+
+
+.calendarWrapper {
+    width: 95%;
+    margin: 20px auto;
+    background-color: #FFBB28;
+    
+    border-radius: 10px;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1000;
+}
+
+.modal {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    width: 400px;
+    text-align: center;
+    max-width: 100%;
+}
+
+.input {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.textarea {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    resize: vertical;
+}
+
+.buttonGroup {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.button, .cancelButton {
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.button {
+    background-color: #66BB6A;
+    color: #fff;
+    border: none;
+}
+
+.cancelButton {
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+}
+
+.button:hover {
+    background-color: #4CAF50;
+}
+
+.cancelButton:hover {
+    background-color: #e53935;
+}
+.eventList {
+    background-color: #FFBB28; /* Light background for better contrast */
+    border: 1px solid #ddd; /* Subtle border */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px;
+     /* Limit width for readability */
+    margin: 20px auto; /* Center the container */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
   }
   
-  /* Container for the calendar to ensure it displays correctly */
-  .calendarContainer {
-    margin-top: 200px; /* Adjust the space so the calendar is visible below the header */
-    padding-top: 70px;
-    padding-left: 310px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  .eventList h2 {
+    font-size: 1.8rem;
+    color: #333; /* Dark text for good contrast */
+    border-bottom: 2px solid #00aaff; /* Accent border */
+    padding-bottom: 10px;
+    margin-bottom: 20px;
   }
   
-  /* Event List styles */
-  .eventList {
-    margin-top: 20px;
+  .eventList ul {
+    list-style: none; /* Remove default bullets */
+    padding: 0;
+    margin: 0;
   }
   
   .eventItem {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    border: 1px solid #ddd;
+    background-color: #ffffff; /* White background for each item */
+    margin-bottom: 15px;
+    padding: 15px;
     border-radius: 8px;
-    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    transition: transform 0.2s ease-in-out; /* Smooth hover effect */
   }
   
-  .eventItem button {
-    background: none;
-    border: none;
-    cursor: pointer;
+  .eventItem:hover {
+    transform: translateY(-5px); /* Lift item on hover */
   }
   
-  /* Modal styles */
-  .modal {
-    background: white;
-    padding: 20px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  .eventTitle {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #0077cc; /* Highlighted title */
+    margin-bottom: 8px;
   }
   
-  .modal input,
-  .modal textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+  .eventDescription {
+    font-size: 1rem;
+    color: #666; /* Muted color for description */
+    margin-bottom: 5px;
   }
   
-  .modal button {
-    padding: 10px;
-    margin-right: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-  }
-  
-  .modal button:last-child {
-    background-color: #f44336;
+  .eventTime {
+    font-size: 0.9rem;
+    color: #888; /* Subtle color for time */
   }
   
