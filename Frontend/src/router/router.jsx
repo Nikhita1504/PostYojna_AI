@@ -5,7 +5,7 @@ import Dashboard from "../pages/dashboard/Dashboard";
 import DemographicInsights from "../pages/demographic-insights/DemographicInsights";
 import GraphComponent from "../pages/demographic-insights/graphs/GraphComponent";
 import Maps from "../pages/demographic-insights/Maps/Maps";
-import Recommendations from "../pages/recommendations/Recommendations";
+import Recommendations from "../pages/Feedback/recommendations/Recommendations";
 import Calendar from "../pages/calender/Calendar";
 import Voiceinput from "../pages/Feedback/Voiceinput";
 import Login from "../LoginPage/login";

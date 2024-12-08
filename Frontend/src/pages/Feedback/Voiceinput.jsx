@@ -3,6 +3,7 @@ import { useState , useRef } from "react";
 import styles from "./Voiceinput.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
+import ReactStars from "react-rating-stars-component";
 const Voiceinput = () => {
   const [prompt, Setprompt] = useState({});
   const [text, setText] = useState("");
@@ -11,6 +12,14 @@ const Voiceinput = () => {
   const [isListening, setIsListening] = useState(false);
   const recognitionRef = useRef(null);
   const [language, setLanguage] = useState("hi-IN");
+
+
+  const [rating, setRating] = useState(0);
+
+  const handleRating = (newRating) => {
+    setRating(newRating);
+    console.log("Selected rating:", newRating); // You can send this to the backend
+  };
 
 
   const indianLanguages = [
@@ -99,6 +108,7 @@ const Voiceinput = () => {
       location: location,
       scheme: scheme,
       text: text,
+      rating:rating,
       myprompt:
         "You have been given feedback in the form of text regarding a scheme from a visitor at a mela. The feedback text is related to the scheme and can be in any language. Your task is to analyze the feedback and extract key points or a conclusion that can help improve the scheme. If the feedback contains no relevant information for improvement, return only the following JSON object with the field 'relevant' set to false: { location: <location>, scheme: <scheme>, relevant: false }. If there is relevant information, return only the following JSON object with the fields 'location' (same as provided), 'scheme' (same as provided), 'relevant' set to true, and a 'point' field containing the extracted key point or conclusion from the feedback: { location: <location>, scheme: <scheme>, relevant: true, point: <extracted key point> }. Do not include any other data in the response.",
     };
@@ -185,7 +195,18 @@ const Voiceinput = () => {
           ))}
         </select>
       </div>
-
+ <div>
+      <h2>Rate Us</h2>
+      <ReactStars
+        count={5}
+        size={30}
+        isHalf={true}
+        value={rating}
+        onChange={handleRating}
+        activeColor="#ffd700"
+      />
+      <p>Your rating: {rating}</p>
+    </div>
 
     </div>
   );

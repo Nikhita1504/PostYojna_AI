@@ -21,7 +21,7 @@ GeminiRouter.post("/listen", async (req, res) => {
     if (result && result.response && result.response.text) {
       console.log(result.response.text());
       const res = result.response.text();
-      const cleanJsonString = res.replace(/json|\n/g, "").trim();
+      const cleanJsonString = res.replace(/json|\n/g, "").trim().replace(/^`+|`+$/g, "").trim();
       const r = JSON.parse(cleanJsonString);
       console.log(r);
       if (r.relevant == true) {
@@ -30,6 +30,8 @@ GeminiRouter.post("/listen", async (req, res) => {
           scheme: prompts.scheme, // Scheme the feedback is related to
           relevant: r.relevant,
           point: r.point,
+          rating:prompts.rating
+
         };
 
         // Store feedback in the database

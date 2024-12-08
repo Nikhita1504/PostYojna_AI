@@ -22,13 +22,19 @@ import axios from "axios";
 
 const GraphComponent = () => {
   const [hoveredChart, setHoveredChart] = useState(null);
-  const [datat , Setdata] = useState({})
+  const [datat, Setdata] = useState({});
 
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
   const getPopulationData = () => [
-    { name: "Male Population", value: villageData.demographics.totalPopulation.male },
-    { name: "Female Population", value: villageData.demographics.totalPopulation.female },
+    {
+      name: "Male Population",
+      value: villageData.demographics.totalPopulation.male,
+    },
+    {
+      name: "Female Population",
+      value: villageData.demographics.totalPopulation.female,
+    },
   ];
 
   const getAgeGroupData = () => {
@@ -43,8 +49,12 @@ const GraphComponent = () => {
   const getOccupationData = () => [
     {
       name: "Agricultural Labourers",
-      Male: villageData.occupations.agriculturalLabourers.main.male + villageData.occupations.agriculturalLabourers.marginal.male,
-      Female: villageData.occupations.agriculturalLabourers.main.female + villageData.occupations.agriculturalLabourers.marginal.female,
+      Male:
+        villageData.occupations.agriculturalLabourers.main.male +
+        villageData.occupations.agriculturalLabourers.marginal.male,
+      Female:
+        villageData.occupations.agriculturalLabourers.main.female +
+        villageData.occupations.agriculturalLabourers.marginal.female,
     },
     {
       name: "Non-working Population",
@@ -56,70 +66,55 @@ const GraphComponent = () => {
   const openModal = (chartType) => setHoveredChart(chartType);
   const closeModal = () => setHoveredChart(null);
   const location = useLocation();
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const { locationName } = location.state || {};
   console.log(locationName);
-  
-  const [currlocation,setcurrlocation]=useState("");
 
-  const fetchdistrict = async() =>{
+  const [currlocation, setcurrlocation] = useState("");
+
+  const fetchdistrict = async () => {
     const newPrompt = {
       address: locationName,
       myprompt:
-        "You have been provided with a full address. Your task is to analyze the address and extract the district and state from it. Return only the following JSON object: { district: <district>, state: <state> }. Do not include any other data in the response. If the district or state cannot be determined, leave the corresponding field empty (e.g., district:  or state: )"
+        "You have been provided with a full address. Your task is to analyze the address and extract the district and state from it. Return only the following JSON object: { district: <district>, state: <state> }. Do not include any other data in the response. If the district or state cannot be determined, leave the corresponding field empty (e.g., district:  or state: )",
     };
 
-try {
-  const response = await axios.post("http://localhost:3000/Gemini/get-district" , {newPrompt})
-  console.log(response.data)
-  setcurrlocation(response.data)
-} catch (error) {
-  console.log(error)
-}
-  }
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/Gemini/get-district",
+        { newPrompt }
+      );
+      console.log(response.data);
+      setcurrlocation(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  useEffect(()=>{
-   fetchdistrict(locationName);
-  },[]);
+  useEffect(() => {
+    fetchdistrict(locationName);
+  }, []);
 
-
-
-  const fetchdata = async() =>{
-    if(currlocation != ""){
-      const district = currlocation.district;
-      const state = currlocation.state;
-try {
-  const response = await axios.post("http://localhost:3000/Gemini/get-data" , {district,state})
-  console.log(response.data)
-  Setdata(response.data)
-} catch (error) {
-  console.log(error)
-}}
-  }
-  useEffect(() =>{
-  fetchdata();
-  },[currlocation]);
-
-
-
-const handleNavigate=()=>{
-  navigate('/recommendations')
-}
+  const handleNavigate = () => {
+    navigate("/recommendations");
+  };
   return (
     <div className={styles.bigCon}>
       <div className={styles.titleContainer}>
         <h2 className={styles.title}>
           Demographic Insights for {currlocation.district}
-        </h2>     
-        
+        </h2>
       </div>
-      <button onClick={handleNavigate} className={styles.recommendationbtn}>Show Recommendations</button>
+      <button onClick={handleNavigate} className={styles.recommendationbtn}>
+        Show Recommendations
+      </button>
       <div className={styles.chartContainer}>
         {/* Population Pie Chart */}
-        <div className={`${styles.chartBox} ${styles.firstChart}`} onClick={() => openModal("population")}>
-
+        <div
+          className={`${styles.chartBox} ${styles.firstChart}`}
+          onClick={() => openModal("population")}
+        >
           <ResponsiveContainer width="100%" height={200}>
-
             <PieChart>
               <Pie
                 data={getPopulationData()}
@@ -130,7 +125,10 @@ const handleNavigate=()=>{
                 fill="#8884d8"
               >
                 {getPopulationData().map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                  />
                 ))}
               </Pie>
               <Tooltip />
@@ -139,17 +137,20 @@ const handleNavigate=()=>{
                 align="right"
                 verticalAlign="middle"
                 iconType="square"
-                formatter={(value, entry) => `${value} (${entry.payload.value})`}
+                formatter={(value, entry) =>
+                  `${value} (${entry.payload.value})`
+                }
               />
             </PieChart>
           </ResponsiveContainer>
           <p>Population Based Chart</p>
-
         </div>
 
-
         {/* Age Group Bar Chart */}
-        <div className={`${styles.chartBox} ${styles.secondChart}`} onClick={() => openModal("ageGroup")}>
+        <div
+          className={`${styles.chartBox} ${styles.secondChart}`}
+          onClick={() => openModal("ageGroup")}
+        >
           <ResponsiveContainer width="100%" height={200}>
             <BarChart data={getAgeGroupData()}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -165,7 +166,10 @@ const handleNavigate=()=>{
         </div>
 
         {/* Occupation Bar Chart */}
-        <div className={`${styles.chartBox} ${styles.thirdChart}`} onClick={() => openModal("occupation")}>
+        <div
+          className={`${styles.chartBox} ${styles.thirdChart}`}
+          onClick={() => openModal("occupation")}
+        >
           <ResponsiveContainer width="100%" height={200}>
             <BarChart data={getOccupationData()}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -188,7 +192,7 @@ const handleNavigate=()=>{
         onRequestClose={closeModal}
         className={styles.modal}
       >
-        <div >
+        <div>
           {hoveredChart === "population" && (
             <ResponsiveContainer width="100%" height={200}>
               <PieChart>
@@ -201,7 +205,10 @@ const handleNavigate=()=>{
                   fill="#8884d8"
                 >
                   {getPopulationData().map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={COLORS[index % COLORS.length]}
+                    />
                   ))}
                 </Pie>
                 <Tooltip />
@@ -210,7 +217,9 @@ const handleNavigate=()=>{
                   align="right"
                   verticalAlign="middle"
                   iconType="square"
-                  formatter={(value, entry) => `${value} (${entry.payload.value})`}
+                  formatter={(value, entry) =>
+                    `${value} (${entry.payload.value})`
+                  }
                 />
               </PieChart>
             </ResponsiveContainer>
@@ -247,7 +256,6 @@ const handleNavigate=()=>{
           <button onClick={closeModal}>Close</button>
         </div>
       </Modal>
-
     </div>
   );
 };
