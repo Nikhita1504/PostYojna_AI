@@ -31,7 +31,7 @@ const Sidebar = () => {
         <div className={styles.section}>
           <h3 className={styles.sectionTitle}>Home</h3>
           <Link
-            to="/"
+            to="/Home/Dashboard"
             className={`${styles.navItem} ${
               location.pathname === "/" ? styles.active : ""
             }`}
@@ -44,7 +44,7 @@ const Sidebar = () => {
           <h3 className={styles.sectionTitle}>Visualizations</h3>
 
           <Link
-            to="/demographic-insights"
+            to="/Home/demographic-insights"
             className={`${styles.navItem} ${
               location.pathname === "/demographic-insights" ? styles.active : ""
             }`}
@@ -55,9 +55,9 @@ const Sidebar = () => {
           </Link>
           <h3 className={styles.sectionTitle}>Add Event</h3>
           <Link
-            to="/calendar"
+            to="/Home/calendar"
             className={`${styles.navItem} ${
-              location.pathname === "/calendar" ? styles.active : ""
+              location.pathname === "/Home/calendar" ? styles.active : ""
             }`}
           >
             <FontAwesomeIcon icon={faCalendarAlt} className={styles.icon} />
@@ -65,9 +65,9 @@ const Sidebar = () => {
             <FontAwesomeIcon icon={faAngleRight} className={styles.iconRight} />
           </Link>
           <Link
-            to="/Feedback"
+            to="/Home/Feedback"
             className={`${styles.navItem} ${
-              location.pathname === "/Feedback" ? styles.active : ""
+              location.pathname === "/Home/Feedback" ? styles.active : ""
             }`}
           >
             <Menu className={styles.icon} />

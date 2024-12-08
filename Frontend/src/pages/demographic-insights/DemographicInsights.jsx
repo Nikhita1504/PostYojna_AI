@@ -122,4 +122,3 @@ function DemographicInsights() {
 }
 
 export default DemographicInsights;
-
