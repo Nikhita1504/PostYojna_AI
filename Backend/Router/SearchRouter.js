@@ -30,4 +30,5 @@ SearchRouter.get('/location', async (req, res) => {
   });
 
 module.exports=SearchRouter
+
   

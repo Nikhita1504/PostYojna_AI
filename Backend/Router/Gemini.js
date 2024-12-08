@@ -7,7 +7,7 @@ const {FeedbackModel} = require("../model/db");
 
 const genAI = new GoogleGenerativeAI("AIzaSyCn5UAt76WC7GZ--09qAzHd29mgz8G86TI");
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-const { HfInference } = require("@huggingface/inference");
+
 
 GeminiRouter.post("/listen", async (req, res) => {
   const prompts = req.body;

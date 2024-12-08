@@ -1,47 +1,25 @@
 import { ResponsiveBar } from "@nivo/bar";
 import { useTheme } from "@mui/material";
 
-const mockBarData = [
-  {
-    year: 2018,
-    registrations: 12,
-  },
-  {
-    year: 2019,
-    registrations: 18,
-  },
-  {
-    year: 2020,
-    registrations: 10,
-  },
-  {
-    year: 2021,
-    registrations: 25,
-  },
-  {
-    year: 2022,
-    registrations: 20,
-  },
-  {
-    year: 2023,
-    registrations: 30,
-  },
-];
-
-const DashboardBarChart = ({ isCustomBarColors = false, isDashboard = false }) => {
+const DashboardBarChart = ({ registrationsOverYears }) => {
   const theme = useTheme();
+
+  // Check if data is available and is in the expected format
+  if (!registrationsOverYears || registrationsOverYears.length === 0) {
+    return <div>Loading...</div>; // Render a loading state or fallback
+  }
 
   const colors = {
     grey: "#B0B0B0", // Lighter grey for axes
     primaryStart: "#079AA2", // Start color for gradient (light blue)
-    primaryEnd: "#00C49F", // End color for gradient (dark teal)
+    primaryEnd: "#FFBB28", // End color for gradient (dark teal)
     background: "#F0F0F5", // Light lavender background color
     axisText: "#999999", // Lighter grey for axis text
   };
 
   return (
     <ResponsiveBar
-      data={mockBarData}
+      data={registrationsOverYears} // Use registrationsOverYears as the data source
       keys={['registrations']} // Specify the field to use for the bars' values
       indexBy="year" // Specify the field to use for the bars' categories
       theme={{
@@ -60,7 +38,7 @@ const DashboardBarChart = ({ isCustomBarColors = false, isDashboard = false }) =
           container: { color: colors.primaryStart },
         },
       }}
-      margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+      margin={{ top: 50, right: 110, bottom: 50, left: 80 }}
       xScale={{ type: "band", padding: 0.3 }}
       yScale={{
         type: "linear",
@@ -84,7 +62,7 @@ const DashboardBarChart = ({ isCustomBarColors = false, isDashboard = false }) =
         tickPadding: 5,
         tickRotation: 0,
         legend: "Registrations",
-        legendOffset: -40,
+        legendOffset: -60,
         legendPosition: "middle",
       }}
       enableGridX={false}
@@ -141,9 +119,87 @@ const DashboardBarChart = ({ isCustomBarColors = false, isDashboard = false }) =
         },
       ]}
       animate={true} // Enable transitions/animations
-      motionConfig="stiff" // Use a gentle transition effect
+      motionConfig="wobbly" // Use a gentle transition effect
     />
   );
 };
 
 export default DashboardBarChart;
+
+
+
+// import React from 'react';
+// import { ChartComponent, ColumnSeries, Category, DataLabel, Tooltip, SeriesDirective, SeriesCollectionDirective, Inject } from '@syncfusion/ej2-react-charts';
+// import { Browser } from '@syncfusion/ej2-base';
+
+// const CylindricalColumnDashboard = ({ data }) => {
+//   const onChartLoad = (args) => {
+//     let chart = document.getElementById('charts');
+//     chart.setAttribute('title', '');
+//   };
+
+//   const load = (args) => {
+//     let selectedTheme = location.hash.split('/')[1];
+//     selectedTheme = selectedTheme ? selectedTheme : 'Fluent2';
+//     args.chart.theme = (selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).replace(/-dark/i, "Dark").replace(/contrast/i, 'Contrast').replace(/-highContrast/i, 'HighContrast');
+//   };
+
+//   return (
+//     <div className='control-pane'>
+//       <div className='control-section'>
+//         <ChartComponent 
+//           id='charts' 
+//           style={{ textAlign: "center" }} 
+//           chartArea={{ border: { width: 0 } }} 
+//           title='Registrations Over Years'
+//           primaryXAxis={{
+//             valueType: 'Category',
+//             interval: 1,
+//             majorGridLines: { width: 0 },
+//             labelIntersectAction: Browser.isDevice ? 'None' : 'Trim',
+//             labelRotation: Browser.isDevice ? -45 : 0,
+//             majorTickLines: { width: 0 },
+//             minorTickLines: { width: 0 }
+//           }} 
+//           primaryYAxis={{
+//             title: 'Registrations',
+//             majorTickLines: { width: 0 },
+//             lineStyle: { width: 0 },
+//             maximum: 200000,
+//             interval: 25000
+//           }} 
+//           tooltip={{
+//             enable: true,
+//             header: "<b>${point.tooltip}</b>",
+//             format: "Registrations: <b>${point.y}</b>"
+//           }} 
+//           load={load.bind(this)} 
+//           loaded={onChartLoad.bind(this)} 
+//           width={Browser.isDevice ? '100%' : '75%'}
+//           height='300px' // Adjust overall height of the chart
+//           enableAnimation={true} // Enable smooth animation
+//           animationDuration={1500} 
+//           animationEasing="EaseInOut" // Duration of the animation in milliseconds
+//         >
+//           <Inject services={[ColumnSeries, Category, DataLabel, Tooltip]} />
+          
+//           <SeriesCollectionDirective>
+//             <SeriesDirective 
+//               dataSource={data}
+//               columnFacet='Cylinder'
+//               type='Column' 
+//               xName='year' 
+//               yName='registrations' 
+//               width={1}  // Adjust width to reduce cylinder height
+//               columnSpacing={0.2} // Increase spacing between columns to reduce height perception
+//               tooltipMappingName='year'>
+//             </SeriesDirective>
+//           </SeriesCollectionDirective>
+//         </ChartComponent>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default CylindricalColumnDashboard;
+

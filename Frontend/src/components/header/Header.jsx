@@ -58,9 +58,9 @@ const Header = () => {
           <p>{currentTime.toLocaleDateString()}</p>
           <p>{currentTime.toLocaleTimeString()}</p>
         </div>
-        <button className={styles.actionButton}>
+        {/* <button className={styles.actionButton}>
           <Bell className={styles.actionIcon} />
-        </button>
+        </button> */}
         {/* <div className={styles.profile}>
           <img src="/assets/user.jpeg" alt="Profile" className={styles.profileImage} />
         </div> */}

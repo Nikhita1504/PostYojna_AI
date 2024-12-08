@@ -1,5 +1,7 @@
 
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+
 require("dotenv").config();
 const URL = process.env.URL;
 
@@ -34,38 +36,25 @@ mongoose
     { timestamps: true }
   );
 
-  const dashboardDataSchema = new mongoose.Schema(
-    {
-      location: {
-        city: String,
-        state: String,
-        pincode: String,
+  const dashboardDataSchema = new mongoose.Schema({
+    schemeName: { type: String, required: true },
+    metrics: [
+      {
+        icon: { type: String, required: true },  // Store icon name or icon identifier
+        title: { type: String, required: true },
+        value: { type: String, required: true },
+        progress: { type: Number, required: true },
       },
-      schemeName: String,
-      statistics: {
-        totalPopulation: Number,
-        trafficGenerated: Number,
-        totalAccountsOpened: Number,
-        totalFundsDeposited: Number,
+    ],
+    registrationsOverYears: [
+      {
+        year: { type: Number, required: true },
+        registrations: { type: Number, required: true },
       },
-      registrationsOverYears: [
-        {
-          year: Number,
-          registrations: Number,
-        },
-      ],
-      lastUpdated: Date,
-    },
-    { collection: 'dashboard_data' } // Explicitly specify the collection name
-  );
-  
-  // Create the Mongoose model
+    ],
+    lastUpdated: { type: Date, required: true },
+  });
 
-
-
-const Schema = mongoose.Schema;
-
-// Define the Feedback schema
 const feedbackSchema = new Schema({
   location: {
     type: String,  // Location where the feedback was given
@@ -89,8 +78,74 @@ const feedbackSchema = new Schema({
   }
 });
 
-// Create the Feedback model
+
+
+const eventSchema = new mongoose.Schema({
+    title: { type: String, required: true },
+    description: { type: String, required: true },
+    start: { type: Date, required: true },
+    end: { type: Date, required: true },
+});
+
+
+
+
+const DemographicsSchema = new mongoose.Schema({
+  location: { type: String, required: true },
+  population: {
+    total: { type: Number, required: true },
+    male: { type: Number, required: true },
+    female: { type: Number, required: true },
+    gender_ratio: { type: Number, required: true } // Females per 1000 males
+  },
+  age_group_population: {
+    male: {
+      "0-10": { type: Number, required: true },
+      "11-59": { type: Number, required: true },
+      "60+": { type: Number, required: true }
+    },
+    female: {
+      "0-10": { type: Number, required: true },
+      "11-59": { type: Number, required: true },
+      "60+": { type: Number, required: true }
+    }
+  },
+  occupation_based_population: {
+    male: {
+      agriculture: { type: Number, required: true },
+      service: { type: Number, required: true },
+      business: { type: Number, required: true },
+      others: { type: Number, required: true },
+      non_working: { type: Number, required: true }
+    },
+    female: {
+      agriculture: { type: Number, required: true },
+      service: { type: Number, required: true },
+      business: { type: Number, required: true },
+      others: { type: Number, required: true },
+      non_working: { type: Number, required: true }
+    }
+  },
+  seasonal_demand_for_money: [
+    {
+      month: { type: String, required: true },
+      demand_score: { type: Number, required: true },
+      demand_type: { type: String, required: true }
+    }
+  ]
+});
+
+
+
+
+const EventModel = mongoose.model('Event', eventSchema);
+
+
+
+const DemographicModel = mongoose.model("Demographic", DemographicsSchema);
+
+const DashboardModel = mongoose.model('Dashboard', dashboardDataSchema);
 const FeedbackModel = mongoose.model('Feedback', feedbackSchema);
 const UserModel = mongoose.model("UserModel", userSchema);
-const DashboardData = mongoose.model('DashboardData', dashboardDataSchema);
-module.exports = {FeedbackModel , UserModel , DashboardData};
+
+module.exports = {FeedbackModel , UserModel , DashboardModel,EventModel,DemographicModel};
