@@ -103,7 +103,7 @@
 
 
 .navItem:hover {
-    background: #A5C5FF;
+    background: #5d93f8b3;
 
 
 }
@@ -126,7 +126,8 @@
 .Profile {
     display: flex;
     flex-direction: column;
-    gap: 9px;
+    justify-content: center;
+    gap: 13px;
     align-items: center;
     padding: 10px;
     margin: 20px 0; /* Adds some spacing around the profile section */
@@ -141,7 +142,14 @@
     margin-right: 15px; /* Space between image and text */
     border: 2px solid #ddd; /* Optional border for the image */
   }
-  
+  .Profile div{
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-items: center;
+    gap: 6px;
+
+  }
   .Profile h4 {
     margin: 0; /* Remove default margin */
     font-size: 16px;
@@ -152,6 +160,7 @@
   .Profile p {
     margin: 0;
     font-size: 14px;
+    text-align: center;
     color: white; /* Softer text color for the role */
   }
   

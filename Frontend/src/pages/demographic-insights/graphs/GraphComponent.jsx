@@ -21,10 +21,13 @@ import { Parallax, Pagination, Navigation } from 'swiper/modules';
 import './styles.css';
 import PieCornerRadius from './charts/PieChart';
 import Column from './charts/BarChart';
-
+import CylindricalColumn from './charts/CylindricalColumn';
+import OccupationBased from './charts/OccupationBased';
 import Doughnut from './charts/OccupationBased';
-
+import ApexChart from './charts/HeatMap';
+import SeasonalDemandChart from './charts/CylindricalColumn';
 import { useLocation } from 'react-router-dom';
+import HashLoader from 'react-spinners/HashLoader';
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
@@ -35,9 +38,12 @@ const GraphSwiper = () => {
   const { locationName } = location.state || {};
   console.log(locationName);
 
+  const [ageData, setageData]
+    = useState(null);
   const [currlocation, setcurrlocation] = useState("");
+  const [fetchDistrict, setFetchingDistrict] = useState(true);
 
-  const fetchdistrict = async () => {
+  const fetchingDistrict = async () => {
     const newPrompt = {
       address: locationName,
       myprompt:
@@ -46,28 +52,49 @@ const GraphSwiper = () => {
 
     try {
       const response = await axios.post("http://localhost:3000/Gemini/get-district", { newPrompt })
-      console.log(response.data)
+      
+      setFetchingDistrict(true);
+      console.log(response.data) 
       setcurrlocation(response.data)
     } catch (error) {
       console.log(error)
+    }finally {
+      setFetchingDistrict(false); // Stop loading for district
     }
   }
   console.log(currlocation.district);
 
   useEffect(() => {
-    fetchdistrict(locationName);
+    fetchingDistrict(locationName);
 
   }, []);
 
   // Fetch data from backend API
 
-  const fetchData = async () => {
+  // const fetchData = async () => {
+  //   try {
+  //     const location = currlocation.district;
+  //     const response = await axios.get('http://localhost:3000/demographic-data/get', {
+  //       params: {location}
+  //     });
+  //     console.log(response.data)
+  //     setGraphData(response.data);
+  //     setLoading(false);
+  //   } catch (error) {
+  //     console.error('Error fetching data:', error);
+  //     setLoading(false);
+  //   }
+  // };
+  // useEffect(() => {
+  //   fetchData();
+  // }, [currlocation])
+
+  const fetchPopulationData = async () => {
     try {
-      const location = currlocation.district;
-      const response = await axios.get('http://localhost:3000/demographic-data/get', {
-        params: {location}
+      const Location = currlocation.district;
+      const response = await axios.get('http://localhost:3000/demographic-data/getPopulationData', {
+        params: { Location }
       });
-      console.log(response.data)
       setGraphData(response.data);
       setLoading(false);
     } catch (error) {
@@ -76,8 +103,24 @@ const GraphSwiper = () => {
     }
   };
   useEffect(() => {
-    fetchData();
+    // fetchData();
+    fetchPopulationData();
   }, [currlocation])
+
+  const fetchAgeData = async () => {
+    try {
+      const response = await axios.get("http://localhost:3000/demographic-data/getAgedata")
+      console.log(response.data)
+      setageData(response.data)
+
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  useEffect(() => {
+    fetchAgeData();
+  }, [])
 
 
 
@@ -85,8 +128,8 @@ const GraphSwiper = () => {
   const getPopulationData = () =>
     graphData
       ? [
-        { name: 'Male Population', value: graphData.population.male },
-        { name: 'Female Population', value: graphData.population.female },
+        { name: 'Male Population', value: graphData.Male },
+        { name: 'Female Population', value: graphData.Female },
       ]
       : [];
 
@@ -97,13 +140,21 @@ const GraphSwiper = () => {
 
 
 
+  // const getAgeGroupData = () =>
+  //   graphData
+  //     ? [
+  //       { name: '0-10', Male: graphData.age_group_population.male['0-10'], Female: graphData.age_group_population.female['0-10'] },
+  //       { name: '11-59', Male: graphData.age_group_population.male['11-59'], Female: graphData.age_group_population.female['11-59'] },
+  //       { name: '60+', Male: graphData.age_group_population.male['60+'], Female: graphData.age_group_population.female['60+'] },
+  //     ]
+  //     : [];
   const getAgeGroupData = () =>
-    graphData
-      ? [
-        { name: '0-10', Male: graphData.age_group_population.male['0-10'], Female: graphData.age_group_population.female['0-10'] },
-        { name: '11-59', Male: graphData.age_group_population.male['11-59'], Female: graphData.age_group_population.female['11-59'] },
-        { name: '60+', Male: graphData.age_group_population.male['60+'], Female: graphData.age_group_population.female['60+'] },
-      ]
+    ageData
+      ? ageData.map((ageGroup) => ({
+        name: ageGroup.Column1,
+        Male: ageGroup.Males,
+        Female: ageGroup.Females,
+      }))
       : [];
 
   const getOccupationData = () =>
@@ -137,13 +188,20 @@ const GraphSwiper = () => {
     return <p>Loading...</p>;
   }
 
+  // if (fetchingDistrict) {
+  //   return <p>Loading district data...</p>; // Loader for district fetching
+  // }
+
   if (!graphData) {
     return <p>Error loading data.</p>;
   }
 
   return (
     <div className="bigCon">
-     
+{fetchDistrict && <div className='loader'><HashLoader 
+style={{position:"relative",right:"12%"}}
+size={50} color="#3A57E8" /></div>}
+
       <Swiper
         style={{
           '--swiper-navigation-color': '#fff',
@@ -176,7 +234,7 @@ const GraphSwiper = () => {
         <SwiperSlide>
           <div className="graphBox1">
             <p>Population Based Chart</p>
-            {/* <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height={300}>
               <PieChart>
                 <Pie
                   data={getPopulationData()}
@@ -187,14 +245,14 @@ const GraphSwiper = () => {
                   fill="#8884d8"
                 >
                   {getPopulationData().map((entry, index) => (
-                    <Cell key={cell-${index}} fill={COLORS[index % COLORS.length]} />
+                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
                 <Tooltip />
                 <Legend />
               </PieChart>
-            </ResponsiveContainer> */}
-            <PieCornerRadius data={formattedData} />
+            </ResponsiveContainer>
+            {/* <PieCornerRadius data={formattedData} /> */}
           </div>
         </SwiperSlide>
 
@@ -202,18 +260,28 @@ const GraphSwiper = () => {
         <SwiperSlide>
           <div className="graphBox1">
             <p>Age Group Chart</p>
-            {/* <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height={370}>
               <BarChart data={getAgeGroupData()}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
+                <XAxis
+                  dataKey="name"
+                  angle={-45} // Adjust the angle to make it slanted
+                  textAnchor="end"
+                  fontSize={12}  // Aligns the text correctly after rotation
+                />
+                <YAxis fontSize={12} />
                 <Tooltip />
-                <Legend />
+                {/* <Legend
+
+                  // Aligns the legend at the top
+                  margin={{ top: 40 }} // Adds margin at the top
+                /> */}
                 <Bar dataKey="Male" fill="#8884d8" />
                 <Bar dataKey="Female" fill="#82ca9d" />
               </BarChart>
-            </ResponsiveContainer> */}
-            <Column ageGroupData={getAgeGroupData()} />
+            </ResponsiveContainer>
+
+            {/* <Column ageGroupData={getAgeGroupData()} /> */}
           </div>
         </SwiperSlide>
 
@@ -232,7 +300,7 @@ const GraphSwiper = () => {
                 <Bar dataKey="Female" fill="#FF8042" />
               </BarChart>
             </ResponsiveContainer> */}
-            <Doughnut data={getOccupationData()} />
+            {/* <Doughnut data={getOccupationData()} /> */}
           </div>
         </SwiperSlide>
 
@@ -240,7 +308,7 @@ const GraphSwiper = () => {
         <SwiperSlide>
           <div className="SeasongraphBox1">
             <p>Seasonal Demand Heatmap</p>
-            <ResponsiveContainer width="100%" height={300}>
+            {/* <ResponsiveContainer width="100%" height={300}>
               <BarChart data={seasonalDemandData}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="month" />
@@ -258,7 +326,7 @@ const GraphSwiper = () => {
                   }}
                 />
               </BarChart>
-            </ResponsiveContainer>
+            </ResponsiveContainer> */}
             {/* <SeasonalDemandChart seasonalDemandData={seasonalDemandData} /> */}
           </div>
         </SwiperSlide>

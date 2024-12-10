@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import styles from './DemographicInsights.module.css';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
+import axios from 'axios';
 
 function DemographicInsights() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -67,7 +68,7 @@ function DemographicInsights() {
   }, [searchQuery]);
 
   const handleMapNavigate=()=>{
-    navigate('/demographic-insights/maps')
+    navigate('/Home/demographic-insights/maps')
   }
 
   return (

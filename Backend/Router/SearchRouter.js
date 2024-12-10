@@ -1,5 +1,6 @@
 const express = require("express");
-const axios = require("axios");
+const{ default:axios} = require("axios");
+
 
 const SearchRouter = express.Router();
 SearchRouter.get('/location', async (req, res) => {

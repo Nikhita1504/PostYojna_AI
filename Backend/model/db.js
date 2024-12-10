@@ -132,11 +132,66 @@ const DemographicsSchema = new mongoose.Schema({
     {
       month: { type: String, required: true },
       demand_score: { type: Number, required: true },
-      demand_type: { type: String, required: true },
+      demand_type: { type: String, required: true }
+    }
+  ]
+});
+const populationSchema = new mongoose.Schema({
+  Location: {
+    type: String,
+    required: true,
+  },
+  Total: {
+    type: Number,
+    required: true,
+  },
+  Male: {
+    type: Number,
+    required: true,
+  },
+  Female: {
+    type: Number,
+    required: true,
+  },
+}, { timestamps: true });
+
+const ageGroupSchema = new mongoose.Schema({
+  ageGroup: {
+    type: String, // Age group or range (e.g., "0-4", "5-9", "80")
+    required: true
+  },
+  persons: {
+    type: Number, // Total number of persons in the specified age group
+    required: true
+  },
+  percentageTotal: {
+    type: Number, // Percentage of total population in this age group
+    required: true
+  },
+  males: {
+    count: {
+      type: Number, // Number of males in the age group
+      required: true
     },
-  ],
+    percentage: {
+      type: Number, // Percentage of male population in this age group
+      required: true
+    }
+  },
+  females: {
+    count: {
+      type: Number, // Number of females in the age group
+      required: true
+    },
+    percentage: {
+      type: Number, // Percentage of female population in this age group
+      required: true
+    }
+  }
 });
 
+const AgeGroup = mongoose.model('AgeGroup', ageGroupSchema);
+const Population = mongoose.model('Population', populationSchema);
 const ActiveSchemeSchema = new mongoose.Schema({
   schemeName: { type: String, required: true }, // Name of the scheme
   state: { type: String, required: true },
@@ -150,7 +205,12 @@ const ActiveSchemeSchema = new mongoose.Schema({
 });
 
 const ActiveSchemeModel = mongoose.model("ActiveScheme",ActiveSchemeSchema);
-const EventModel = mongoose.model("Event", eventSchema);
+
+
+
+const EventModel = mongoose.model('Event', eventSchema);
+
+
 
 const DemographicModel = mongoose.model("Demographic", DemographicsSchema);
 
@@ -163,6 +223,6 @@ module.exports = {
   UserModel,
   DashboardModel,
   EventModel,
-  DemographicModel,
+  DemographicModel,Population,AgeGroup,
   ActiveSchemeModel,
 };

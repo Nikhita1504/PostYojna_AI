@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Merriweather:wght@700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Merriweather:wght@700&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Ubuntu&display=swap');
+
 .dashboard {
   background-color: #D3D3D3;
 
@@ -54,11 +55,15 @@
 .dashboardHeader h1 {
   font-size: 3rem;
   margin: 0;
+  font-family: "Noto Serif", serif;
+
 }
 
 .dashboardHeader p {
   font-size: 1.5rem;
   margin: 0;
+  font-family: "Noto Serif", serif;
+
 }
 
 .controls {
@@ -107,6 +112,7 @@
 
 .dropdown option {
   padding: 5px;
+  font-family: "Noto Serif", serif;
 
   background-color: #fff;
 
@@ -155,35 +161,32 @@
 }
 
 .metricCard {
-  flex: 1;
+  flex: 0.5;
   background-color: #fff;
   padding: 10px 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
-  justify-content: center; /* Align content to sides */
   align-items: center; /* Center vertically */
   height: 150px;
 }
 
-.metricCardData{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 25px;
-}
+
 .metricCardData p{
   font-weight: bold;
   font-size: 1.8rem;
-}
-.metricValues{
+  font-family: Arial, sans-serif;
 
-width: 100%;
 }
+
 .metricCardData h4 {
   margin-bottom: 5px;
   font-size: 1.1rem;
 
+}
+.metricIcon{
+/* background-color: #007bff; */
+margin-bottom: 15px;
 }
 
 

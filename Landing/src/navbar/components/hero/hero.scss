@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Merriweather:wght@700&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Ubuntu&display=swap');
+
+.hero {
+    height: calc(100vh - 100px);
+    overflow: hidden;
+    padding: 0 70px;
+    background-color: #070917;
+    // background: linear-gradient(180deg, #0c0c1d, #111132);
+    position: relative;
+
+    .wrapper {
+        max-width: 1366px;
+        height: 100%;
+        margin: 0 auto; // Center the container horizontally
+        padding-left: 30px; // Left margin
+        padding-right: 30px; // Right margin
+
+        .textContainer {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            margin-left: 3%;
+            flex-direction: column;
+            justify-content: center;
+            gap: 40px;
+
+            h2 {
+                font-size: 6rem;
+                font-family: "Noto Serif", serif;
+                color: transparent;
+                -webkit-text-stroke: 1px white;
+                -webkit-background-clip: text;
+                background-image: url(../back.png);
+                background-size: 2000px;
+                animation: animate 20s infinite linear;
+                margin: 0.5rem 0;
+
+                @keyframes animate {
+                    100% {
+                        background-position: 2000px 0;
+                    }
+                }
+            }
+
+            h1 {
+                font-size: 38px;
+            }
+
+
+            button {
+                padding: 0.5rem;
+                border: 1px solid white;
+
+                background-color: transparent;
+                color: white;
+                margin-right: 20px;
+                cursor: pointer;
+                position: relative;
+                font-weight: 300;
+            }
+
+            button:hover {
+                border: 1px solid #f44336;
+                background: #f44336;
+                transition: 1s;
+            }
+
+
+
+            img {
+                width: 50px;
+            }
+        }
+    }
+
+    .imageContainer {
+        height: 100%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        // border: 2px solid green;
+
+        img {
+            margin-right: 30px;
+            height: 600px;
+            /* Adjust height as desired */
+            width: 600px;
+        }
+    }
+
+    .slidingTextContainer {
+        position: absolute;
+        font-size: 50vh;
+        bottom: -120px;
+        white-space: nowrap;
+        color: #ffffff10;
+        width: 50%;
+        font-weight: bold;
+    }
+}

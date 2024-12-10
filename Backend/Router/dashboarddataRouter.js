@@ -1,7 +1,7 @@
 const express = require("express");
 const axios = require("axios");
 const mongoose = require("mongoose");
-const { DashboardModel } = require('../model/db'); // Path to your model file
+const { DashboardModel, AgeGroup } = require('../model/db'); // Path to your model file
 
 
 const dashboarddataRouter = express.Router();
@@ -28,6 +28,7 @@ dashboarddataRouter.get('/getData', async (req, res) => {
         res.status(500).json({ message: "Server Error" });
     }
 });
+
 
 
 
