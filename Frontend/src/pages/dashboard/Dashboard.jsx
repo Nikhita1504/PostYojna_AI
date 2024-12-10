@@ -26,19 +26,25 @@ import CountUp from 'react-countup';
 import CylindricalColumn from "../demographic-insights/graphs/charts/CylindricalColumn";
 import CylindricalColumnDashboard from "./DashboardLineChart";
 
+import ReactStars from "react-rating-stars-component";
 
 
 
 const schemes = [
-  "Sukanya Samriddhi Account",
-  "Senior Citizens Savings Scheme Account",
-
-  "Kisan Vikas Patra",
-  "Mahila Samman Savings Certificate",
+  "Post Office Savings Account",
+  "Post Office Recurring Deposit Account",
+  "Post Office Time Deposit Account",
+  "Post Office Monthly Income Scheme",
+  "Senior Citizen Savings Scheme",
   "Public Provident Fund",
+  "Sukanya Samriddhi Yojana",
   "Postal Life Insurance",
   "Rural Postal Life Insurance",
-  "Post Office Savings Account",
+  "National Savings Certificate",
+  "Kisan Vikas Patra",
+  "Fixed Deposits",
+  "Recurring Deposits",
+"Mahila Samman Savings Certificate",
 ];
 
 
@@ -106,7 +112,7 @@ const Dashboard = () => {
   }, [debouncedSearchQuery]);
 
   const fetchfeedback = async () => {
-    // console.log(selectedScheme);
+    SetFeedback([])
     const response = await axios(
       `http://localhost:3000/feedback/scheme/${selectedScheme}`
     );
@@ -260,16 +266,31 @@ const Dashboard = () => {
             <DashboardBarChart isDashboard={true} scheme={selectedScheme} registrationsOverYears={dashboardData.registrationsOverYears} />
             {/* <CylindricalColumnDashboard className={styles.barChart} data={dashboardData.registrationsOverYears} /> */}
           </div>
-          <div className={styles.recentTransactions}>
+          <div className={styles.feedback}>
             <h3>Feedbacks</h3>
             <div className={styles.transactionList}>
               {Feedback.map((feedback, index) => (
-                <div className={styles.transactionItem} key={index}>
-                  <div className={styles.transactiondata}>
-                    <div className={styles.id}>{feedback.location}</div>
-                  </div>
+                <div className={styles.feedbackContainer}>
+                  <div className={styles.Content}>
+                    <p>{feedback.point}</p></div>
+                    <div className={styles.lowercontainer}>
+                    
+                 
+                    <div className={styles.location}><span>Location :{feedback.location}</span> </div>
+                    <div className={styles.rating}>
+                    <ReactStars
+          count={5}
+          size={30}
+          isHalf={true}
+          value={feedback.rating}
+        
+          activeColor="#ffd700"
+        />
+                     </div>
+              
                 </div>
-
+                
+                </div>
               ))}
             </div>
           </div>

@@ -345,7 +345,7 @@ align-items: center;
 .progresschart canvas {
   max-width: 100%; /* Ensure charts are responsive */
 }
-.recentTransactions {
+.feedback {
   padding: 20px;
   width: 40%;
   background-color: #fff;
@@ -353,6 +353,7 @@ align-items: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   max-height: 350px; /* Adjust this height to suit your layout */
   overflow-y: auto; /* Makes the container scrollable */
+  
 }
 
 .transactionList {
@@ -407,4 +408,52 @@ h3 {
 
 .viewButton:hover {
   background-color: #1d5cb7; /* Slightly darker shade on hover */
+}
+.feedbackContainer {
+  border: 1px solid #050505; /* Green outline for freshness and trust */
+  border-radius: 8px; /* Rounded corners for a modern look */
+  height: 100px; /* Adjusted height for better spacing */
+  display: flex;
+  flex-direction: column;
+  background-color: #f9f9f9; /* Light grey for a subtle background */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+
+  .Content {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    height: 70px;
+    background-color: #FFFAE6; /* Soft yellow to indicate highlight */
+    border: 1px solid #FFD54F; /* Slightly darker yellow for the border */
+    padding: 10px; /* Added padding for content spacing */
+    font-family: 'Arial', sans-serif;
+    color: #333; /* Darker text for readability */
+    font-size: 16px; /* Comfortable font size */
+    border-radius: 8px;
+    border-bottom: ;
+  }
+
+  .lowercontainer {
+    height: 40px;
+   
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px;
+    padding: 0 10px;
+    background-color: #FFF; /* White background for contrast */
+    color: #555; /* Neutral grey for text */
+    font-size: 14px;
+
+    .location {
+      color: #020202; /* Blue for links or location text */
+      font-weight: bold;
+    }
+
+    .rating {
+      color: #FFC107; /* Yellow for ratings, symbolizing stars or positivity */
+      font-weight: bold;
+    }
+  }
 }
