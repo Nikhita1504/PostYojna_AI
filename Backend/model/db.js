@@ -135,6 +135,62 @@ const DemographicsSchema = new mongoose.Schema({
   ]
 });
 
+const populationSchema = new mongoose.Schema({
+  Location: {
+    type: String,
+    required: true,
+  },
+  Total: {
+    type: Number,
+    required: true,
+  },
+  Male: {
+    type: Number,
+    required: true,
+  },
+  Female: {
+    type: Number,
+    required: true,
+  },
+}, { timestamps: true });
+
+const ageGroupSchema = new mongoose.Schema({
+  ageGroup: {
+    type: String, // Age group or range (e.g., "0-4", "5-9", "80")
+    required: true
+  },
+  persons: {
+    type: Number, // Total number of persons in the specified age group
+    required: true
+  },
+  percentageTotal: {
+    type: Number, // Percentage of total population in this age group
+    required: true
+  },
+  males: {
+    count: {
+      type: Number, // Number of males in the age group
+      required: true
+    },
+    percentage: {
+      type: Number, // Percentage of male population in this age group
+      required: true
+    }
+  },
+  females: {
+    count: {
+      type: Number, // Number of females in the age group
+      required: true
+    },
+    percentage: {
+      type: Number, // Percentage of female population in this age group
+      required: true
+    }
+  }
+});
+
+const AgeGroup = mongoose.model('AgeGroup', ageGroupSchema);
+const Population = mongoose.model('Population', populationSchema);
 
 
 
@@ -148,4 +204,4 @@ const DashboardModel = mongoose.model('Dashboard', dashboardDataSchema);
 const FeedbackModel = mongoose.model('Feedback', feedbackSchema);
 const UserModel = mongoose.model("UserModel", userSchema);
 
-module.exports = {FeedbackModel , UserModel , DashboardModel,EventModel,DemographicModel};
+module.exports = {FeedbackModel , UserModel , DashboardModel,EventModel,DemographicModel,Population,AgeGroup};

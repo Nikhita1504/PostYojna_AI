@@ -45,13 +45,13 @@ const schemes = [
 const getIcon = (iconName) => {
   switch (iconName) {
     case "FaUsers":
-      return <FaUsers size={43} color="#3A57E8" />;
+      return <FaUsers size={30} color="#3A57E8" />;
     case "FaChartLine":
-      return <FaChartLine size={43} color="#3A57E8" />;
+      return <FaChartLine size={30} color="#3A57E8" />;
     case "FaUserPlus":
-      return <FaUserPlus size={43} color="#3A57E8" />;
+      return <FaUserPlus size={30} color="#3A57E8" />;
     case "BiRupee":
-      return <BiRupee size={43} color="#3A57E8" />;
+      return <BiRupee size={30} color="#3A57E8" />;
     default:
       return null; // Fallback in case the icon name is not recognized
   }
@@ -134,8 +134,6 @@ const Dashboard = () => {
         setlocationName(locationArr[0]);
 
       }
-
-
       const response = await axios.get('http://localhost:3000/dashboard/getData', {
         params: {
           // city: locationName,

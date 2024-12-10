@@ -1,5 +1,5 @@
 import React from "react";
-import { useState , useRef } from "react";
+import { useState, useRef } from "react";
 import styles from "./Voiceinput.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
@@ -31,14 +31,14 @@ const Voiceinput = () => {
     { code: "ma-IN", name: "Maithili" },
   ];
 
-  
+
 
 
   const initializeRecognition = () => {
     if (!recognitionRef.current) {
       if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
         const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-        recognition.lang =  language;
+        recognition.lang = language;
         recognition.continuous = true;
 
         recognition.onresult = (event) => {
@@ -114,80 +114,85 @@ const Voiceinput = () => {
     }
   };
 
- 
-  
+
+
   return (
-    <div className={styles.div}>
-      <div>
-        <input
-          placeholder="Enter Location of feedback"
-          value={location}
-          onChange={(e) => {
-            setlocation(e.target.value);
-            console.log(location);
-          }}
-        ></input>
+    <div className={styles.bigContainer}>
+      <div className={styles.imageWrapper}>
+        {/* <img src="/assets/bg.png" alt="" /> */}
+
+        <div className={styles.voiceInputContainer}>
+          <div>
+            <input
+              placeholder="Enter Location of feedback"
+              value={location}
+              onChange={(e) => {
+                setlocation(e.target.value);
+                console.log(location);
+              }}
+              className={styles.inputField}
+            />
+          </div>
+          <div>
+            <select
+              className={`form-select form-select-sm ${styles.selectField}`}
+              aria-label="Select Post Office Scheme"
+              onChange={(e) => {
+                setscheme(e.target.options[e.target.selectedIndex].text);
+              }}
+            >
+              <option selected>Choose a Post Office Scheme</option>
+              <option value="1">Post Office Savings Account</option>
+              <option value="2">Post Office Recurring Deposit (RD) Account</option>
+              <option value="3">Post Office Time Deposit (TD) Account</option>
+              <option value="4">Post Office Monthly Income Scheme (MIS)</option>
+              <option value="5">Senior Citizen Savings Scheme (SCSS)</option>
+              <option value="6">Public Provident Fund (PPF)</option>
+              <option value="7">Sukanya Samriddhi Yojana (SSY)</option>
+              <option value="8">Postal Life Insurance (PLI)</option>
+              <option value="9">Rural Postal Life Insurance (RPLI)</option>
+              <option value="10">National Savings Certificate (NSC)</option>
+              <option value="11">Kisan Vikas Patra (KVP)</option>
+              <option value="12">Fixed Deposits</option>
+              <option value="13">Recurring Deposits</option>
+            </select>
+          </div>
+          <button onClick={handleListening} className={styles.primaryButton}>
+            {isListening ? "Stop Listening" : "Start Listening"}
+          </button>
+          <p className={styles.transcribedText}>Transcribed Text: {text}</p>
+          <button
+            onClick={() => {
+              setText("");
+            }}
+            className={styles.secondaryButton}
+          >
+            Reset
+          </button>
+          <button
+            type="button"
+            className={`btn btn-success ${styles.submitButton}`}
+            onClick={handlesubmit}
+          >
+            Submit
+          </button>
+          <div>
+            <select
+              className={`form-select ${styles.languageSelector}`}
+              value={language}
+              onChange={handleLanguageChange}
+            >
+              {indianLanguages.map((lang) => (
+                <option key={lang.code} value={lang.code}>
+                  {lang.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
       </div>
-      <div>
-        <select
-          class="form-select form-select-sm"
-          aria-label="Select Post Office Scheme"
-          onChange={(e) => {
-            setscheme(e.target.options[e.target.selectedIndex].text);
-          }}
-        >
-          <option selected>Choose a Post Office Scheme</option>
-
-          <option value="1">Post Office Savings Account</option>
-          <option value="2">Post Office Recurring Deposit (RD) Account</option>
-          <option value="3">Post Office Time Deposit (TD) Account</option>
-          <option value="4">Post Office Monthly Income Scheme (MIS)</option>
-          <option value="5">Senior Citizen Savings Scheme (SCSS)</option>
-          <option value="6">Public Provident Fund (PPF)</option>
-          <option value="7">Sukanya Samriddhi Yojana (SSY)</option>
-
-          <option value="8">Postal Life Insurance (PLI)</option>
-          <option value="9">Rural Postal Life Insurance (RPLI)</option>
-
-          <option value="10">National Savings Certificate (NSC)</option>
-          <option value="11">Kisan Vikas Patra (KVP)</option>
-
-          <option value="12">Fixed Deposits</option>
-          <option value="13">Recurring Deposits</option>
-        </select>
-      </div>
-      <button onClick={handleListening}>
-        {isListening ? "Stop Listening" : "Start Listening"}
-      </button>
-      <p>Transcribed Text: {text}</p>
-      <button
-        onClick={() => {
-          setText("");
-        }}
-        style={{ marginLeft: "10px" }}
-      >
-        Reset
-      </button>
-      <button type="button" class="btn btn-success" onClick={handlesubmit}>
-        submit
-      </button>
-
-      <div>
-        <select
-          className="form-select"
-          value={language}
-          onChange={handleLanguageChange}
-        >
-          {indianLanguages.map((lang) => (
-            <option key={lang.code} value={lang.code}>
-              {lang.name}
-            </option>
-          ))}
-        </select>
-      </div>
-
-
     </div>
+
   );
 };
 

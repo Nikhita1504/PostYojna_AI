@@ -13,7 +13,7 @@ const Sidebar = () => {
       {/* Logo Section */}
       <div className={styles.logo}>
         <div className={styles.logoIcon}>
-          <img src="/assets/logo.jpeg" alt="Logo" />
+          <img src="/assets/logo.png" alt="Logo" />
         </div>
         <span className={styles.logoText}>PostYojna AI</span>
       </div>
