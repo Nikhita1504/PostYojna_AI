@@ -5,17 +5,16 @@
   width: 100%;
   height: 100vh;
   margin: 0;
-  padding: 70px;
+  padding-top: 70px;
+  background-color: #D3D3D3;
   font-family: 'Roboto', sans-serif;
 }
 
 .imageWrapper {
   position: relative;
   width: 100%;
-  height: 100%;
-  overflow: hidden;
-  object-fit: cover;
 }
+
 
 .searchContainer h2 {
    position: absolute;
@@ -23,6 +22,7 @@
   color: white;
   top: 20%;
   right: 22%; */
+  margin-top: 10px;
   top: 0;
   font-family: "Roboto Mono", monospace;
 color: rgb(100, 100, 100);
@@ -39,13 +39,13 @@ color: rgb(100, 100, 100);
 .searchContainer {
   position: absolute;
   top: 50%; /* Center vertically */
-  left: 50%; /* Center horizontally */
+  left: 53%; /* Center horizontally */
   transform: translate(-50%, -50%); /* Adjust for the element's dimensions */
   
   background-color: white; 
   height: 300px;
   width: 100%;
-  max-width: 500px; 
+  max-width: 600px; 
   padding: 20px;
   z-index: 2;
   border-radius: 10px; 

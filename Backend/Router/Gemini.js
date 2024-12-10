@@ -7,9 +7,9 @@ const {FeedbackModel} = require("../model/db");
 
 const genAI = new GoogleGenerativeAI("AIzaSyCn5UAt76WC7GZ--09qAzHd29mgz8G86TI");
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-const { HfInference } = require("@huggingface/inference");
 
-GeminiRouter.post("/listen", async (req, res) => {
+
+GeminiRouter.post("/listen", async (req, resq) => {
   const prompts = req.body;
 
   const prompt = JSON.stringify(prompts);
@@ -29,6 +29,7 @@ GeminiRouter.post("/listen", async (req, res) => {
           location: prompts.location, // Where the feedback was given
           scheme: prompts.scheme, // Scheme the feedback is related to
           relevant: r.relevant,
+          useCategory:prompts.useCategory,
           point: r.point,
           rating:prompts.rating
 
@@ -37,10 +38,13 @@ GeminiRouter.post("/listen", async (req, res) => {
         // Store feedback in the database
         const newFeedback = new FeedbackModel(feedback);
         await newFeedback.save();
+        return resq.json({success:true , message:"Feedback saved successfully"});
+     
+      }else {
+        resq.json({success:false, message:"irrelevant feedback"})
+        console.log("No text found in the response.");
       }
-    } else {
-      console.log("No text found in the response.");
-    }
+    } 
   } catch (error) {
     console.error("Error:", error.message);
   }

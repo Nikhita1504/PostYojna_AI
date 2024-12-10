@@ -1,7 +1,12 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleRight, faCalendarAlt, faChartPie, faHome } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAngleRight,
+  faCalendarAlt,
+  faChartPie,
+  faHome,
+} from "@fortawesome/free-solid-svg-icons";
 import { Dashboard, Menu, Palette } from "@mui/icons-material"; // Valid Material UI icons
 import styles from "./Sidebar.module.css";
 
@@ -13,7 +18,7 @@ const Sidebar = () => {
       {/* Logo Section */}
       <div className={styles.logo}>
         <div className={styles.logoIcon}>
-          <img src="/assets/logo.jpeg" alt="Logo" />
+          <img src="\assets\image.png" alt="Logo" />
         </div>
         <span className={styles.logoText}>PostYojna AI</span>
       </div>
@@ -21,8 +26,8 @@ const Sidebar = () => {
       <div className={styles.Profile}>
         <img src="/assets/user.jpeg" alt="" />
         <div>
-        <h4>Rahul Vyas</h4>
-        <p>Branch Manager</p>
+          <h4>Rahul Vyas</h4>
+          <p>Branch Manager</p>
         </div>
       </div>
 
@@ -33,11 +38,11 @@ const Sidebar = () => {
           <Link
             to="/Home/Dashboard"
             className={`${styles.navItem} ${
-              location.pathname === "/" ? styles.active : ""
+              location.pathname === "/Home/Dashboard" ? styles.active : ""
             }`}
             id={styles.dashboard}
           >
-               <FontAwesomeIcon icon={faHome} className={styles.icon} />
+            <FontAwesomeIcon icon={faHome} className={styles.icon} />
             Dashboard
             <FontAwesomeIcon icon={faAngleRight} className={styles.iconRight} />
           </Link>
@@ -46,13 +51,20 @@ const Sidebar = () => {
           <Link
             to="/Home/demographic-insights"
             className={`${styles.navItem} ${
-              location.pathname === "/demographic-insights" ? styles.active : ""
+              [
+                "/Home/demographic-insights",
+                "/Home/demographic-insights/maps",
+                "/Home/demographic-insights/maps/graphs",
+              ].includes(location.pathname)
+                ? styles.active
+                : ""
             }`}
           >
-             <FontAwesomeIcon icon={faChartPie} className={styles.icon} />
+            <FontAwesomeIcon icon={faChartPie} className={styles.icon} />
             Demographic Insights
             <FontAwesomeIcon icon={faAngleRight} className={styles.iconRight} />
           </Link>
+
           <h3 className={styles.sectionTitle}>Add Event</h3>
           <Link
             to="/Home/calendar"
@@ -64,6 +76,8 @@ const Sidebar = () => {
             Calendar
             <FontAwesomeIcon icon={faAngleRight} className={styles.iconRight} />
           </Link>
+          <h3 className={styles.sectionTitle}>Suggestions</h3>
+
           <Link
             to="/Home/Feedback"
             className={`${styles.navItem} ${

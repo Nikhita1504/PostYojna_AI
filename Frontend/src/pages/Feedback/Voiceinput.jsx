@@ -1,9 +1,12 @@
-import React from "react";
-import { useState , useRef } from "react";
+import React, { useEffect } from "react";
+import { useState, useRef } from "react";
 import styles from "./Voiceinput.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import ReactStars from "react-rating-stars-component";
+import { handleError, handleSucess } from "../../utils/utils";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Voiceinput = () => {
   const [prompt, Setprompt] = useState({});
   const [text, setText] = useState("");
@@ -13,14 +16,21 @@ const Voiceinput = () => {
   const recognitionRef = useRef(null);
   const [language, setLanguage] = useState("hi-IN");
 
-
   const [rating, setRating] = useState(0);
+  const[Data , SetData] = useState([]);
+  const [selectedState, setSelectedState] = useState(''); // To track selected state
+  const [loading, setLoading] = useState(false); // For loading state
+  const [districts, setDistricts] = useState([]); 
 
   const handleRating = (newRating) => {
     setRating(newRating);
     console.log("Selected rating:", newRating); // You can send this to the backend
   };
-
+  // const [feedbackType, setFeedbackType] = useState("");
+  const [userCategory, setUserCategory] = useState("");
+const[dis ,Setdis]= useState('');
+  // const feedbackTypes = ["Suggestion", "Complaint", "Inquiry", "Appreciation"];
+  const userCategories = ["Visitor", "Official", "Stakeholder", "Other"];
 
   const indianLanguages = [
     { code: "hi-IN", name: "Hindi" },
@@ -40,14 +50,15 @@ const Voiceinput = () => {
     { code: "ma-IN", name: "Maithili" },
   ];
 
-  
-
-
   const initializeRecognition = () => {
     if (!recognitionRef.current) {
-      if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
-        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-        recognition.lang =  language;
+      if (
+        "SpeechRecognition" in window ||
+        "webkitSpeechRecognition" in window
+      ) {
+        const recognition = new (window.SpeechRecognition ||
+          window.webkitSpeechRecognition)();
+        recognition.lang = language;
         recognition.continuous = true;
 
         recognition.onresult = (event) => {
@@ -99,16 +110,17 @@ const Voiceinput = () => {
   };
 
   const handlesubmit = async () => {
-    if (!scheme) {
-      alert("Please select a valid scheme");
+    if (!scheme  || !userCategory) {
+      alert("Please fill all the fields before submitting feedback.");
       return;
     }
 
     const newPrompt = {
-      location: location,
+      location:`${dis-selectedState}`,
       scheme: scheme,
       text: text,
-      rating:rating,
+      rating: rating,
+      userCategory: userCategory,
       myprompt:
         "You have been given feedback in the form of text regarding a scheme from a visitor at a mela. The feedback text is related to the scheme and can be in any language. Your task is to analyze the feedback and extract key points or a conclusion that can help improve the scheme. If the feedback contains no relevant information for improvement, return only the following JSON object with the field 'relevant' set to false: { location: <location>, scheme: <scheme>, relevant: false }. If there is relevant information, return only the following JSON object with the fields 'location' (same as provided), 'scheme' (same as provided), 'relevant' set to true, and a 'point' field containing the extracted key point or conclusion from the feedback: { location: <location>, scheme: <scheme>, relevant: true, point: <extracted key point> }. Do not include any other data in the response.",
     };
@@ -119,53 +131,147 @@ const Voiceinput = () => {
         "http://localhost:3000/Gemini/listen",
         newPrompt
       );
+      console.log(res.data);
+      if (res.data.success) {
+        handleSucess(res.data.message);
+      } else {
+        handleError(res.data.message);
+      }
     } catch (error) {
       console.log(error);
     }
   };
 
- 
-  
+  const fetchActiveDistrict = async(selectedScheme) =>{
+    SetData([]);
+    try {
+      const response = await axios.get(`http://localhost:3000/ActiveScheme/${selectedScheme}`);
+      if(response.data.success == true){
+        SetData(response.data.data)
+      }
+
+    } catch (error) {
+      console.log("error in fetching active scheme district" , error)
+    }
+    finally {
+      setLoading(false);
+    }
+  }
+  useEffect(() =>{
+  fetchActiveDistrict()
+  },[scheme])
+
+    // Handle state selection change
+    const handleStateChange = (e) => {
+      setSelectedState(e.target.value);
+      console.log(e.target.value);
+      const selectedStateData = Data.find(item => item.state === e.target.value); // Find the selected state's data
+      if (selectedStateData) {
+        setDistricts(selectedStateData.districts); // Update districts based on selected state
+      }
+    };
   return (
     <div className={styles.div}>
-      <div>
-        <input
-          placeholder="Enter Location of feedback"
-          value={location}
-          onChange={(e) => {
-            setlocation(e.target.value);
-            console.log(location);
-          }}
-        ></input>
-      </div>
-      <div>
+       <div>
         <select
           class="form-select form-select-sm"
           aria-label="Select Post Office Scheme"
           onChange={(e) => {
+            setSelectedState('');
+            SetData([]);
+            setDistricts([]);
             setscheme(e.target.options[e.target.selectedIndex].text);
+           
+             fetchActiveDistrict(e.target.options[e.target.selectedIndex].text);
           }}
         >
           <option selected>Choose a Post Office Scheme</option>
 
           <option value="1">Post Office Savings Account</option>
-          <option value="2">Post Office Recurring Deposit (RD) Account</option>
-          <option value="3">Post Office Time Deposit (TD) Account</option>
-          <option value="4">Post Office Monthly Income Scheme (MIS)</option>
-          <option value="5">Senior Citizen Savings Scheme (SCSS)</option>
-          <option value="6">Public Provident Fund (PPF)</option>
-          <option value="7">Sukanya Samriddhi Yojana (SSY)</option>
+          <option value="2">Post Office Recurring Deposit Account</option>
+          <option value="3">Post Office Time Deposit Account</option>
+          <option value="4">Post Office Monthly Income Scheme</option>
+          <option value="5">Senior Citizen Savings Scheme</option>
+          <option value="6">Public Provident Fund</option>
+          <option value="7">Sukanya Samriddhi Yojana</option>
 
-          <option value="8">Postal Life Insurance (PLI)</option>
-          <option value="9">Rural Postal Life Insurance (RPLI)</option>
+          <option value="8">Postal Life Insurance</option>
+          <option value="9">Rural Postal Life Insurance</option>
 
-          <option value="10">National Savings Certificate (NSC)</option>
-          <option value="11">Kisan Vikas Patra (KVP)</option>
+          <option value="10">National Savings Certificate</option>
+          <option value="11">Kisan Vikas Patra</option>
 
           <option value="12">Fixed Deposits</option>
           <option value="13">Recurring Deposits</option>
+          <option value="14"> Mahila Samman Savings Certificate</option>
         </select>
       </div>
+
+
+
+
+      <div>
+      <h2>Select State</h2>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <select value={selectedState} onChange={handleStateChange}>
+          <option value="" disabled>Select a state</option>
+          {Data.map((scheme, index) => (
+            <option key={index} value={scheme.state}>
+              {scheme.state}
+            </option>
+          ))}
+        </select>
+      )}
+    </div>
+
+    
+        <div>
+          <h3>Districts in {selectedState}:</h3>
+          <select value={dis} onChange={(e) =>{
+            Setdis(e.target.value);
+          }}>
+            <option value="" disabled>Select a district</option>
+            {districts.map((district, index) => (
+              <option key={index} value={district}>
+                {district}
+              </option>
+            ))}
+          </select>
+        </div>
+       
+      {/* <div>
+        <select
+          className="form-select"
+          aria-label="Select Feedback Type"
+          value={feedbackType}
+          onChange={(e) => setFeedbackType(e.target.value)}
+        >
+          <option selected>Choose Feedback Type</option>
+          {feedbackTypes.map((type) => (
+            <option key={type} value={type}>
+              {type}
+            </option>
+          ))}
+        </select>
+      </div> */}
+      <div>
+        <select
+          className="form-select"
+          aria-label="Select User Category"
+          value={userCategory}
+          onChange={(e) => setUserCategory(e.target.value)}
+        >
+          <option selected>Choose User Category</option>
+          {userCategories.map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
+        </select>
+      </div>
+
       <button onClick={handleListening}>
         {isListening ? "Stop Listening" : "Start Listening"}
       </button>
@@ -195,21 +301,43 @@ const Voiceinput = () => {
           ))}
         </select>
       </div>
- <div>
-      <h2>Rate Us</h2>
-      <ReactStars
-        count={5}
-        size={30}
-        isHalf={true}
-        value={rating}
-        onChange={handleRating}
-        activeColor="#ffd700"
-      />
-      <p>Your rating: {rating}</p>
-    </div>
-
+      <div>
+        <h2>Rate Us</h2>
+        <ReactStars
+          count={5}
+          size={30}
+          isHalf={true}
+          value={rating}
+          onChange={handleRating}
+          activeColor="#ffd700"
+        />
+        <p>Your rating: {rating}</p>
+      </div>
+      <ToastContainer />
     </div>
   );
 };
 
 export default Voiceinput;
+
+
+
+
+
+
+// const schemes = [
+//   "Post Office Savings Account",
+//   "Post Office Recurring Deposit Account",
+//   "Post Office Time Deposit Account",
+//   "Post Office Monthly Income Scheme",
+//   "Senior Citizen Savings Scheme",
+//   "Public Provident Fund",
+//   "Sukanya Samriddhi Yojana",
+//   "Postal Life Insurance",
+//   "Rural Postal Life Insurance",
+//   "National Savings Certificate",
+//   "Kisan Vikas Patra",
+//   "Fixed Deposits",
+//   "Recurring Deposits",
+//   "Mahila Samman Savings Certificate"
+// ];

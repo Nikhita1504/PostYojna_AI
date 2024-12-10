@@ -1,8 +1,8 @@
 .sidebar {
     width: 320px;
     height: 100vh;
-    background: white;
-    border-right: 1px solid #eee;
+    background: #070917;
+
     padding: 1rem;
     display: flex;
     flex-direction: column;
@@ -29,11 +29,12 @@
     gap: 0.5rem;
     padding: 1rem;
     margin-bottom: 2rem;
+    border-radius: 8px;
 }
 
 .logoIcon img {
-    width: 70px;
-    height: 50px;
+    width: 120px;
+    height: 100px;
     background: #4318ff;
     color: white;
     /* border-radius: 10px; */
@@ -41,12 +42,15 @@
     align-items: center;
     justify-content: center;
     font-weight: bold;
+    border-radius: 50%;
     font-size: 1.5rem;
 }
 
 .logoText {
     font-size: 1.5rem;
     font-weight: 600;
+
+    color: white;
 }
 
 .hidden {
@@ -89,7 +93,7 @@
     align-items: center;
     gap: 1rem;
     padding: 1rem;
-    color: #666;
+    color: #D3D3D3;
     text-decoration: none;
     border-radius: 10px;
     transition: all 0.3s ease;
@@ -141,13 +145,13 @@
   .Profile h4 {
     margin: 0; /* Remove default margin */
     font-size: 16px;
-    color: #333; /* Darker text color for better readability */
+    color: white; /* Darker text color for better readability */
     font-weight: bold;
   }
   
   .Profile p {
     margin: 0;
     font-size: 14px;
-    color: #666; /* Softer text color for the role */
+    color: white; /* Softer text color for the role */
   }
   
