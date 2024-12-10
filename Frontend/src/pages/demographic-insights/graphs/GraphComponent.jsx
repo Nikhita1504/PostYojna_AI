@@ -21,11 +21,9 @@ import { Parallax, Pagination, Navigation } from 'swiper/modules';
 import './styles.css';
 import PieCornerRadius from './charts/PieChart';
 import Column from './charts/BarChart';
-import CylindricalColumn from './charts/CylindricalColumn';
-import OccupationBased from './charts/OccupationBased';
+
 import Doughnut from './charts/OccupationBased';
-import ApexChart from './charts/HeatMap';
-import SeasonalDemandChart from './charts/CylindricalColumn';
+
 import { useLocation } from 'react-router-dom';
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
@@ -189,7 +187,7 @@ const GraphSwiper = () => {
                   fill="#8884d8"
                 >
                   {getPopulationData().map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    <Cell key={cell-${index}} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
                 <Tooltip />
