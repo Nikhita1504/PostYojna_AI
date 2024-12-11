@@ -193,10 +193,21 @@ const ageGroupSchema = new mongoose.Schema({
   },
 });
 
-const SchemeSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  description: { type: String, required: true },
-  createdAt: { type: Date, default: Date.now },
+
+const schemeSchema = new mongoose.Schema({
+  scheme_name: { type: String, required: true },
+  scheme_type: { type: String, required: true },
+  description: { type: String, required: true }, // Added description
+  target_gender: { type: String, enum: ['Male', 'Female', 'All'], required: true },
+  target_age_group: { type: String, required: true },
+  min_investment: { type: String, required: true },
+  max_investment: { type: String, required: true }, 
+  roi: { type: String, required: true },
+  risk_level: { type: String, enum: ['Low', 'Medium', 'High'], required: true },
+  target_occupation: { type: String, required: true },
+  target_income_level: { type: String, required: true },
+  target_education_level: { type: String, required: true },
+  tax_benefit: { type: String, enum: ['Yes', 'No'], required: true }
 });
 
 const regionSchema = new mongoose.Schema({
@@ -253,7 +264,7 @@ const regionSchema = new mongoose.Schema({
 
 const RegionModel = mongoose.model("Region", regionSchema);
 
-const SchemeModel = mongoose.model("Scheme", SchemeSchema);
+const SchemeModel = mongoose.model("Scheme", schemeSchema);
 
 const AgeGroup = mongoose.model("AgeGroup", ageGroupSchema);
 const Population = mongoose.model("Population", populationSchema);
@@ -268,6 +279,10 @@ const ActiveSchemeSchema = new mongoose.Schema({
   ],
   createdAt: { type: Date, default: Date.now }, // Timestamp for record creation
 });
+
+
+
+
 
 const ActiveSchemeModel = mongoose.model("ActiveScheme", ActiveSchemeSchema);
 

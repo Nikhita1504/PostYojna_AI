@@ -15,6 +15,7 @@ const ActiveSchemeRouter = require("./Router/ActiveSchemeRouter");
 
 const AddSchemeRouter = require("./Router/AddSchemeRouter")
 const AddnewlocationDataRouter = require("./Router/AddnewlocationDataRouter")
+const GetSchemeRouter = require("./Router/GetSchemeRouter")
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 require("./model/db")
@@ -33,6 +34,8 @@ app.use("/demographic-data",demographicdataRouter);
 app.use("/ActiveScheme" ,ActiveSchemeRouter);
 app.use('/Addscheme' , AddSchemeRouter);
 app.use('/AddnewlocationData' ,AddnewlocationDataRouter )
+app.use("/getScheme" , GetSchemeRouter);
+
 
 
 const Port = process.env.PORT || 3000;

@@ -7,7 +7,7 @@ import {
   faChartPie,
   faHome,
 } from "@fortawesome/free-solid-svg-icons";
-import { Dashboard, Menu, Palette } from "@mui/icons-material"; // Valid Material UI icons
+import { Menu } from "@mui/icons-material";
 import styles from "./Sidebar.module.css";
 
 const Sidebar = () => {
@@ -20,13 +20,13 @@ const Sidebar = () => {
         <div className={styles.logoIcon}>
           <img src="/assets/logo.png" alt="Logo" />
         </div>
-        <span className={styles.logoText}>PostYojna AI</span>
       </div>
 
-      <div className={styles.Profile}>
-        <img src="/assets/user.jpeg" alt="" />
+      {/* Profile Section */}
+      <div className={styles.profile}>
+        <img src="/assets/user.jpeg" alt="User" />
         <div>
-          <h4>Rahul Vyas</h4>
+          <h4>Rahul Vyass</h4>
           <p>Branch Manager</p>
         </div>
       </div>
@@ -34,20 +34,15 @@ const Sidebar = () => {
       {/* Navigation Section */}
       <nav className={styles.nav}>
         <div className={styles.section}>
-          <h3 className={styles.sectionTitle}>Home</h3>
           <Link
             to="/Home/Dashboard"
             className={`${styles.navItem} ${
               location.pathname === "/Home/Dashboard" ? styles.active : ""
             }`}
-            id={styles.dashboard}
           >
             <FontAwesomeIcon icon={faHome} className={styles.icon} />
             Dashboard
-            <FontAwesomeIcon icon={faAngleRight} className={styles.iconRight} />
           </Link>
-          <h3 className={styles.sectionTitle}>Visualizations</h3>
-
           <Link
             to="/Home/demographic-insights"
             className={`${styles.navItem} ${
@@ -62,10 +57,7 @@ const Sidebar = () => {
           >
             <FontAwesomeIcon icon={faChartPie} className={styles.icon} />
             Demographic Insights
-            <FontAwesomeIcon icon={faAngleRight} className={styles.iconRight} />
           </Link>
-
-          <h3 className={styles.sectionTitle}>Add Event</h3>
           <Link
             to="/Home/calendar"
             className={`${styles.navItem} ${
@@ -74,10 +66,7 @@ const Sidebar = () => {
           >
             <FontAwesomeIcon icon={faCalendarAlt} className={styles.icon} />
             Calendar
-            <FontAwesomeIcon icon={faAngleRight} className={styles.iconRight} />
           </Link>
-          <h3 className={styles.sectionTitle}>Suggestions</h3>
-
           <Link
             to="/Home/Feedback"
             className={`${styles.navItem} ${
@@ -86,10 +75,19 @@ const Sidebar = () => {
           >
             <Menu className={styles.icon} />
             Feedback
-            <FontAwesomeIcon icon={faAngleRight} className={styles.iconRight} />
           </Link>
         </div>
       </nav>
+
+      {/* Footer Section */}
+      <div className={styles.footer}>
+        <Link to="/help" className={styles.help}>
+          Help
+        </Link>
+        <Link to="/logout" className={styles.logout}>
+          Logout Account
+        </Link>
+      </div>
     </div>
   );
 };

@@ -1,166 +1,107 @@
 .sidebar {
-    width: 320px;
+    width: 270px;
     height: 100vh;
-    background: #070917;
-
+    background: #161A23;
     padding: 1rem;
     display: flex;
     flex-direction: column;
     position: fixed;
     left: 0;
     top: 0;
-    overflow-y: auto; /* Scrollable sidebar */
-    transition: all 0.3s;
-    z-index: 10; /* Ensure the sidebar is below the header */
-}
-
-.closed {
-    width: 85px;
-}
-
-.open {
-    width: 280px; /* Expanded width when open */
-}
-
-.logo {
+    overflow-y: auto;
+  }
+  
+  .logo {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem;
-    padding: 1rem;
+
     margin-bottom: 2rem;
-    border-radius: 8px;
-}
-
-.logoIcon img {
-    width: 120px;
-    height: 100px;
-    background: #4318ff;
-    color: white;
-    /* border-radius: 10px; */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
+  }
+  
+  .logoIcon img {
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
-    font-size: 1.5rem;
-}
-
-.logoText {
-    font-size: 1.5rem;
-    font-weight: 600;
-
-    color: white;
-}
-
-.hidden {
-    display: none;
-}
-
-.toggleButton {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1.5rem;
-    position: absolute;
-    right: 0;
-    color: #4318ff;
-}
-
-.nav {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
-.section {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.sectionTitle {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #666;
-    padding: 0 1rem;
-    margin-bottom: 0.5rem;
-    transition: opacity 0.2s ease-in-out;
-}
-
-.navItem {
+  }
+  
+  .profile {
     display: flex;
     align-items: center;
     gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+  }
+  
+  .profile img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+  }
+  
+  .profile h4 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+  }
+  
+  .profile p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #d3d3d3;
+  }
+  
+  .nav {
+    flex: 1;
+  }
+  
+  .navItem {
+    display: flex;
+    align-items: center;
     padding: 1rem;
-    color: #D3D3D3;
+    color: #d3d3d3;
     text-decoration: none;
     border-radius: 10px;
-    transition: all 0.3s ease;
-    font-size: 1.2rem;
-    position: relative;
-}
-
-
-.navItem:hover {
+    transition: background 0.3s;
+  }
+  
+  .navItem:hover {
     background: #5d93f8b3;
-
-
-}
-
-.navItem.active {
-    background: #174EB3;
+  }
+  
+  .navItem.active {
+    background: #174eb3;
     color: white;
-}
-
-.icon {
-    width: 1.5rem;
-    height: 1.5rem;
-}
-
-.iconRight {
-    margin-left: auto;
+  }
+  
+  .navItem .icon {
+    margin-right: 1rem;
     font-size: 1.2rem;
-}
-
-.Profile {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 13px;
-    align-items: center;
-    padding: 10px;
-    margin: 20px 0; /* Adds some spacing around the profile section */
-    border-radius: 8px;
   }
   
-  .Profile img {
-    width: 85px; /* Profile image size */
-    height: 85px;
-    border-radius: 50%; /* Makes the image circular */
-    object-fit: cover; /* Ensures image doesn't stretch */
-    margin-right: 15px; /* Space between image and text */
-    border: 2px solid #ddd; /* Optional border for the image */
-  }
-  .Profile div{
+  .footer {
     display: flex;
     flex-direction: column;
-    justify-self: center;
     align-items: center;
-    gap: 6px;
-
-  }
-  .Profile h4 {
-    margin: 0; /* Remove default margin */
-    font-size: 16px;
-    color: white; /* Darker text color for better readability */
-    font-weight: bold;
+    gap: 1rem;
   }
   
-  .Profile p {
-    margin: 0;
-    font-size: 14px;
-    text-align: center;
-    color: white; /* Softer text color for the role */
+  .footer a {
+    color: #d3d3d3;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+  }
+  
+  .footer a:hover {
+    color: white;
+  }
+  
+  .logout {
+    color: #f76b6b;
+  }
+  
+  .logout:hover {
+    color: #ff4b4b;
   }
   
