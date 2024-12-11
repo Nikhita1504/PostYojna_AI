@@ -22,13 +22,11 @@ import { BiRupee } from "react-icons/bi";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import DashboardBarChart from "./DashboardLineChart";
-import CountUp from 'react-countup';
+import CountUp from "react-countup";
 import CylindricalColumn from "../demographic-insights/graphs/charts/CylindricalColumn";
 import CylindricalColumnDashboard from "./DashboardLineChart";
 
 import ReactStars from "react-rating-stars-component";
-
-
 
 const schemes = [
   "Post Office Savings Account",
@@ -46,7 +44,6 @@ const schemes = [
   "Recurring Deposits",
   "Mahila Samman Savings Certificate",
 ];
-
 
 const getIcon = (iconName) => {
   switch (iconName) {
@@ -71,7 +68,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [selectedScheme, setSelectedScheme] = useState(schemes[0]);
-  const [debouncedSearchQuery, setDebouncedSearchQuery] = useState('');
+  const [debouncedSearchQuery, setDebouncedSearchQuery] = useState("");
   const [locationName, setlocationName] = useState("");
   const [dashboardData, setDashboardData] = useState({});
   // Debounce logic
@@ -86,19 +83,20 @@ const Dashboard = () => {
   }, [searchQuery]);
 
   const handleSchemeChange = (e) => {
-
     setSelectedScheme(e.target.value);
   };
 
-
   const handleSearch = async (query) => {
-    if (!query || query.trim() === '' || query.length <= 3) return;
+    if (!query || query.trim() === "" || query.length <= 3) return;
 
     setLoading(true);
     try {
-      const response = await axios.get('http://localhost:3000/search/location', {
-        params: { query },
-      });
+      const response = await axios.get(
+        "http://localhost:3000/search/location",
+        {
+          params: { query },
+        }
+      );
       setLocations(response.data);
     } catch (error) {
       console.error("Error fetching location data:", error);
@@ -112,7 +110,7 @@ const Dashboard = () => {
   }, [debouncedSearchQuery]);
 
   const fetchfeedback = async () => {
-    SetFeedback([])
+    SetFeedback([]);
     const response = await axios(
       `http://localhost:3000/feedback/scheme/${selectedScheme}`
     );
@@ -123,11 +121,10 @@ const Dashboard = () => {
   //fetch feedback
   useEffect(() => {
     fetchfeedback();
-
   }, [selectedScheme]);
 
   useEffect(() => {
-    if (location.pathname !== '/demographic-insights/graphs') {
+    if (location.pathname !== "/demographic-insights/graphs") {
       setLocations([]);
     }
   }, [location.pathname]);
@@ -135,29 +132,29 @@ const Dashboard = () => {
   const getDashboardData = async (locationname, schemeName) => {
     try {
       if (locationname) {
-        const words = locationname.split(',');
+        const words = locationname.split(",");
         const locationArr = words.slice(-6);
         setlocationName(locationArr[0]);
-
       }
-      const response = await axios.get('http://localhost:3000/dashboard/getData', {
-        params: {
-          // city: locationName,
-          scheme: schemeName,
-        },
-      });
-      console.log(response.data)
+      const response = await axios.get(
+        "http://localhost:3000/dashboard/getData",
+        {
+          params: {
+            // city: locationName,
+            scheme: schemeName,
+          },
+        }
+      );
+      console.log(response.data);
       setDashboardData(response.data);
-
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-
-  }
+  };
 
   useEffect(() => {
     getDashboardData(debouncedSearchQuery, selectedScheme);
-  }, [debouncedSearchQuery, selectedScheme])
+  }, [debouncedSearchQuery, selectedScheme]);
 
   return (
     <div className={styles.dashboard}>

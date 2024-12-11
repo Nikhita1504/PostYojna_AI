@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { handleError, handleSucess } from "../../../utils/utils";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 import {
   PieChart,
   Pie,
@@ -26,7 +29,7 @@ import OccupationBased from './charts/OccupationBased';
 import Doughnut from './charts/OccupationBased';
 import ApexChart from './charts/HeatMap';
 import SeasonalDemandChart from './charts/CylindricalColumn';
-import { useLocation } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import HashLoader from 'react-spinners/HashLoader';
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
@@ -36,13 +39,14 @@ const GraphSwiper = () => {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
   const { locationName } = location.state || {};
-  console.log(locationName);
+  console.log("l",locationName);
   const [toggle, setToggle] = useState('Age Group-Based');
 
   const [ageData, setageData]
     = useState(null);
   const [currlocation, setcurrlocation] = useState("");
   const [fetchDistrict, setFetchingDistrict] = useState(true);
+  const[Schemes , SetSchemes] = useState([]);
 
   const fetchingDistrict = async () => {
     const newPrompt = {
@@ -69,6 +73,21 @@ const GraphSwiper = () => {
     fetchingDistrict(locationName);
 
   }, []);
+  const fetchSchemes = async() =>{
+    try {
+     const response = await axios.get("http://localhost:3000/getScheme");
+     if(response.data.success){
+       console.log(response.data.data);
+       SetSchemes(response.data.data);
+     }
+    } catch (error) {
+     handleError(error);
+    }
+     }
+     useEffect(() =>{
+     fetchSchemes();
+     },[])
+   
 
   // Fetch data from backend API
 
@@ -200,8 +219,53 @@ const GraphSwiper = () => {
     return <p>Error loading data.</p>;
   }
 
+  const handleClick = async (schemeName , state , district) => {
+    console.log(state , district)
+    try {
+      // Define the request body
+      const requestBody = {
+        schemeName,
+        location: {
+          state,
+          district,
+        },
+      };
+      console.log(requestBody)
+
+      // Call the API endpoint
+      const response = await axios.post(
+        `http://localhost:3000/ActiveScheme/Apply`, 
+        requestBody,
+      );
+
+      if(response.data.success == true){
+        handleSucess(response.data.message);
+      }else{
+        handleError(response.data.message);
+      }
+    } catch (error) {
+      // Handle errors
+      if (error.response) {
+        // Server responded with an error
+        handleError(error.response.message)
+      } else {
+        // Network error or other issues
+        handleError("Error: Unable to connect to the server.");
+      }
+    }
+  };
+  const handleAi = () =>{
+      const a = {
+        useid :'123',
+         location:currlocation.district
+      }
+    Navigate("/Home/Aiprediction" ,{ state:{a}})
+  }
+ 
   return (
     <div className="bigCon">
+      <button onClick={handleAi}>Ai Prediction</button>
+      
       {fetchDistrict && <div className='loader'><HashLoader
         style={{ position: "relative", right: "12%" }}
         size={50} color="#3A57E8" /></div>}
@@ -352,10 +416,30 @@ const GraphSwiper = () => {
             </SwiperSlide>
           </Swiper>
         </div>
-        <div className="suggestionsList">
+        <div className="suggestionsList" style={{overflow:scroll}}>
           <h4>List</h4>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "16px" ,  }}>
+                    {Schemes.map((scheme) => (
+                        <div
+                            key={scheme._id}
+                            style={{
+                                border: "1px solid #ccc",
+                                padding: "16px",
+                                borderRadius: "8px",
+                                width: "250px",
+                            }}
+                        >
+                            <h2>{scheme.scheme_name}</h2>
+                            <button onClick={() =>{
+        console.log(currlocation.state , currlocation.district)
+handleClick('Hello' , currlocation.state , currlocation.district );
+      }}>Add to Promote</button>
+                        </div>
+                    ))}
+                </div>
         </div>
       </div>
+      <ToastContainer/>
     </div>
   );
 };

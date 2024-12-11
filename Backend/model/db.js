@@ -132,66 +132,142 @@ const DemographicsSchema = new mongoose.Schema({
     {
       month: { type: String, required: true },
       demand_score: { type: Number, required: true },
-      demand_type: { type: String, required: true }
-    }
-  ]
+      demand_type: { type: String, required: true },
+    },
+  ],
 });
-const populationSchema = new mongoose.Schema({
-  Location: {
-    type: String,
-    required: true,
+const populationSchema = new mongoose.Schema(
+  {
+    Location: {
+      type: String,
+      required: true,
+    },
+    Total: {
+      type: Number,
+      required: true,
+    },
+    Male: {
+      type: Number,
+      required: true,
+    },
+    Female: {
+      type: Number,
+      required: true,
+    },
   },
-  Total: {
-    type: Number,
-    required: true,
-  },
-  Male: {
-    type: Number,
-    required: true,
-  },
-  Female: {
-    type: Number,
-    required: true,
-  },
-}, { timestamps: true });
+  { timestamps: true }
+);
 
 const ageGroupSchema = new mongoose.Schema({
   ageGroup: {
     type: String, // Age group or range (e.g., "0-4", "5-9", "80")
-    required: true
+    required: true,
   },
   persons: {
     type: Number, // Total number of persons in the specified age group
-    required: true
+    required: true,
   },
   percentageTotal: {
     type: Number, // Percentage of total population in this age group
-    required: true
+    required: true,
   },
   males: {
     count: {
       type: Number, // Number of males in the age group
-      required: true
+      required: true,
     },
     percentage: {
       type: Number, // Percentage of male population in this age group
-      required: true
-    }
+      required: true,
+    },
   },
   females: {
     count: {
       type: Number, // Number of females in the age group
-      required: true
+      required: true,
     },
     percentage: {
       type: Number, // Percentage of female population in this age group
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 });
 
-const AgeGroup = mongoose.model('AgeGroup', ageGroupSchema);
-const Population = mongoose.model('Population', populationSchema);
+
+const schemeSchema = new mongoose.Schema({
+  scheme_name: { type: String, required: true },
+  scheme_type: { type: String, required: true },
+  description: { type: String, required: true }, // Added description
+  target_gender: { type: String, enum: ['Male', 'Female', 'All'], required: true },
+  target_age_group: { type: String, required: true },
+  min_investment: { type: String, required: true },
+  max_investment: { type: String, required: true }, 
+  roi: { type: String, required: true },
+  risk_level: { type: String, enum: ['Low', 'Medium', 'High'], required: true },
+  target_occupation: { type: String, required: true },
+  target_income_level: { type: String, required: true },
+  target_education_level: { type: String, required: true },
+  tax_benefit: { type: String, enum: ['Yes', 'No'], required: true }
+});
+
+const regionSchema = new mongoose.Schema({
+  region_name: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  population_density: {
+    type: Number,
+    required: true,
+    min: 0,
+  },
+  Male: {
+    type: Number,
+    required: true,
+    min: 0,
+  },
+  Female: {
+    type: Number,
+    required: true,
+    min: 0,
+  },
+  gender_ratio: {
+    type: Number,
+    required: true,
+    min: 0,
+    max: 1,
+  },
+  education_level: {
+    type: Number,
+    required: true,
+    min: 0,
+    max: 100,
+  },
+  income_level: {
+    type: Number,
+    required: true,
+    min: 0,
+  },
+  age_distribution: {
+    type: String,
+    required: true,
+    validate: {
+      validator: function (v) {
+        // Validate percentage format (e.g., "22%, 23%, 38%, 17%")
+        return /^(\d+%)(,\s*\d+%)*$/.test(v);
+      },
+      message: (props) =>
+        `${props.value} is not a valid age distribution format. Use comma-separated percentages.`,
+    },
+  },
+});
+
+const RegionModel = mongoose.model("Region", regionSchema);
+
+const SchemeModel = mongoose.model("Scheme", schemeSchema);
+
+const AgeGroup = mongoose.model("AgeGroup", ageGroupSchema);
+const Population = mongoose.model("Population", populationSchema);
 const ActiveSchemeSchema = new mongoose.Schema({
   schemeName: { type: String, required: true }, // Name of the scheme
   state: { type: String, required: true },
@@ -204,69 +280,13 @@ const ActiveSchemeSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now }, // Timestamp for record creation
 });
 
-const regionSchema = new mongoose.Schema({
-  region_name: {
-    type: String,
-    required: true,
-    trim: true
-  },
-  population_density: {
-    type: Number,
-    required: true,
-    min: 0
-  },
-  Male: {
-    type: Number,
-    required: true,
-    min: 0
-  },
-  Female: {
-    type: Number,
-    required: true,
-    min: 0
-  },
-  gender_ratio: {
-    type: Number,
-    required: true,
-    min: 0,
-    max: 1
-  },
-  education_level: {
-    type: Number,
-    required: true,
-    min: 0,
-    max: 100
-  },
-  income_level: {
-    type: Number,
-    required: true,
-    min: 0
-  },
-  age_distribution: {
-    type: String,
-    required: true,
-    validate: {
-      validator: function (v) {
-        // Validate percentage format (e.g., "22%, 23%, 38%, 17%")
-        return /^(\d+%)(,\s*\d+%)*$/.test(v);
-      },
-      message: (props) =>
-        `${props.value} is not a valid age distribution format. Use comma-separated percentages.`
-    }
-  }
-});
-
-const Region = mongoose.model('Region', regionSchema);
 
 
 
-const ActiveSchemeModel = mongoose.model("ActiveScheme",ActiveSchemeSchema);
 
+const ActiveSchemeModel = mongoose.model("ActiveScheme", ActiveSchemeSchema);
 
-
-const EventModel = mongoose.model('Event', eventSchema);
-
-
+const EventModel = mongoose.model("Event", eventSchema);
 
 const DemographicModel = mongoose.model("Demographic", DemographicsSchema);
 
@@ -279,7 +299,10 @@ module.exports = {
   UserModel,
   DashboardModel,
   EventModel,
-  DemographicModel,Population,AgeGroup,
+  DemographicModel,
+  Population,
+  AgeGroup,
   ActiveSchemeModel,
-  Region
+  SchemeModel,
+  RegionModel,
 };
