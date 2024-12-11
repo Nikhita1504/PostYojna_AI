@@ -1,15 +1,19 @@
 .calendarContainer {
 
-    height: 100vh;
-    position: relative;
-    background-color: #D3D3D3;
-    margin-top: 70px;
+    margin-left: 270px; /* Starts just after the sidebar */
+  background-color: #252B3A;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  overflow: hidden;
+  padding: 25px 40px;
 
 }
 
 .imageWrapper img {
     width: 100%;
     height: 200px;
+    background-color: #D3D3D3;
 
 
 }
