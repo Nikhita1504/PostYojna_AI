@@ -11,7 +11,10 @@ const {authrouter} = require("./Router/Authrouter");
 const UserRouter = require("./Router/UserdetailRouter");
 const EventsRouter = require("./Router/EventsRouter");
 const demographicdataRouter = require("./Router/demographicdataRouter");
-const ActiveSchemeRouter = require("./Router/ActiveSchemeRouter")
+const ActiveSchemeRouter = require("./Router/ActiveSchemeRouter");
+
+const AddSchemeRouter = require("./Router/AddSchemeRouter")
+const AddnewlocationDataRouter = require("./Router/AddnewlocationDataRouter")
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 require("./model/db")
@@ -28,6 +31,8 @@ app.use("/", UserRouter);
 app.use("/events",EventsRouter)
 app.use("/demographic-data",demographicdataRouter);
 app.use("/ActiveScheme" ,ActiveSchemeRouter);
+app.use('/Addscheme' , AddSchemeRouter);
+app.use('/AddnewlocationData' ,AddnewlocationDataRouter )
 
 
 const Port = process.env.PORT || 3000;

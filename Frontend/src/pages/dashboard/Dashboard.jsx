@@ -22,13 +22,11 @@ import { BiRupee } from "react-icons/bi";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import DashboardBarChart from "./DashboardLineChart";
-import CountUp from 'react-countup';
+import CountUp from "react-countup";
 import CylindricalColumn from "../demographic-insights/graphs/charts/CylindricalColumn";
 import CylindricalColumnDashboard from "./DashboardLineChart";
 
 import ReactStars from "react-rating-stars-component";
-
-
 
 const schemes = [
   "Post Office Savings Account",
@@ -44,9 +42,8 @@ const schemes = [
   "Kisan Vikas Patra",
   "Fixed Deposits",
   "Recurring Deposits",
-"Mahila Samman Savings Certificate",
+  "Mahila Samman Savings Certificate",
 ];
-
 
 const getIcon = (iconName) => {
   switch (iconName) {
@@ -71,7 +68,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [selectedScheme, setSelectedScheme] = useState(schemes[0]);
-  const [debouncedSearchQuery, setDebouncedSearchQuery] = useState('');
+  const [debouncedSearchQuery, setDebouncedSearchQuery] = useState("");
   const [locationName, setlocationName] = useState("");
   const [dashboardData, setDashboardData] = useState({});
   // Debounce logic
@@ -86,19 +83,20 @@ const Dashboard = () => {
   }, [searchQuery]);
 
   const handleSchemeChange = (e) => {
-
     setSelectedScheme(e.target.value);
   };
 
-
   const handleSearch = async (query) => {
-    if (!query || query.trim() === '' || query.length <= 3) return;
+    if (!query || query.trim() === "" || query.length <= 3) return;
 
     setLoading(true);
     try {
-      const response = await axios.get('http://localhost:3000/search/location', {
-        params: { query },
-      });
+      const response = await axios.get(
+        "http://localhost:3000/search/location",
+        {
+          params: { query },
+        }
+      );
       setLocations(response.data);
     } catch (error) {
       console.error("Error fetching location data:", error);
@@ -112,7 +110,7 @@ const Dashboard = () => {
   }, [debouncedSearchQuery]);
 
   const fetchfeedback = async () => {
-    SetFeedback([])
+    SetFeedback([]);
     const response = await axios(
       `http://localhost:3000/feedback/scheme/${selectedScheme}`
     );
@@ -123,11 +121,10 @@ const Dashboard = () => {
   //fetch feedback
   useEffect(() => {
     fetchfeedback();
-
   }, [selectedScheme]);
 
   useEffect(() => {
-    if (location.pathname !== '/demographic-insights/graphs') {
+    if (location.pathname !== "/demographic-insights/graphs") {
       setLocations([]);
     }
   }, [location.pathname]);
@@ -135,29 +132,29 @@ const Dashboard = () => {
   const getDashboardData = async (locationname, schemeName) => {
     try {
       if (locationname) {
-        const words = locationname.split(',');
+        const words = locationname.split(",");
         const locationArr = words.slice(-6);
         setlocationName(locationArr[0]);
-
       }
-      const response = await axios.get('http://localhost:3000/dashboard/getData', {
-        params: {
-          // city: locationName,
-          scheme: schemeName,
-        },
-      });
-      console.log(response.data)
+      const response = await axios.get(
+        "http://localhost:3000/dashboard/getData",
+        {
+          params: {
+            // city: locationName,
+            scheme: schemeName,
+          },
+        }
+      );
+      console.log(response.data);
       setDashboardData(response.data);
-
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-
-  }
+  };
 
   useEffect(() => {
     getDashboardData(debouncedSearchQuery, selectedScheme);
-  }, [debouncedSearchQuery, selectedScheme])
+  }, [debouncedSearchQuery, selectedScheme]);
 
   return (
     <div className={styles.dashboard}>
@@ -215,7 +212,11 @@ const Dashboard = () => {
         )}
       </div> */}
 
-      {loading && <div className={styles.loader}><HashLoader size={50} color="#3A57E8" /></div>}
+      {loading && (
+        <div className={styles.loader}>
+          <HashLoader size={50} color="#3A57E8" />
+        </div>
+      )}
 
       {/* Metrics Section */}
       <div className={styles.content}>
@@ -233,7 +234,7 @@ const Dashboard = () => {
                     <p>
                       <CountUp
                         start={0}
-                        end={parseInt(metric.value.replace(/[^0-9]/g, ''))} // Convert value to a number, removing non-numeric characters (like Rs)
+                        end={parseInt(metric.value.replace(/[^0-9]/g, ""))} // Convert value to a number, removing non-numeric characters (like Rs)
                         duration={3.5} // Duration of the animation in seconds
                         separator="," // For thousand separator
                       />
@@ -263,7 +264,11 @@ const Dashboard = () => {
         {/* Charts Section */}
         <div className={styles.charts}>
           <div className={styles.progresschart}>
-            <DashboardBarChart isDashboard={true} scheme={selectedScheme} registrationsOverYears={dashboardData.registrationsOverYears} />
+            <DashboardBarChart
+              isDashboard={true}
+              scheme={selectedScheme}
+              registrationsOverYears={dashboardData.registrationsOverYears}
+            />
             {/* <CylindricalColumnDashboard className={styles.barChart} data={dashboardData.registrationsOverYears} /> */}
           </div>
           <div className={styles.feedback}>
@@ -272,24 +277,22 @@ const Dashboard = () => {
               {Feedback.map((feedback, index) => (
                 <div className={styles.feedbackContainer}>
                   <div className={styles.Content}>
-                    <p>{feedback.point}</p></div>
-                    <div className={styles.lowercontainer}>
-                    
-                 
-                    <div className={styles.location}><span>Location :{feedback.location}</span> </div>
+                    <p>{feedback.point}</p>
+                  </div>
+                  <div className={styles.lowercontainer}>
+                    <div className={styles.location}>
+                      <span>Location :{feedback.location}</span>{" "}
+                    </div>
                     <div className={styles.rating}>
-                    <ReactStars
-          count={5}
-          size={30}
-          isHalf={true}
-          value={feedback.rating}
-        
-          activeColor="#ffd700"
-        />
-                     </div>
-              
-                </div>
-                
+                      <ReactStars
+                        count={5}
+                        size={30}
+                        isHalf={true}
+                        value={feedback.rating}
+                        activeColor="#ffd700"
+                      />
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>

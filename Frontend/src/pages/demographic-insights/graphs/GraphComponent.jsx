@@ -197,11 +197,11 @@ const GraphSwiper = () => {
   }
 
   return (
+    <div className={style.div}>
     <div className="bigCon">
 {fetchDistrict && <div className='loader'><HashLoader 
 style={{position:"relative",right:"12%"}}
 size={50} color="#3A57E8" /></div>}
-
       <Swiper
         style={{
           '--swiper-navigation-color': '#fff',
@@ -303,7 +303,7 @@ size={50} color="#3A57E8" /></div>}
             {/* <Doughnut data={getOccupationData()} /> */}
           </div>
         </SwiperSlide>
-
+    
         {/* Heatmap for Seasonal Demand */}
         <SwiperSlide>
           <div className="SeasongraphBox1">
@@ -331,6 +331,8 @@ size={50} color="#3A57E8" /></div>}
           </div>
         </SwiperSlide>
       </Swiper>
+     
+    </div>
     </div>
   );
 };
