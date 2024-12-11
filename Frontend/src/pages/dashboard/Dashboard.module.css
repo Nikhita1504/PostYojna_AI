@@ -1,6 +1,7 @@
 .dashboard {
   margin-left: 270px; /* Starts just after the sidebar */
   background-color: #252B3A;
+  /* background-color: #D1D1D1; */
   color: #ffffff;
   font-family: Arial, sans-serif;
   height: 100vh;
@@ -15,6 +16,7 @@
   width: 100%;
   border-radius: 18px;
   background-color: #191d27;
+  /* background-color: #555555; */
   overflow: scroll;
   padding: 1.5rem;
   box-shadow: 0px 10px 20px 0px rgba(255, 255, 255, 0.1),
@@ -26,8 +28,10 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  /* background: linear-gradient(135deg, #ff952c, #FFFFFF, #108605); */
   background: linear-gradient(135deg, #3A57E8, #A033E5, #F283E6);
 
+color: black;
   border-radius: 18px;
   padding: 1rem;
 }
@@ -39,7 +43,7 @@
 
 .headerContent p {
   font-size: 18px;
-  color: #dcdcdc;
+  color: rgb(54, 54, 54);
 }
 
 .controls {
@@ -68,7 +72,7 @@
 }
 
 .metricCard {
-  background-color: #393d47;
+  background-color: #FFFFFF;
   padding: 20px;
   border-radius: 10px;
   text-align: center;
@@ -78,12 +82,13 @@
 .metricValues h4 {
   font-size: 18px;
   margin: 0;
+  color: black;
 }
 
 .metricValues p {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: bold;
-  color: #a4b0be;
+  color: black;
 }
 
 .mainContent {
@@ -94,13 +99,13 @@
 }
 
 .progresschart {
-  background-color: #CADAFF;
+  background-color: #FFFFFF;
   padding: 20px;
   border-radius: 10px;
 }
 
 .feedback {
-  background-color: #CADAFF;
+  background-color: #FFFFFF;
   padding: 20px;
   border-radius: 10px;
 overflow: scroll;

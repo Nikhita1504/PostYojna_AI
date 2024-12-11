@@ -54,8 +54,9 @@ demographicdataRouter.get("/getAgedata", async (req, res) => {
 })
 demographicdataRouter.get("/getdemographicData", async (req, res) => {
     try {
-        const data = await Region.find({});
-        console.log(data);
+        const { Location } = req.query;
+        const data = await Region.findOne({region_name:Location});
+        res.json(data);
     } catch (error) {
         console.log(error)
     }

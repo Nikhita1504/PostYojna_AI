@@ -172,151 +172,142 @@ const Voiceinput = () => {
   };
   return (
     <div className={styles.bigContainer}>
-      <div className={styles.voiceInputContainer}>
-      <h2>Record FeedBack</h2>
-      <div className={styles.feedbackform}>
-        <select
-          class="form-select form-select-sm"
-          aria-label="Select Post Office Scheme"
-          onChange={(e) => {
-            setSelectedState('');
-            SetData([]);
-            setDistricts([]);
-            setscheme(e.target.options[e.target.selectedIndex].text);
+      <div className={styles.container}>
+        <div className={styles.headerSection}>
+          <h2>Record FeedBack</h2>
+        </div>
+        <div className={styles.mainFeedbackCon}>
+          <div className={styles.voiceInputContainer}>
+            <div className={styles.feedbackform}>
+              <select
+                className="form-select form-select-sm"
+                aria-label="Select Post Office Scheme"
+                onChange={(e) => {
+                  setSelectedState('');
+                  SetData([]);
+                  setDistricts([]);
+                  setscheme(e.target.options[e.target.selectedIndex].text);
 
-            fetchActiveDistrict(e.target.options[e.target.selectedIndex].text);
-          }}
-        >
-          <option selected>Choose a Post Office Scheme</option>
+                  fetchActiveDistrict(e.target.options[e.target.selectedIndex].text);
+                }}
+              >
+                <option selected>Choose a Post Office Scheme</option>
 
-          <option value="1">Post Office Savings Account</option>
-          <option value="2">Post Office Recurring Deposit Account</option>
-          <option value="3">Post Office Time Deposit Account</option>
-          <option value="4">Post Office Monthly Income Scheme</option>
-          <option value="5">Senior Citizen Savings Scheme</option>
-          <option value="6">Public Provident Fund</option>
-          <option value="7">Sukanya Samriddhi Yojana</option>
+                <option value="1">Post Office Savings Account</option>
+                <option value="2">Post Office Recurring Deposit Account</option>
+                <option value="3">Post Office Time Deposit Account</option>
+                <option value="4">Post Office Monthly Income Scheme</option>
+                <option value="5">Senior Citizen Savings Scheme</option>
+                <option value="6">Public Provident Fund</option>
+                <option value="7">Sukanya Samriddhi Yojana</option>
+                <option value="8">Postal Life Insurance</option>
+                <option value="9">Rural Postal Life Insurance</option>
+                <option value="10">National Savings Certificate</option>
+                <option value="11">Kisan Vikas Patra</option>
+                <option value="12">Fixed Deposits</option>
+                <option value="13">Recurring Deposits</option>
+                <option value="14">Mahila Samman Savings Certificate</option>
+              </select>
+            </div>
 
-          <option value="8">Postal Life Insurance</option>
-          <option value="9">Rural Postal Life Insurance</option>
+          <div className={styles.selectionCon}>
+          <div className={styles.selectState}>
+              <h2>Select State</h2>
+              {loading ? (
+                <p>Loading...</p>
+              ) : (
+                <select value={selectedState} onChange={handleStateChange}>
+                  <option value="" disabled>Select a state</option>
+                  {Data.map((scheme, index) => (
+                    <option key={index} value={scheme.state}>
+                      {scheme.state}
+                    </option>
+                  ))}
+                </select>
+              )}
+            </div>
 
-          <option value="10">National Savings Certificate</option>
-          <option value="11">Kisan Vikas Patra</option>
+            <div className={styles.selectDistrict}>
+              <h3>Districts in {selectedState}:</h3>
+              <select
+                value={dis}
+                onChange={(e) => {
+                  Setdis(e.target.value);
+                }}
+              >
+                <option value="" disabled>Select a district</option>
+                {districts.map((district, index) => (
+                  <option key={index} value={district}>
+                    {district}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-          <option value="12">Fixed Deposits</option>
-          <option value="13">Recurring Deposits</option>
-          <option value="14"> Mahila Samman Savings Certificate</option>
-        </select>
+            <div className={styles.chooseCategory}>
+              <h3>Choose a cateogory you lay in </h3>
+              <select
+                className="form-select"
+                aria-label="Select User Category"
+                value={userCategory}
+                onChange={(e) => setUserCategory(e.target.value)}
+              >
+                <option selected>Choose User Category</option>
+                {userCategories.map((category) => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+          </div>
+            <button className={styles.button} onClick={handleListening}>
+              {isListening ? "Stop Listening" : "Start Listening"}
+            </button>
+            <p>Transcribed Text: {text}</p>
+            <button
+              onClick={() => {
+                setText("");
+              }}
+              style={{ marginLeft: "10px" }}
+            >
+              Reset
+            </button>
+            <button type="button" className="btn btn-success" onClick={handlesubmit}>
+              Submit
+            </button>
+
+            <div className={styles.selectLanguage}>
+              <select
+                className="form-select"
+                value={language}
+                onChange={handleLanguageChange}
+              >
+                {indianLanguages.map((lang) => (
+                  <option key={lang.code} value={lang.code}>
+                    {lang.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className={styles.ratingContainer}>
+              <h2>Rate Us</h2>
+              <ReactStars
+                count={5}
+                size={30}
+                isHalf={true}
+                value={rating}
+                onChange={handleRating}
+                activeColor="#ffd700"
+              />
+              <p>Your rating: {rating}</p>
+            </div>
+            <ToastContainer />
+          </div>
+        </div>
       </div>
-
-
-
-
-      <div className={styles.selectState}>
-        <h2>Select State</h2>
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
-          <select value={selectedState} onChange={handleStateChange}>
-            <option value="" disabled>Select a state</option>
-            {Data.map((scheme, index) => (
-              <option key={index} value={scheme.state}>
-                {scheme.state}
-              </option>
-            ))}
-          </select>
-        )}
-      </div>
-
-
-      <div className={styles.selectDistrict}>
-        <h3>Districts in {selectedState}:</h3>
-        <select value={dis} onChange={(e) => {
-          Setdis(e.target.value);
-        }}>
-          <option value="" disabled>Select a district</option>
-          {districts.map((district, index) => (
-            <option key={index} value={district}>
-              {district}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      {/* <div>
-        <select
-          className="form-select"
-          aria-label="Select Feedback Type"
-          value={feedbackType}
-          onChange={(e) => setFeedbackType(e.target.value)}
-        >
-          <option selected>Choose Feedback Type</option>
-          {feedbackTypes.map((type) => (
-            <option key={type} value={type}>
-              {type}
-            </option>
-          ))}
-        </select>
-      </div> */}
-      <div className={styles.chooseCategory}> 
-        <select
-          className="form-select"
-          aria-label="Select User Category"
-          value={userCategory}
-          onChange={(e) => setUserCategory(e.target.value)}
-        >
-          <option selected>Choose User Category</option>
-          {userCategories.map((category) => (
-            <option key={category} value={category}>
-              {category}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <button className={styles.button} onClick={handleListening}>
-        {isListening ? "Stop Listening" : "Start Listening"}
-      </button>
-      <p>Transcribed Text: {text}</p>
-      <button
-        onClick={() => {
-          setText("");
-        }}
-        style={{ marginLeft: "10px" }}
-      >
-        Reset
-      </button>
-      <button type="button" class="btn btn-success" onClick={handlesubmit}>
-        submit
-      </button>
-
-      <div className={styles.selectLanguage}>
-        <select
-          className="form-select"
-          value={language}
-          onChange={handleLanguageChange}
-        >
-          {indianLanguages.map((lang) => (
-            <option key={lang.code} value={lang.code}>
-              {lang.name}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div className={styles.ratingContainer}>
-        <h2>Rate Us</h2>
-        <ReactStars
-          count={5}
-          size={30}
-          isHalf={true}
-          value={rating}
-          onChange={handleRating}
-          activeColor="#ffd700"
-        />
-        <p>Your rating: {rating}</p>
-      </div>
-      <ToastContainer />
-    </div>
     </div>
 
   );

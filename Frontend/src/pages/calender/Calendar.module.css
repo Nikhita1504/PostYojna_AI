@@ -5,7 +5,7 @@
   color: #ffffff;
   font-family: Arial, sans-serif;
   height: 100vh;
-  overflow: hidden;
+
   padding: 25px 40px;
 
 }
@@ -60,8 +60,9 @@
 }
 
 .calendarBox{
-    padding-left: 320px;
+
     margin-top: 50px;
+    width: 100%;
 }
 
 

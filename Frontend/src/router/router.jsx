@@ -10,6 +10,7 @@ import Calendar from "../pages/calender/Calendar";
 import Voiceinput from "../pages/Feedback/Voiceinput";
 import Login from "../LoginPage/login";
 import Home from "../pages/Home";
+import PersonalizedRecommendations from "../pages/Personalized-recommendations/PersonalizedRecommendations";
 
 const router = createBrowserRouter([
   {
@@ -55,7 +56,10 @@ const router = createBrowserRouter([
           {
             path: "Feedback",
             element: <Voiceinput></Voiceinput>,
-          },
+          },{
+            path:"Personalized-recommendations",
+            element:<PersonalizedRecommendations/>
+          }
         ],
       },
     ],

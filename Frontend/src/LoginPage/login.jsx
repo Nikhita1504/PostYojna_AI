@@ -69,10 +69,11 @@ function Login() {
     <div className={styles.loginbanner}>
       {/* Left video section */}
       <div className={styles.loginbannerVideo}>
-        <video autoPlay loop muted className={styles.video}>
-          <source src="/assets/loginmv.mp4" type="video/mp4" />
+        {/* <video autoPlay loop muted className={styles.video}>
+          <source src="/assets/Data Analysis.mp4" type="video/mp4" />
 
-        </video>
+        </video> */}
+        <img src="/assets/loginbg.avif" alt="" />
       </div>
   
       {/* Right form section */}

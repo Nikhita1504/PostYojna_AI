@@ -76,6 +76,15 @@ const Sidebar = () => {
             <Menu className={styles.icon} />
             Feedback
           </Link>
+          <Link
+            to="/Home/Personalized-recommendations"
+            className={`${styles.navItem} ${
+              location.pathname === "/Home/Personalized-recommendations" ? styles.active : ""
+            }`}
+          >
+            <Menu className={styles.icon} />
+            Personalized Recommendations
+          </Link>
         </div>
       </nav>
 

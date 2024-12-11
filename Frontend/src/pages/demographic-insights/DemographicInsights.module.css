@@ -95,13 +95,14 @@ color: rgb(100, 100, 100);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   max-width: 400px;
   width: 100%;
+
   margin:30px 20px; /* Space between the input and the button */
 }
 
 button {
   padding: 10px 20px;
   background-color: #1961CE;
-  color: white;
+  color: black;
   font-size: 1rem;
   border: none;
   border-radius: 5px;
