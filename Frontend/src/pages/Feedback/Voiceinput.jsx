@@ -17,10 +17,10 @@ const Voiceinput = () => {
   const [language, setLanguage] = useState("hi-IN");
 
   const [rating, setRating] = useState(0);
-  const[Data , SetData] = useState([]);
+  const [Data, SetData] = useState([]);
   const [selectedState, setSelectedState] = useState(''); // To track selected state
   const [loading, setLoading] = useState(false); // For loading state
-  const [districts, setDistricts] = useState([]); 
+  const [districts, setDistricts] = useState([]);
 
   const handleRating = (newRating) => {
     setRating(newRating);
@@ -28,7 +28,7 @@ const Voiceinput = () => {
   };
   // const [feedbackType, setFeedbackType] = useState("");
   const [userCategory, setUserCategory] = useState("");
-const[dis ,Setdis]= useState('');
+  const [dis, Setdis] = useState('');
   // const feedbackTypes = ["Suggestion", "Complaint", "Inquiry", "Appreciation"];
   const userCategories = ["Visitor", "Official", "Stakeholder", "Other"];
 
@@ -110,13 +110,13 @@ const[dis ,Setdis]= useState('');
   };
 
   const handlesubmit = async () => {
-    if (!scheme  || !userCategory) {
+    if (!scheme || !userCategory) {
       alert("Please fill all the fields before submitting feedback.");
       return;
     }
 
     const newPrompt = {
-      location:`${dis-selectedState}`,
+      location: `${dis - selectedState}`,
       scheme: scheme,
       text: text,
       rating: rating,
@@ -142,37 +142,39 @@ const[dis ,Setdis]= useState('');
     }
   };
 
-  const fetchActiveDistrict = async(selectedScheme) =>{
+  const fetchActiveDistrict = async (selectedScheme) => {
     SetData([]);
     try {
       const response = await axios.get(`http://localhost:3000/ActiveScheme/${selectedScheme}`);
-      if(response.data.success == true){
+      if (response.data.success == true) {
         SetData(response.data.data)
       }
 
     } catch (error) {
-      console.log("error in fetching active scheme district" , error)
+      console.log("error in fetching active scheme district", error)
     }
     finally {
       setLoading(false);
     }
   }
-  useEffect(() =>{
-  fetchActiveDistrict()
-  },[scheme])
+  useEffect(() => {
+    fetchActiveDistrict()
+  }, [scheme])
 
-    // Handle state selection change
-    const handleStateChange = (e) => {
-      setSelectedState(e.target.value);
-      console.log(e.target.value);
-      const selectedStateData = Data.find(item => item.state === e.target.value); // Find the selected state's data
-      if (selectedStateData) {
-        setDistricts(selectedStateData.districts); // Update districts based on selected state
-      }
-    };
+  // Handle state selection change
+  const handleStateChange = (e) => {
+    setSelectedState(e.target.value);
+    console.log(e.target.value);
+    const selectedStateData = Data.find(item => item.state === e.target.value); // Find the selected state's data
+    if (selectedStateData) {
+      setDistricts(selectedStateData.districts); // Update districts based on selected state
+    }
+  };
   return (
-    <div className={styles.div}>
-       <div>
+    <div className={styles.bigContainer}>
+      <div className={styles.voiceInputContainer}>
+      <h2>Record FeedBack</h2>
+      <div className={styles.feedbackform}>
         <select
           class="form-select form-select-sm"
           aria-label="Select Post Office Scheme"
@@ -181,8 +183,8 @@ const[dis ,Setdis]= useState('');
             SetData([]);
             setDistricts([]);
             setscheme(e.target.options[e.target.selectedIndex].text);
-           
-             fetchActiveDistrict(e.target.options[e.target.selectedIndex].text);
+
+            fetchActiveDistrict(e.target.options[e.target.selectedIndex].text);
           }}
         >
           <option selected>Choose a Post Office Scheme</option>
@@ -210,37 +212,37 @@ const[dis ,Setdis]= useState('');
 
 
 
-      <div>
-      <h2>Select State</h2>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <select value={selectedState} onChange={handleStateChange}>
-          <option value="" disabled>Select a state</option>
-          {Data.map((scheme, index) => (
-            <option key={index} value={scheme.state}>
-              {scheme.state}
-            </option>
-          ))}
-        </select>
-      )}
-    </div>
-
-    
-        <div>
-          <h3>Districts in {selectedState}:</h3>
-          <select value={dis} onChange={(e) =>{
-            Setdis(e.target.value);
-          }}>
-            <option value="" disabled>Select a district</option>
-            {districts.map((district, index) => (
-              <option key={index} value={district}>
-                {district}
+      <div className={styles.selectState}>
+        <h2>Select State</h2>
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <select value={selectedState} onChange={handleStateChange}>
+            <option value="" disabled>Select a state</option>
+            {Data.map((scheme, index) => (
+              <option key={index} value={scheme.state}>
+                {scheme.state}
               </option>
             ))}
           </select>
-        </div>
-       
+        )}
+      </div>
+
+
+      <div className={styles.selectDistrict}>
+        <h3>Districts in {selectedState}:</h3>
+        <select value={dis} onChange={(e) => {
+          Setdis(e.target.value);
+        }}>
+          <option value="" disabled>Select a district</option>
+          {districts.map((district, index) => (
+            <option key={index} value={district}>
+              {district}
+            </option>
+          ))}
+        </select>
+      </div>
+
       {/* <div>
         <select
           className="form-select"
@@ -256,7 +258,7 @@ const[dis ,Setdis]= useState('');
           ))}
         </select>
       </div> */}
-      <div>
+      <div className={styles.chooseCategory}> 
         <select
           className="form-select"
           aria-label="Select User Category"
@@ -272,7 +274,7 @@ const[dis ,Setdis]= useState('');
         </select>
       </div>
 
-      <button onClick={handleListening}>
+      <button className={styles.button} onClick={handleListening}>
         {isListening ? "Stop Listening" : "Start Listening"}
       </button>
       <p>Transcribed Text: {text}</p>
@@ -288,7 +290,7 @@ const[dis ,Setdis]= useState('');
         submit
       </button>
 
-      <div>
+      <div className={styles.selectLanguage}>
         <select
           className="form-select"
           value={language}
@@ -301,7 +303,7 @@ const[dis ,Setdis]= useState('');
           ))}
         </select>
       </div>
-      <div>
+      <div className={styles.ratingContainer}>
         <h2>Rate Us</h2>
         <ReactStars
           count={5}
@@ -314,6 +316,7 @@ const[dis ,Setdis]= useState('');
         <p>Your rating: {rating}</p>
       </div>
       <ToastContainer />
+    </div>
     </div>
 
   );

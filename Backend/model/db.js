@@ -204,6 +204,62 @@ const ActiveSchemeSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now }, // Timestamp for record creation
 });
 
+const regionSchema = new mongoose.Schema({
+  region_name: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  population_density: {
+    type: Number,
+    required: true,
+    min: 0
+  },
+  Male: {
+    type: Number,
+    required: true,
+    min: 0
+  },
+  Female: {
+    type: Number,
+    required: true,
+    min: 0
+  },
+  gender_ratio: {
+    type: Number,
+    required: true,
+    min: 0,
+    max: 1
+  },
+  education_level: {
+    type: Number,
+    required: true,
+    min: 0,
+    max: 100
+  },
+  income_level: {
+    type: Number,
+    required: true,
+    min: 0
+  },
+  age_distribution: {
+    type: String,
+    required: true,
+    validate: {
+      validator: function (v) {
+        // Validate percentage format (e.g., "22%, 23%, 38%, 17%")
+        return /^(\d+%)(,\s*\d+%)*$/.test(v);
+      },
+      message: (props) =>
+        `${props.value} is not a valid age distribution format. Use comma-separated percentages.`
+    }
+  }
+});
+
+const Region = mongoose.model('Region', regionSchema);
+
+
+
 const ActiveSchemeModel = mongoose.model("ActiveScheme",ActiveSchemeSchema);
 
 
@@ -225,4 +281,5 @@ module.exports = {
   EventModel,
   DemographicModel,Population,AgeGroup,
   ActiveSchemeModel,
+  Region
 };

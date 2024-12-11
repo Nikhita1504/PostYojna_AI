@@ -16,8 +16,8 @@ const Maps = () => {
 
   const locationpoint = location.state?.locationpoint;
   const coordinatess = locationpoint
-  ? [locationpoint.lat, locationpoint.lon]
-  : [23.2599, 77.4126]; // Default to India's center
+    ? [locationpoint.lat, locationpoint.lon]
+    : [23.2599, 77.4126]; // Default to India's center
   function createPopupContent(city) {
     return `
       <div>
@@ -99,7 +99,7 @@ const Maps = () => {
       markerInstance.bindPopup(createPopupContent(currentCity)).openPopup();
       const button = document.getElementById("viewDataButton");
       button.addEventListener("click", () => {
-        Navigate("/Home/demographic-insights/maps/graphs",{state:{locationName:cityRef.current}});
+        Navigate("/Home/demographic-insights/maps/graphs", { state: { locationName: cityRef.current } });
         console.log("View data for:", cityRef.current);
       });
       markerInstance.on("popupopen", () => {
@@ -118,17 +118,17 @@ const Maps = () => {
 
   return (
 
-    <div style={{ paddingLeft: "21.6%" }}>
-  <h1>MapTiler Vector Map Example</h1>
-  <div
-    id="map"
-    style={{
-      width: "100%",
-      height: "100vh",
-      border: "1px solid #ccc",
-    }}
-  ></div>
-</div>
+    <div style={{ marginLeft: "270px" }}>
+
+      <div
+        id="map"
+        style={{
+          width: "100%",
+          height: "100vh",
+          border: "1px solid #ccc",
+        }}
+      ></div>
+    </div>
 
   );
 };

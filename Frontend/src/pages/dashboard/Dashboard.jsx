@@ -44,7 +44,7 @@ const schemes = [
   "Kisan Vikas Patra",
   "Fixed Deposits",
   "Recurring Deposits",
-"Mahila Samman Savings Certificate",
+  "Mahila Samman Savings Certificate",
 ];
 
 
@@ -162,15 +162,12 @@ const Dashboard = () => {
   return (
     <div className={styles.dashboard}>
       {/* Header Section */}
-
-      <div className={styles.imageWrapper}>
-        <img src="/assets/bg.png" className={styles.backgroundImage} alt="" />
-        <div className={styles.dashboardHeader}>
-          <div>
+      <div className={styles.dashboardCon}>
+        <div className={styles.headerSection}>
+          <div className={styles.headerContent}>
             <h1>Hey!</h1>
             <p>Welcome to your Dashboard</p>
           </div>
-
           <div className={styles.controls}>
             <select
               value={selectedScheme}
@@ -185,111 +182,56 @@ const Dashboard = () => {
             </select>
           </div>
         </div>
-      </div>
 
-      {/* <div className={styles.inputWrapper}>
-        <FaMapMarkerAlt className={styles.icon} />
-        <input
-          type="text"
-          placeholder="Search for a location..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className={styles.input}
-        />
-        {locations.length > 0 && (
-          <div className={styles.suggestions}>
-            {locations.map((location, index) => (
-              <div
-                key={index}
-                className={styles.suggestionItem}
-                onClick={() => {
-                  setSearchQuery(location.display_name); // Update search query
-                  setLocations([]); // Clear suggestions
-                }}
-              >
-                <FaMapMarkerAlt className={styles.locationIcon} />
-                {location.display_name}
-              </div>
-            ))}
-          </div>
-        )}
-      </div> */}
-
-      {loading && <div className={styles.loader}><HashLoader size={50} color="#3A57E8" /></div>}
-
-      {/* Metrics Section */}
-      <div className={styles.content}>
+        {/* Metrics Section */}
         <div className={styles.metricsSection}>
           {dashboardData.metrics && dashboardData.metrics.length > 0 ? (
             dashboardData.metrics.map((metric, index) => (
               <div className={styles.metricCard} key={index}>
-                <div className={styles.metricCardData}>
-                  <div className={styles.metricIcon}>
-                    {getIcon(metric.icon)}
-                  </div>
-
-                  <div className={styles.metricValues}>
-                    <h4>{metric.title}</h4>
-                    <p>
-                      <CountUp
-                        start={0}
-                        end={parseInt(metric.value.replace(/[^0-9]/g, ''))} // Convert value to a number, removing non-numeric characters (like Rs)
-                        duration={3.5} // Duration of the animation in seconds
-                        separator="," // For thousand separator
-                      />
-                    </p>
-                  </div>
+                <div className={styles.metricValues}>
+                  <h4>{metric.title}</h4>
+                  <p>
+                    <CountUp
+                      start={0}
+                      end={parseInt(metric.value.replace(/[^0-9]/g, ""))}
+                      duration={3.5}
+                      separator=","
+                    />
+                  </p>
                 </div>
-
-                {/* <div style={{ width: "80px", height: "80px" }}>
-                  <CircularProgressbar
-                    value={metric.progress}
-                    text={`${metric.progress}%`}
-                    styles={buildStyles({
-                      pathColor: "#3A57E8",
-                      textColor: "#3A57E8",
-                      trailColor: "#d6d6d6",
-                      textSize: "20px", // Font size of the text inside the circle
-                    })}
-                  />
-                </div> */}
               </div>
             ))
           ) : (
-            <p>No data Found</p> // Displayed if no metrics data is found
+            <p>No data Found</p>
           )}
         </div>
 
-        {/* Charts Section */}
-        <div className={styles.charts}>
+        {/* Charts and Feedback Section */}
+        <div className={styles.mainContent}>
           <div className={styles.progresschart}>
-            <DashboardBarChart isDashboard={true} scheme={selectedScheme} registrationsOverYears={dashboardData.registrationsOverYears} />
-            {/* <CylindricalColumnDashboard className={styles.barChart} data={dashboardData.registrationsOverYears} /> */}
+            {/* <DashboardBarChart
+              isDashboard={true}
+              scheme={selectedScheme}
+              registrationsOverYears={dashboardData.registrationsOverYears}
+            /> */}
           </div>
+
           <div className={styles.feedback}>
             <h3>Feedbacks</h3>
             <div className={styles.transactionList}>
               {Feedback.map((feedback, index) => (
-                <div className={styles.feedbackContainer}>
-                  <div className={styles.Content}>
-                    <p>{feedback.point}</p></div>
-                    <div className={styles.lowercontainer}>
-                    
-                 
-                    <div className={styles.location}><span>Location :{feedback.location}</span> </div>
-                    <div className={styles.rating}>
+                <div className={styles.feedbackContainer} key={index}>
+                  <p className={styles.feedbackPoint}> {feedback.point}</p>
+                  <div className={styles.lowercontainer}>
+                    <span className={styles.feedbackLocation}>📍 {feedback.location}</span>
                     <ReactStars
-          count={5}
-          size={30}
-          isHalf={true}
-          value={feedback.rating}
-        
-          activeColor="#ffd700"
-        />
-                     </div>
-              
-                </div>
-                
+                      count={5}
+                      size={20}
+                      isHalf={true}
+                      value={feedback.rating}
+                      activeColor="#FEBE00"
+                    />
+                  </div>
                 </div>
               ))}
             </div>
