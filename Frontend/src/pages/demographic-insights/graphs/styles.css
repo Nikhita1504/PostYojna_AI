@@ -3,26 +3,24 @@
 .bigCon {
   
   margin-left: 270px; /* Adjusted for sidebar offset */
-  padding: 40px 30px;
+  padding: 20px;
   /* background-color: #1E2433; */
   height: 100vh;
-  position: relative;
 
+  overflow: hidden;
+  }
+.innerCon{
+  height: 100vh;
+   background-color: #1E2433;
+   padding: 40px 30px;
+   border-radius: 18px;
+  
+}
 
-  }
-  .schemeRecommendations{
-    background-color: #191d27;
-    height: 100vh;
-    border-radius: 10px;
-  }
-  .imageWrapper{
-position: absolute;
-z-index: 100;
-
-  }
-  .imageWrapper img{
-    object-fit: cover;
+  .bigCon img{
     width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
   }
 
 
@@ -73,14 +71,20 @@ z-index: 100;
 
   }
   .swipper{
-    width: 70%;
-    height: 100%;
+    width: 100%;
+    height: 90%;
   border-radius: 10px;
 
-    box-shadow: 0px 0px 15px 5px rgba(255, 255, 255, 0.3);
+    /* box-shadow: 0px 0px 15px 5px rgba(255, 255, 255, 0.3); */
 
   }
-
+.suggestionsList{
+  width: 40%;
+  height: 100%;
+  background-color:white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px 5px rgba(255, 255, 255, 0.3);
+}
   .swiper {
     width: 100%;
     height: 100%;
@@ -155,6 +159,16 @@ justify-content: center;
     font-size: 23px;
 
   }
+  /* Change color of the next arrow */
+.swiper-button-next {
+  color: black; /* Replace with your desired color */
+}
+
+/* Change color of the previous arrow */
+.swiper-button-prev {
+  color: black; /* Replace with your desired color */
+}
+
 
   .OccupationgraphBox1.recharts-bar-rectangle {
     transition: transform 0.5s ease-out, box-shadow 0.5s ease-in-out;
@@ -270,63 +284,3 @@ flex-direction: column;    gap: 20px;
   .bubble-tag.Low {
     background-color: #f44336; /* Red for Low */
   }
-
-  /* Container for the list */
-  .suggestionsList {
-    background-color: #191d27;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 15px 5px rgba(255, 255, 255, 0.3);
-    overflow: scroll;
-  }
-  
-  .listHeader {
-    font-size: 24px;
-    font-weight: bold;
-    color: white;
-    margin-bottom: 20px;
-  }
-  
-  .schemeContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .schemeCard {
-    background-color: #fff;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease-in-out;
-  }
-  
-  .schemeCard:hover {
-    transform: translateY(-5px);
-  }
-  
-  .schemeTitle {
-    font-size: 20px;
-    color: #444;
-    margin-bottom: 10px;
-  }
-  
-  .promoteButton {
-    background-color: #4caf50;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .promoteButton:hover {
-    background-color: #45a049;
-  }
-  
-  .promoteButton:focus {
-    outline: none;
-  }
-  

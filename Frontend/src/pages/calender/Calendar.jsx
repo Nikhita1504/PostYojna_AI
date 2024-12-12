@@ -26,14 +26,21 @@ const CalendarComponent = () => {
         const fetchEvents = async () => {
             try {
                 const response = await axios.get('http://localhost:3000/events');
-                setEvents(response.data);
+                // Normalize the data for react-big-calendar
+                const normalizedEvents = response.data.map((event) => ({
+                    ...event,
+                    start: new Date(event.start), // Convert to Date object
+                    end: new Date(event.end),     // Convert to Date object
+                }));
+                setEvents(normalizedEvents);
             } catch (error) {
                 console.error('Error fetching events:', error);
             }
         };
 
         fetchEvents();
-    }, []);
+    }, []); // Dependency array is empty to fetch data only once on mount
+    
 
     const handleAddEvent = async () => {
         const newEvent = {
@@ -134,14 +141,19 @@ const CalendarComponent = () => {
                         </div>
                     ) : (
                         <Calendar
-                            localizer={localizer}
-                            events={events}
-                            startAccessor="start"
-                            endAccessor="end"
-                            style={{ height: 600 }}
-                            selectable
-                            onSelectEvent={openDeleteModal} // Open delete modal on event click
-                        />
+    localizer={localizer}
+    events={events.map((event) => ({
+        ...event,
+        start: new Date(event.start), // Ensure dates are in correct format
+        end: new Date(event.end),
+    }))}
+    startAccessor="start"
+    endAccessor="end"
+    style={{ height: 600 }}
+    selectable
+    onSelectEvent={openDeleteModal} // Open delete modal on event click
+/>
+
                     )}
                 </div>
             </div>
