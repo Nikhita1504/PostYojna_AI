@@ -3,9 +3,9 @@ import { useLocation } from 'react-router-dom';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import styles from './Calendar.module.css'; // Import your CSS module
+import styles from './Calendar.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faList, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faList, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
 const localizer = momentLocalizer(moment);
@@ -13,48 +13,42 @@ const localizer = momentLocalizer(moment);
 const CalendarComponent = () => {
     const location = useLocation();
     const [events, setEvents] = useState([]);
-    const [isEventListView, setIsEventListView] = useState(false); // Manage view toggle
-    const [isModalOpen, setIsModalOpen] = useState(false); // Manage modal visibility
-    const [eventTitle, setEventTitle] = useState(""); // Store event title
-    const [eventDescription, setEventDescription] = useState(""); // Store event description
-    const [fromDate, setFromDate] = useState(""); // Store start date
-    const [toDate, setToDate] = useState(""); // Store end date
+    const [isEventListView, setIsEventListView] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // Manage delete modal
+    const [eventTitle, setEventTitle] = useState("");
+    const [eventDescription, setEventDescription] = useState("");
+    const [fromDate, setFromDate] = useState("");
+    const [toDate, setToDate] = useState("");
+    const [eventToDelete, setEventToDelete] = useState(null); // Store event to be deleted
 
-    // Fetch events from the backend when the component mounts
     useEffect(() => {
         const fetchEvents = async () => {
             try {
-                const response = await fetch('http://localhost:3000/events');
-                const data = await response.json();
-                setEvents(data); // Set events in state
+                const response = await axios.get('http://localhost:3000/events');
+                setEvents(response.data);
             } catch (error) {
                 console.error('Error fetching events:', error);
             }
         };
 
         fetchEvents();
-    }, []); // Empty dependency array to run once when the component mounts
+    }, []);
 
     const handleAddEvent = async () => {
         const newEvent = {
             title: eventTitle,
             description: eventDescription,
-            start: new Date(fromDate).toISOString(),  // Convert to ISO string
-            end: new Date(toDate).toISOString(),      // Convert to ISO string
+            start: new Date(fromDate).toISOString(),
+            end: new Date(toDate).toISOString(),
         };
-        console.log(newEvent);
-    
-        try {
-            // POST request to add event to the database using axios
-            const response = await axios.post('http://localhost:3000/events/add', newEvent
 
-        );
-    
-            // Check if the response is successful
+        try {
+            const response = await axios.post('http://localhost:3000/events/add', newEvent);
             if (response.status === 201) {
-                setEvents((prevEvents) => [...prevEvents, newEvent]); // Update state with the new event
-                setIsModalOpen(false); // Close modal
-                setEventTitle(""); // Reset input fields
+                setEvents((prevEvents) => [...prevEvents, newEvent]);
+                setIsModalOpen(false);
+                setEventTitle("");
                 setEventDescription("");
                 setFromDate("");
                 setToDate("");
@@ -66,14 +60,40 @@ const CalendarComponent = () => {
         }
     };
 
+    const handleDeleteEvent = async () => {
+        if (!eventToDelete) return;
+        console.log(eventToDelete)
+
+        try {
+            const response = await axios.delete(`http://localhost:3000/events/${eventToDelete._id}`);
+            if (response.status === 200) {
+                setEvents((prevEvents) =>
+                    prevEvents.filter((event) => event.id !== eventToDelete.id)
+                );
+                setIsDeleteModalOpen(false);
+                setEventToDelete(null);
+            } else {
+                console.error('Error deleting event:', response.data.message);
+            }
+        } catch (error) {
+            console.error('Error deleting event:', error);
+        }
+    };
+
     const toggleView = () => {
-        setIsEventListView(!isEventListView); // Toggle between calendar and event list
+        setIsEventListView(!isEventListView);
+    };
+
+    const openDeleteModal = (event) => {
+        setEventToDelete(event); // Set the event to delete
+        setIsDeleteModalOpen(true); // Show the delete modal
     };
 
     return (
-        <div className={styles.calendarContainer}>
+        <div className={styles.bigCon}>
+            <div className={styles.calendarContainer}>
             <div className={styles.imageWrapper}>
-                <img src="/assets/bg.png" alt="Background" />
+                <img src="/assets/fullbanner.png" alt="Background" />
             </div>
             <div className={styles.header}>
                 <p>Calendar</p>
@@ -92,22 +112,26 @@ const CalendarComponent = () => {
                 <div className={styles.calendarWrapper}>
                     {isEventListView ? (
                         <div className={styles.eventList}>
-                        <h2>Event List</h2>
-                        <ul>
-                          {events.map((event, index) => (
-                            <li key={index} className={styles.eventItem}>
-                              <strong className={styles.eventTitle}>{event.title}</strong>
-                              <p className={styles.eventDescription}>{event.description}</p>
-                              <p className={styles.eventTime}>
-                                {`From: ${moment(event.start).format("MMMM Do YYYY, h:mm:ss a")}`}
-                              </p>
-                              <p className={styles.eventTime}>
-                                {`To: ${moment(event.end).format("MMMM Do YYYY, h:mm:ss a")}`}
-                              </p>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                            <h2>Event List</h2>
+                            <ul>
+                                {events.map((event) => (
+                                    <li
+                                        key={event.id}
+                                        className={styles.eventItem}
+                                        onClick={() => openDeleteModal(event)}
+                                    >
+                                        <strong className={styles.eventTitle}>{event.title}</strong>
+                                        <p className={styles.eventDescription}>{event.description}</p>
+                                        <p className={styles.eventTime}>
+                                            From: {moment(event.start).format("MMMM Do YYYY, h:mm:ss a")}
+                                        </p>
+                                        <p className={styles.eventTime}>
+                                            To: {moment(event.end).format("MMMM Do YYYY, h:mm:ss a")}
+                                        </p>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     ) : (
                         <Calendar
                             localizer={localizer}
@@ -116,6 +140,7 @@ const CalendarComponent = () => {
                             endAccessor="end"
                             style={{ height: 600 }}
                             selectable
+                            onSelectEvent={openDeleteModal} // Open delete modal on event click
                         />
                     )}
                 </div>
@@ -163,6 +188,29 @@ const CalendarComponent = () => {
                     </div>
                 </div>
             )}
+
+            {/* Delete Event Modal */}
+            {isDeleteModalOpen && eventToDelete && (
+                <div className={styles.overlay}>
+                    <div className={styles.modal}>
+
+                        <p>Are you sure you want to delete this event?</p>
+                        <p><strong>{eventToDelete.title}</strong></p>
+                        <div className={styles.buttonGroup}>
+                            <button onClick={handleDeleteEvent} className={styles.button}>
+                                Yes, Delete
+                            </button>
+                            <button
+                                onClick={() => setIsDeleteModalOpen(false)}
+                                className={styles.cancelButton}
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+        </div>
         </div>
     );
 };

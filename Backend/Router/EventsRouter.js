@@ -29,6 +29,24 @@ EventsRouter.post('/add', async (req, res) => {
     }
 });
 
+EventsRouter.delete('/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        // Find the event by ID and delete it
+        const deletedEvent = await EventModel.findByIdAndDelete(id);
+
+        if (!deletedEvent) {
+            return res.status(404).json({ message: 'Event not found' });
+        }
+
+        res.status(200).json({ message: 'Event deleted successfully', deletedEvent });
+    } catch (error) {
+        console.error('Error deleting event:', error);
+        res.status(500).json({ message: 'Internal server error', error });
+    }
+});
+
 // Route to get all events
 
 

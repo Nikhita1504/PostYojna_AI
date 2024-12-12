@@ -12,7 +12,7 @@
 .loginbanner {
   display: flex;
 
-  max-width: 1300px;
+  width: 1000px;
   height: 80%;
   background-color: #fff;
   border-radius: 10px;
@@ -25,12 +25,13 @@
 .loginbannerVideo {
   flex: 1.5;
   position: relative;
-  overflow: hidden;
+  /* overflow: hidden; */
   margin: 30px 0;
 }
 
 .loginbannerVideo img{
   object-fit: cover;
+  height: 500px;
 }
 
 

@@ -1,6 +1,6 @@
 const express = require("express");
 const axios = require("axios");
-const { DemographicModel, Population, AgeGroup, Region } = require("../model/db");
+const { DemographicModel, Population, AgeGroup, Region, RegionModel } = require("../model/db");
 
 const demographicdataRouter = express.Router();
 
@@ -55,7 +55,7 @@ demographicdataRouter.get("/getAgedata", async (req, res) => {
 demographicdataRouter.get("/getdemographicData", async (req, res) => {
     try {
         const { Location } = req.query;
-        const data = await Region.findOne({region_name:Location});
+        const data = await RegionModel.findOne({region_name:Location});
         res.json(data);
     } catch (error) {
         console.log(error)

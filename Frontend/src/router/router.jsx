@@ -11,6 +11,8 @@ import Voiceinput from "../pages/Feedback/Voiceinput";
 import Login from "../LoginPage/login";
 import Home from "../pages/Home";
 import PersonalizedRecommendations from "../pages/Personalized-recommendations/PersonalizedRecommendations";
+import Aiprediction from "../pages/Aiprediction/Aiprediction";
+import PredictAccountOpening from "../pages/PredictAccountOpening";
 
 const router = createBrowserRouter([
   {
@@ -59,6 +61,14 @@ const router = createBrowserRouter([
           },{
             path:"Personalized-recommendations",
             element:<PersonalizedRecommendations/>
+          },
+          {
+            path:"Aiprediction",
+            element:<Aiprediction></Aiprediction>
+          },
+          {
+            path:"Predict",
+            element:<PredictAccountOpening/>
           }
         ],
       },

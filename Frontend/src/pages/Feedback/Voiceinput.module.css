@@ -1,6 +1,6 @@
 .bigContainer {
   margin-left: 270px; /* Starts just after the sidebar */
-  background-color: #252B3A;
+  /* background-color: #252B3A; */
   color: #ffffff;
   font-family: Arial, sans-serif;
   height: 100vh;
@@ -26,11 +26,18 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  background: linear-gradient(135deg, #3A57E8, #A033E5, #F283E6);
+/* background-image: url("./../../assets/fullbanner.png"); */
+  /* background: linear-gradient(135deg, #3A57E8, #A033E5, #F283E6); */
 
   border-radius: 18px;
-  padding: 1rem;
+  /* padding: 1rem; */
   width: 100%;
+}
+.headerSection img{
+  object-fit: cover;
+  width: 1040px;
+  border-radius: 8px;
+
 }
 
 
@@ -54,6 +61,7 @@ h2 {
 
 .feedbackform {
   margin-bottom: 20px;
+
 }
 
 .feedbackform select {
@@ -72,9 +80,24 @@ h2 {
 .selectState h2{
 
   text-align: left;
-  font-size: 20px;
+  font-size: 17px;
  
 }
+.selectionCon,
+.ratingContainer {
+  width: 50%; /* Equal width */
+  padding: 1rem;
+  background-color: transparent;
+  border-radius: 8px;
+  /* box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); */
+  color: #333;
+}
+
+.selectionCon {
+  margin-right: 1rem; /* Add space between the two containers */
+}
+
+
 .selectState,
 .selectDistrict {
   display: flex;
@@ -85,7 +108,7 @@ h2 {
 
 .selectState select,
 .selectDistrict select {
-  width: 50%;
+  width: 100%;
   padding: 12px;
   font-size: 16px;
   border: 1px solid #ccc;
@@ -95,10 +118,10 @@ h2 {
   margin-bottom: 15px;
 }
 .selectDistrict h3{
-  font-size: 20px;
+  font-size: 17px;
 }
 .chooseCategory h3{
-  font-size: 20px;
+  font-size: 17px;
 }
 
 .selectState select:focus,
@@ -108,10 +131,11 @@ h2 {
 
 .chooseCategory {
   margin-bottom: 20px;
+  
 }
 
 .chooseCategory select {
-  width: 50%;
+  width: 100%;
   padding: 12px;
   font-size: 16px;
   border: 1px solid #ccc;
@@ -119,11 +143,17 @@ h2 {
   background-color: #f9f9f9;
 }
 
-.button {
+.btnCon{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.btnCon .button {
   padding: 12px 25px;
   font-size: 16px;
   color: #fff;
-  background-color: #007bff;
+  background-color: green;
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -135,9 +165,17 @@ h2 {
   background-color: #0056b3;
   transform: translateY(-2px);
 }
+.textContainer textarea{
+  width: 100%;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+}
 
 .selectLanguage {
   margin-top: 20px;
+  width: 50%;
 }
 
 .selectLanguage select {
@@ -150,12 +188,20 @@ h2 {
 }
 
 .ratingContainer {
+  display: flex; 
+  flex-direction: column;
   margin-top: 20px;
-  text-align: center;
+justify-content: center;
+align-items: center;
+gap: 10px;
+padding: 1rem;
+height: 100%;
+  /* background-color: red; */
+  border: 1px solid grey;
 }
 
 .ratingContainer h2 {
-  font-size: 22px;
+  font-size: 18px;
   color: #333;
   margin-bottom: 10px;
 }
@@ -166,7 +212,37 @@ h2 {
   margin-top: 5px;
 }
 
-.ReactStars {
+.reactStars{
   display: inline-block;
   margin-top: 10px;
+  background-color: transparent;
+  border: 1px solid black;
+}
+.flexCon {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Align content to the top */
+  gap: 20px; /* Add consistent spacing between the elements */
+  border-bottom: 1px solid grey;
+  margin-bottom: 24px;
+}
+.bottomflexCon{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.buttonContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.buttonContainer .resetButton{
+  background-color: red;
+  border-radius: 8px;
+  color: white;
+
+
+
 }

@@ -1,93 +1,108 @@
-.bigCon{
-    margin-left: 270px; /* Starts just after the sidebar */
-    background-color: #252B3A;
-    color: #ffffff;
-    font-family: Arial, sans-serif;
-    height: 100vh;
-    overflow: hidden;
+.bigCon {
+  margin-left: 270px; /* Starts just after the sidebar */
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  height: 100vh;padding: 20px 40px;
+
 }
+
 .container {
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .toggleButtons {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 20px;
-  }
-  
-  button {
-    padding: 10px 20px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  button.active {
-    background-color: #4CAF50;
-    color: white;
-  }
-  
-  .form {
-    display: flex;
-    flex-direction: column;
-  }
-  .form button{
-    color: black;
-  }
-  
-  .formGroup {
-    margin-bottom: 15px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  input {
-    width: 100%;
-    padding: 8px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-  }
-  
-  .toggleButton {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px; /* Spacing between buttons */
-    margin: 20px 0;
-  }
-  
-  .toggle-option {
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    border: 2px solid #5989FF;
-    border-radius: 25px;
-    background-color: #CADAFF;
-    color: black;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .toggle-option.active {
-    background-color: #FF3700; /* Highlight active button */
-    color: white;
-    border-color: #FF3700;
-  }
-  
-  .toggle-option:hover {
-    opacity: 0.9;
-  }
-  
-  .toggle-option:active {
-    transform: scale(0.95);
-  }
-  
-  
+  width: 100%;
+  /* max-width: 800px; Increased max width for a larger form layout */
+  margin: 0 auto;
+  background-color: #191d27;
+  border-radius: 8px;
+
+ /* Ensures proper layout containment */
+}
+
+.headerSection {
+  width: 100%;
+  background-color: #252B3A;
+  text-align: center;
+  padding: 20px;
+}
+
+.headerSection img {
+  max-width: 100%;
+  height: auto;
+}
+
+.formContainer {
+  background-color: #ffffff;
+  padding: 20px;
+  color: #000000; /* Black text for better contrast */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.toggleButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; /* Spacing between buttons */
+  margin: 20px 0;
+}
+
+.toggle-option {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: 2px solid #5989FF;
+  border-radius: 25px;
+  background-color: #CADAFF;
+  color: black;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.toggle-option.active {
+  background-color: #FF3700; /* Highlight active button */
+  color: white;
+  border-color: #FF3700;
+}
+
+.toggle-option:hover {
+  opacity: 0.9;
+}
+
+.toggle-option:active {
+  transform: scale(0.95);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input, select {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form button {
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.form button:hover {
+  background-color: #45a049;
+}

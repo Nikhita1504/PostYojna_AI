@@ -46,31 +46,38 @@ const PersonalizedRecommendations = () => {
 
   return (
     <div className={styles.bigCon}>
-        <div className={styles.container}>
-      {/* Toggle Buttons */}
-      <div className={styles.toggleButton}>
-        <button
-          className={`${styles['toggle-option']} ${formType === 'forYou' ? styles.active : ''}`}
-          onClick={() => toggleForm('forYou')}
-        >
-          For You
-        </button>
-        <button
-          className={`${styles['toggle-option']} ${formType === 'forCustomer' ? styles.active : ''}`}
-          onClick={() => toggleForm('forCustomer')}
-        >
-          For Customer
-        </button>
-      </div>
+      <div className={styles.container}>
+        {/* Header Section */}
+        <div className={styles.headerSection}>
+          <img src="/assets/fullbanner.png" alt="Header Banner" />
+        </div>
 
-      {/* Form Rendering */}
-      <form className={styles.form}>
-        <h2>{formType === 'forYou' ? 'For You' : 'For Customer'} Form</h2>
-        {formFields}
-        <button type="submit">Submit</button>
-      </form>
-    </div>
-        
+        {/* Form Container */}
+        <div className={styles.formContainer}>
+          {/* Toggle Buttons */}
+          <div className={styles.toggleButton}>
+            <button
+              className={`${styles['toggle-option']} ${formType === 'forYou' ? styles.active : ''}`}
+              onClick={() => toggleForm('forYou')}
+            >
+              For You
+            </button>
+            <button
+              className={`${styles['toggle-option']} ${formType === 'forCustomer' ? styles.active : ''}`}
+              onClick={() => toggleForm('forCustomer')}
+            >
+              For Customer
+            </button>
+          </div>
+
+          {/* Form Rendering */}
+          <form className={styles.form}>
+            <h2>{formType === 'forYou' ? 'For You' : 'For Customer'} Form</h2>
+            {formFields}
+            <button type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };

@@ -174,7 +174,7 @@ const Voiceinput = () => {
     <div className={styles.bigContainer}>
       <div className={styles.container}>
         <div className={styles.headerSection}>
-          <h2>Record FeedBack</h2>
+          <img src="/assets/fullbanner.png" alt="" />
         </div>
         <div className={styles.mainFeedbackCon}>
           <div className={styles.voiceInputContainer}>
@@ -210,75 +210,100 @@ const Voiceinput = () => {
               </select>
             </div>
 
-          <div className={styles.selectionCon}>
-          <div className={styles.selectState}>
-              <h2>Select State</h2>
-              {loading ? (
-                <p>Loading...</p>
-              ) : (
-                <select value={selectedState} onChange={handleStateChange}>
-                  <option value="" disabled>Select a state</option>
-                  {Data.map((scheme, index) => (
-                    <option key={index} value={scheme.state}>
-                      {scheme.state}
-                    </option>
-                  ))}
-                </select>
-              )}
+            <div className={styles.flexCon}>
+              <div className={styles.selectionCon}>
+                <div className={styles.selectState}>
+                  <h2>Select State</h2>
+                  {loading ? (
+                    <p>Loading...</p>
+                  ) : (
+                    <select value={selectedState} onChange={handleStateChange}>
+                      <option value="" disabled>Select a state</option>
+                      {Data.map((scheme, index) => (
+                        <option key={index} value={scheme.state}>
+                          {scheme.state}
+                        </option>
+                      ))}
+                    </select>
+                  )}
+                </div>
+
+                <div className={styles.selectDistrict}>
+                  <h3>Districts in {selectedState}:</h3>
+                  <select
+                    value={dis}
+                    onChange={(e) => {
+                      Setdis(e.target.value);
+                    }}
+                  >
+                    <option value="" disabled>Select a district</option>
+                    {districts.map((district, index) => (
+                      <option key={index} value={district}>
+                        {district}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className={styles.chooseCategory}>
+                  <h3>Choose a cateogory you lay in </h3>
+                  <select
+                    className="form-select"
+                    aria-label="Select User Category"
+                    value={userCategory}
+                    onChange={(e) => setUserCategory(e.target.value)}
+                  >
+                    <option selected>Choose User Category</option>
+                    {userCategories.map((category) => (
+                      <option key={category} value={category}>
+                        {category}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+
+              </div>
+
+              <div className={styles.ratingContainer}>
+                <h2>Rate Us</h2>
+                <ReactStars
+                  count={5}
+                  size={30}
+                  back
+                  isHalf={true}
+                  value={rating}
+                  onChange={handleRating}
+                  activeColor="#ffd700"
+                  className={styles.reactStars}
+                />
+                <p>Your rating: {rating}</p>
+
+              </div>
             </div>
 
-            <div className={styles.selectDistrict}>
-              <h3>Districts in {selectedState}:</h3>
-              <select
-                value={dis}
-                onChange={(e) => {
-                  Setdis(e.target.value);
-                }}
-              >
-                <option value="" disabled>Select a district</option>
-                {districts.map((district, index) => (
-                  <option key={index} value={district}>
-                    {district}
-                  </option>
-                ))}
-              </select>
+            <div className={styles.btnCon}>
+              <button className={styles.button} onClick={handleListening}>
+                {isListening ? "Stop Listening" : "Start Listening"}
+              </button>
             </div>
 
-            <div className={styles.chooseCategory}>
-              <h3>Choose a cateogory you lay in </h3>
-              <select
-                className="form-select"
-                aria-label="Select User Category"
-                value={userCategory}
-                onChange={(e) => setUserCategory(e.target.value)}
-              >
-                <option selected>Choose User Category</option>
-                {userCategories.map((category) => (
-                  <option key={category} value={category}>
-                    {category}
-                  </option>
-                ))}
-              </select>
+            <div className={styles.textContainer}>
+              <label htmlFor="transcribedText" className={styles.label}>
+                Transcribed Text:
+              </label>
+              <textarea
+                id="transcribedText"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                className={styles.textarea}
+                rows="5"
+              />
             </div>
 
-          </div>
-            <button className={styles.button} onClick={handleListening}>
-              {isListening ? "Stop Listening" : "Start Listening"}
-            </button>
-            <p>Transcribed Text: {text}</p>
-            <button
-              onClick={() => {
-                setText("");
-              }}
-              style={{ marginLeft: "10px" }}
-            >
-              Reset
-            </button>
-            <button type="button" className="btn btn-success" onClick={handlesubmit}>
-              Submit
-            </button>
-
-            <div className={styles.selectLanguage}>
+            
+          <div className={styles.bottomflexCon}>
+          <div className={styles.selectLanguage}>
               <select
                 className="form-select"
                 value={language}
@@ -292,18 +317,27 @@ const Voiceinput = () => {
               </select>
             </div>
 
-            <div className={styles.ratingContainer}>
-              <h2>Rate Us</h2>
-              <ReactStars
-                count={5}
-                size={30}
-                isHalf={true}
-                value={rating}
-                onChange={handleRating}
-                activeColor="#ffd700"
-              />
-              <p>Your rating: {rating}</p>
+            <div className={styles.buttonContainer}>
+              <button
+                onClick={() => {
+                  setText("");
+                }}
+                className={styles.resetButton}
+              >
+                Reset
+              </button>
+              <button
+                type="button"
+                className={`${styles.submitButton} btn btn-success`}
+                onClick={handlesubmit}
+              >
+                Submit
+              </button>
             </div>
+
+          </div>
+
+
             <ToastContainer />
           </div>
         </div>
