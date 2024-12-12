@@ -15,7 +15,8 @@ const ActiveSchemeRouter = require("./Router/ActiveSchemeRouter");
 
 const AddSchemeRouter = require("./Router/AddSchemeRouter")
 const AddnewlocationDataRouter = require("./Router/AddnewlocationDataRouter")
-const GetSchemeRouter = require("./Router/GetSchemeRouter")
+const GetSchemeRouter = require("./Router/GetSchemeRouter");
+const AccountsData = require("./Router/Accountsdata");
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 require("./model/db")
@@ -35,6 +36,7 @@ app.use("/ActiveScheme" ,ActiveSchemeRouter);
 app.use('/Addscheme' , AddSchemeRouter);
 app.use('/AddnewlocationData' ,AddnewlocationDataRouter )
 app.use("/getScheme" , GetSchemeRouter);
+app.use("/accounts",AccountsData)
 
 
 

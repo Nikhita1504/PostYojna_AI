@@ -156,14 +156,17 @@ const Dashboard = () => {
     getDashboardData(debouncedSearchQuery, selectedScheme);
   }, [debouncedSearchQuery, selectedScheme]);
 
+
+
   return (
     <div className={styles.dashboard}>
       {/* Header Section */}
       <div className={styles.dashboardCon}>
         <div className={styles.headerSection}>
           <div className={styles.headerContent}>
-            <h1>Hey!</h1>
-            <p>Welcome to your Dashboard</p>
+            {/* <h1>Hey!</h1>
+            <p>Welcome to your Dashboard</p> */}
+            <img src="/assets/dashboardhead (1).png" alt="" />
           </div>
           <div className={styles.controls}>
             <select
@@ -186,6 +189,7 @@ const Dashboard = () => {
             dashboardData.metrics.map((metric, index) => (
               <div className={styles.metricCard} key={index}>
                 <div className={styles.metricValues}>
+                  {/* {metric.icon} */}
                   <h4>{metric.title}</h4>
                   <p>
                     <CountUp
@@ -206,11 +210,11 @@ const Dashboard = () => {
         {/* Charts and Feedback Section */}
         <div className={styles.mainContent}>
           <div className={styles.progresschart}>
-            {/* <DashboardBarChart
+            <DashboardBarChart
               isDashboard={true}
               scheme={selectedScheme}
               registrationsOverYears={dashboardData.registrationsOverYears}
-            /> */}
+            />
           </div>
 
           <div className={styles.feedback}>

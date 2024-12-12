@@ -1,0 +1,46 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f4f8;
+    gap: 20px; /* Light background */
+  }
+
+  .container img{
+    object-fit: cover;
+    width: 1000px;
+  }
+  
+  .toggleGroup {
+    display: flex;
+    gap: 20px; /* Space between buttons */
+  }
+  
+  .toggleButton {
+    padding: 15px 25px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #5989FF;
+    border: 2px solid #5989FF;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .toggleButton:hover {
+    background-color: #4CAF50; /* Change color on hover */
+    border-color: #4CAF50;
+  }
+  
+  .toggleButton:active {
+    transform: scale(0.95); /* Add a pressed effect */
+  }
+  
+  .toggleButton.active {
+    background-color: #FF3700;
+    border-color: #FF3700;
+  }
+  

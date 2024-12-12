@@ -1,6 +1,8 @@
 .dashboard {
   margin-left: 270px; /* Starts just after the sidebar */
-  background-color: #252B3A;
+  /* background-color: #252B3A; */
+  background-color: white;
+  /* background-color: #D1D1D1; */
   color: #ffffff;
   font-family: Arial, sans-serif;
   height: 100vh;
@@ -15,10 +17,13 @@
   width: 100%;
   border-radius: 18px;
   background-color: #191d27;
+  /* background: linear-gradient(135deg, #ff952c, #FFFFFF, #108605); */
+
+  /* background-color: #555555; */
+  /* background-color: #FEAB00; */
   overflow: scroll;
   padding: 1.5rem;
-  box-shadow: 0px 10px 20px 0px rgba(255, 255, 255, 0.1),
-  0px 5px 10px 0px rgba(255, 255, 255, 0.05);
+  box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.1),0px 5px 10px 0px rgba(255, 255, 255, 0.05);
 }
 
 .headerSection {
@@ -26,8 +31,10 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  background: linear-gradient(135deg, #3A57E8, #A033E5, #F283E6);
-
+  /* background: linear-gradient(135deg, #ff952c, #FFFFFF, #108605); */
+  /* background: linear-gradient(135deg, #3A57E8, #A033E5, #F283E6); */
+background-color: white;
+color: black;
   border-radius: 18px;
   padding: 1rem;
 }
@@ -39,9 +46,11 @@
 
 .headerContent p {
   font-size: 18px;
-  color: #dcdcdc;
+  color: rgb(54, 54, 54);
 }
-
+.headerContent img{
+  width: 200px;
+}
 .controls {
   display: flex;
   align-items: center;
@@ -50,7 +59,7 @@
 .dropdown {
   padding: 10px 15px;
   font-size: 16px;
-  border: none;
+  border: 1px solid grey;
   border-radius: 5px;
   background-color: #ffffff;
   color: #333333;
@@ -68,7 +77,7 @@
 }
 
 .metricCard {
-  background-color: #393d47;
+  background-color: #FFFFFF;
   padding: 20px;
   border-radius: 10px;
   text-align: center;
@@ -78,12 +87,13 @@
 .metricValues h4 {
   font-size: 18px;
   margin: 0;
+  color: black;
 }
 
 .metricValues p {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: bold;
-  color: #a4b0be;
+  color: black;
 }
 
 .mainContent {
@@ -94,13 +104,13 @@
 }
 
 .progresschart {
-  background-color: #CADAFF;
+  background-color: #FFFFFF;
   padding: 20px;
   border-radius: 10px;
 }
 
 .feedback {
-  background-color: #CADAFF;
+  background-color: #FFFFFF;
   padding: 20px;
   border-radius: 10px;
 overflow: scroll;
@@ -122,6 +132,7 @@ overflow: scroll;
   background-color: white;
   border-radius: 10px;
   padding: 10px;
+  border: 1px solid grey;
 
 color: black;
 }

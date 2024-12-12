@@ -12,7 +12,7 @@ function App() {
   return <>
 
    
-    <div className="div">hello</div>
+
     <Outlet/>
     </>
 }

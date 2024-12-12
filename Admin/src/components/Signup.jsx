@@ -1,11 +1,11 @@
 import React from 'react'
-import styles from'./signup.module.css'
+import styles from './signup.module.css'
 import { handleError, handleSucess } from "../utils";
 import { ToastContainer } from "react-toastify";
 import { useState } from 'react'
 const Signup = () => {
-  
-const [Userinfo , SetUserinfo] = useState(null)
+
+  const [Userinfo, SetUserinfo] = useState(null)
   const handlechange = (e) => {
     const { name, value } = e.target;
     const copyinfo = { ...Userinfo };
@@ -54,8 +54,8 @@ const [Userinfo , SetUserinfo] = useState(null)
   };
 
   return (
-   
-       <div className={styles.signupContainer}>
+
+    <div className={styles.signupContainer}>
       <div className={styles.signupContent}>
         <div className={styles.illustration}>
           <video src="/assets/loginmv.mp4" autoPlay loop muted className={styles.video} />
@@ -76,13 +76,13 @@ const [Userinfo , SetUserinfo] = useState(null)
               <input id="password" className={styles.input} onChange={handlechange} type="password" name="password" placeholder="Enter password" />
             </div>
             <button className={styles.signup}>Signup</button>
-           
+
           </form>
           <ToastContainer />
         </div>
       </div>
     </div>
-    
+
   )
 }
 

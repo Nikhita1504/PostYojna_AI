@@ -1,8 +1,8 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { handleError, handleSucess } from "../utils";
 import axios from "axios";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddScheme = () => {
   const [formData, setFormData] = useState({
@@ -10,7 +10,12 @@ const AddScheme = () => {
     description: "",
     scheme_type: "",
     target_gender: "",
-    target_age_group: "",
+    target_age_group: {
+      young: "",
+      youth: "",
+      adult: "",
+      senior_citizen: "",
+    },
     min_investment: "",
     max_investment: "",
     roi: "",
@@ -23,32 +28,88 @@ const AddScheme = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    if (name.startsWith("age_")) {
+      const key = name.split("_")[1];
+      setFormData((prevState) => ({
+        ...prevState,
+        target_age_group: {
+          ...prevState.target_age_group,
+          [key]: value,
+        },
+      }));
+    } else {
+      setFormData((prevState) => ({ ...prevState, [name]: value }));
+    }
+  };
+
+  const validateForm = () => {
+    const errors = [];
+    if (!formData.scheme_name.trim()) errors.push("Scheme name is required.");
+    if (!formData.description.trim()) errors.push("Description is required.");
+    if (!formData.scheme_type.trim()) errors.push("Scheme type is required.");
+    if (!formData.target_gender) errors.push("Target gender is required.");
+    if (!formData.risk_level) errors.push("Risk level is required.");
+    if (!formData.tax_benefit) errors.push("Tax benefit selection is required.");
+
+    Object.values(formData.target_age_group).forEach((age, idx) => {
+      if (!age) {
+        errors.push(
+          `Age group ${
+            ["young", "youth", "adult", "senior citizen"][idx]
+          } is required.`
+        );
+      }
+    });
+
+    return errors;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("New Scheme:", formData);
+    const errors = validateForm();
+    if (errors.length) {
+      handleError(errors.join(" "));
+      return;
+    }
     try {
       const response = await axios.post(
         "http://localhost:3000/Addscheme/schemes",
         formData
       );
-      console.log(response.data);
       if (response.data.success) {
         handleSucess(response.data.message);
+        setFormData({
+          scheme_name: "",
+          description: "",
+          scheme_type: "",
+          target_gender: "",
+          target_age_group: {
+            young: "",
+            youth: "",
+            adult: "",
+            senior_citizen: "",
+          },
+          min_investment: "",
+          max_investment: "",
+          roi: "",
+          risk_level: "",
+          target_occupation: "",
+          target_income_level: "",
+          target_education_level: "",
+          tax_benefit: "",
+        });
       } else {
         handleError(response.data.message);
       }
     } catch (error) {
-      handleError(error.message);
-      console.log(error);
+      handleError(error.response?.data?.message || error.message);
     }
   };
 
   return (
     <div>
       <h2>Add New Scheme</h2>
+      <form onSubmit={handleSubmit}>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Scheme Name:</label>
@@ -95,18 +156,59 @@ const AddScheme = () => {
         </div>
         <div>
           <label>Target Age Group:</label>
-          <input
-            type="text"
-            name="target_age_group"
-            value={formData.target_age_group}
-            onChange={handleChange}
-            required
-          />
+          <div>
+            <label>Young:</label>
+            <input
+              type="number"
+              name="age_young"
+              value={formData.target_age_group.young}
+              onChange={handleChange}
+              required
+              min="0"
+              max="100"
+            />
+          </div>
+          <div>
+            <label>Youth:</label>
+            <input
+              type="number"
+              name="age_youth"
+              value={formData.target_age_group.youth}
+              onChange={handleChange}
+              required
+              min="0"
+              max="100"
+            />
+          </div>
+          <div>
+            <label>Adult:</label>
+            <input
+              type="number"
+              name="age_adult"
+              value={formData.target_age_group.adult}
+              onChange={handleChange}
+              required
+              min="0"
+              max="100"
+            />
+          </div>
+          <div>
+            <label>Senior Citizen:</label>
+            <input
+              type="number"
+              name="age_senior_citizen"
+              value={formData.target_age_group.senior_citizen}
+              onChange={handleChange}
+              required
+              min="0"
+              max="100"
+            />
+          </div>
         </div>
         <div>
           <label>Minimum Investment:</label>
           <input
-            type="text"
+            type="number"
             name="min_investment"
             value={formData.min_investment}
             onChange={handleChange}
@@ -116,7 +218,7 @@ const AddScheme = () => {
         <div>
           <label>Maximum Investment:</label>
           <input
-            type="text"
+            type="number"
             name="max_investment"
             value={formData.max_investment}
             onChange={handleChange}
@@ -126,7 +228,7 @@ const AddScheme = () => {
         <div>
           <label>Rate of Interest:</label>
           <input
-            type="text"
+            type="number"
             step="0.01"
             name="roi"
             value={formData.roi}
@@ -161,7 +263,7 @@ const AddScheme = () => {
         <div>
           <label>Target Income Level:</label>
           <input
-            type="text"
+            type="number"
             name="target_income_level"
             value={formData.target_income_level}
             onChange={handleChange}
@@ -171,7 +273,7 @@ const AddScheme = () => {
         <div>
           <label>Target Education Level:</label>
           <input
-            type="text"
+            type="number"
             name="target_education_level"
             value={formData.target_education_level}
             onChange={handleChange}
@@ -192,6 +294,7 @@ const AddScheme = () => {
           </select>
         </div>
         <button type="submit">Add Scheme</button>
+      </form>        <button type="submit">Add Scheme</button>
       </form>
       <ToastContainer />
     </div>

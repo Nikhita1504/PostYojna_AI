@@ -262,6 +262,7 @@ const regionSchema = new mongoose.Schema({
   },
 });
 
+
 const RegionModel = mongoose.model("Region", regionSchema);
 
 const SchemeModel = mongoose.model("Scheme", schemeSchema);
@@ -280,6 +281,41 @@ const ActiveSchemeSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now }, // Timestamp for record creation
 });
 
+const accountSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true, // Ensures name is required
+  },
+  scheme: {
+    type: String,
+    required: true, // Ensures scheme is required
+  },
+  branch: {
+    type: String,
+    required: true, // Ensures branch is required
+  },
+  district: {
+    type: String,
+    required: true, // Ensures district is required
+  },
+  state: {
+    type: String,
+    required: true, // Ensures state is required
+  },
+  accountTracker: {
+    type: Number,
+    default: 0, // Initial value set to 0
+  },
+  predictedScore: {
+    type: Number,
+    default: null, // Default value is null if no score is predicted yet
+    min: 0, // Optional validation: Ensure that the score is not negative
+  },
+});
+
+
+
+const Account = mongoose.model("Account", accountSchema);
 
 
 
@@ -305,4 +341,6 @@ module.exports = {
   ActiveSchemeModel,
   SchemeModel,
   RegionModel,
+  Account
 };
+

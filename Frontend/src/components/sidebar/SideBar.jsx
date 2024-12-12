@@ -9,6 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Menu } from "@mui/icons-material";
 import styles from "./Sidebar.module.css";
+import { FaCommentAlt, FaLightbulb } from "react-icons/fa";
 
 const Sidebar = () => {
   const location = useLocation();
@@ -16,11 +17,11 @@ const Sidebar = () => {
   return (
     <div className={styles.sidebar}>
       {/* Logo Section */}
-      <div className={styles.logo}>
+      {/* <div className={styles.logo}>
         <div className={styles.logoIcon}>
           <img src="/assets/logo.png" alt="Logo" />
         </div>
-      </div>
+      </div> */}
 
       {/* Profile Section */}
       <div className={styles.profile}>
@@ -40,7 +41,7 @@ const Sidebar = () => {
               location.pathname === "/Home/Dashboard" ? styles.active : ""
             }`}
           >
-            <FontAwesomeIcon icon={faHome} className={styles.icon} />
+            <FontAwesomeIcon icon={faHome}  className={styles.icon} />
             Dashboard
           </Link>
           <Link
@@ -55,7 +56,7 @@ const Sidebar = () => {
                 : ""
             }`}
           >
-            <FontAwesomeIcon icon={faChartPie} className={styles.icon} />
+            <FontAwesomeIcon icon={faChartPie}  className={styles.icon} />
             Demographic Insights
           </Link>
           <Link
@@ -64,18 +65,27 @@ const Sidebar = () => {
               location.pathname === "/Home/calendar" ? styles.active : ""
             }`}
           >
-            <FontAwesomeIcon icon={faCalendarAlt} className={styles.icon} />
+            <FontAwesomeIcon icon={faCalendarAlt}  className={styles.icon} />
             Calendar
           </Link>
           <Link
-            to="/Home/Feedback"
-            className={`${styles.navItem} ${
-              location.pathname === "/Home/Feedback" ? styles.active : ""
-            }`}
-          >
-            <Menu className={styles.icon} />
-            Feedback
-          </Link>
+        to="/Home/Feedback"
+        className={`${styles.navItem} ${
+          location.pathname === "/Home/Feedback" ? styles.active : ""
+        }`}
+      >
+        <FaCommentAlt   className={styles.icon} /> {/* Feedback Icon */}
+        Feedback
+      </Link>
+      <Link
+        to="/Home/Personalized-recommendations"
+        className={`${styles.navItem} ${
+          location.pathname === "/Home/Personalized-recommendations" ? styles.active : ""
+        }`}
+      >
+        <FaLightbulb   className={styles.icon} /> {/* Recommendations Icon */}
+        Personalized Recommendations
+      </Link>
         </div>
       </nav>
 

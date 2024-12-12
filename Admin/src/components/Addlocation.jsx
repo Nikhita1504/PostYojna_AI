@@ -1,8 +1,9 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { ToastContainer } from "react-toastify";
 import { handleError, handleSucess } from "../utils";
 import axios from "axios";
+import styles from "./AddLocation.module.css"; // Import the CSS module
+
 const Addlocation = () => {
   const [formData, setFormData] = useState({
     region_name: "",
@@ -24,7 +25,6 @@ const Addlocation = () => {
     e.preventDefault();
 
     try {
-      // Adjusting to match the backend schema, ensuring numbers are sent properly
       const requestData = {
         ...formData,
         population_density: parseInt(formData.population_density, 10),
@@ -52,102 +52,117 @@ const Addlocation = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Region Name:
-        <input
-          type="text"
-          name="region_name"
-          value={formData.region_name}
-          onChange={handleChange}
-          required
-        />
-      </label>
+    <div className={styles.addLocationPage}>
+      <div className={styles.banner}>
+        <img src="/fullbanner.png" alt="Banner" className={styles.bannerImage} />
+      </div>
+      <form onSubmit={handleSubmit} className={styles.formContainer}>
+        <h2>Add New Location</h2>
 
-      <label>
-        Population Density:
-        <input
-          type="number"
-          name="population_density"
-          value={formData.population_density}
-          onChange={handleChange}
-          required
-        />
-      </label>
+        <label>
+          Region Name:
+          <input
+            type="text"
+            name="region_name"
+            value={formData.region_name}
+            onChange={handleChange}
+            required
+            className={styles.inputField}
+          />
+        </label>
 
-      <label>
-        Male Population:
-        <input
-          type="number"
-          name="Male"
-          value={formData.Male}
-          onChange={handleChange}
-          required
-        />
-      </label>
+        <label>
+          Population Density:
+          <input
+            type="number"
+            name="population_density"
+            value={formData.population_density}
+            onChange={handleChange}
+            required
+            className={styles.inputField}
+          />
+        </label>
 
-      <label>
-        Female Population:
-        <input
-          type="number"
-          name="Female"
-          value={formData.Female}
-          onChange={handleChange}
-          required
-        />
-      </label>
+        <label>
+          Male Population:
+          <input
+            type="number"
+            name="Male"
+            value={formData.Male}
+            onChange={handleChange}
+            required
+            className={styles.inputField}
+          />
+        </label>
 
-      <label>
-        Gender Ratio:
-        <input
-          type="number"
-          step="0.000001"
-          name="gender_ratio"
-          value={formData.gender_ratio}
-          onChange={handleChange}
-          required
-        />
-      </label>
+        <label>
+          Female Population:
+          <input
+            type="number"
+            name="Female"
+            value={formData.Female}
+            onChange={handleChange}
+            required
+            className={styles.inputField}
+          />
+        </label>
 
-      <label>
-        Education Level (%):
-        <input
-          type="number"
-          step="0.01"
-          name="education_level"
-          value={formData.education_level}
-          onChange={handleChange}
-          required
-        />
-      </label>
+        <label>
+          Gender Ratio:
+          <input
+            type="number"
+            step="0.000001"
+            name="gender_ratio"
+            value={formData.gender_ratio}
+            onChange={handleChange}
+            required
+            className={styles.inputField}
+          />
+        </label>
 
-      <label>
-        Income Level:
-        <input
-          type="number"
-          name="income_level"
-          value={formData.income_level}
-          onChange={handleChange}
-          required
-        />
-      </label>
+        <label>
+          Education Level (%):
+          <input
+            type="number"
+            step="0.01"
+            name="education_level"
+            value={formData.education_level}
+            onChange={handleChange}
+            required
+            className={styles.inputField}
+          />
+        </label>
 
-      <label>
-        Age Distribution (e.g., "21%, 23%, 39%, 17%"):
-        <input
-          type="text"
-          name="age_distribution"
-          value={formData.age_distribution}
-          onChange={handleChange}
-          required
-        />
-      </label>
+        <label>
+          Income Level:
+          <input
+            type="number"
+            name="income_level"
+            value={formData.income_level}
+            onChange={handleChange}
+            required
+            className={styles.inputField}
+          />
+        </label>
 
-      <button type="submit" onSubmit={handleSubmit}>
-        Submit
-      </button>
-      <ToastContainer />
-    </form>
+        <label>
+          Age Distribution (e.g., "21%, 23%, 39%, 17%"):
+          <input
+            type="text"
+            name="age_distribution"
+            value={formData.age_distribution}
+            onChange={handleChange}
+            required
+            className={styles.inputField}
+          />
+        </label>
+
+        <button type="submit" className={styles.submitButton}>
+          Submit
+        </button>
+        <ToastContainer />
+      </form>
+    </div>
   );
 };
 

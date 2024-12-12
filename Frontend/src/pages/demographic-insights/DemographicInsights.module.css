@@ -3,7 +3,7 @@
 
 .container {
   margin-left: 270px; /* Starts just after the sidebar */
-  background-color: #252B3A;
+  /* background-color: #252B3A; */
   color: #ffffff;
   font-family: Arial, sans-serif;
   height: 100vh;
@@ -24,8 +24,9 @@
 
 .imageWrapper {
   width: 100%;
-  background: linear-gradient(135deg, #3A57E8, #A033E5, #F283E6);
+  /* background: linear-gradient(135deg, #3A57E8, #A033E5, #F283E6); */
 height: 300px;
+background: linear-gradient(135deg, #ff952c, #FFFFFF, #108605);
 
   border-radius: 18px;
 }
@@ -95,13 +96,14 @@ color: rgb(100, 100, 100);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   max-width: 400px;
   width: 100%;
+
   margin:30px 20px; /* Space between the input and the button */
 }
 
 button {
   padding: 10px 20px;
   background-color: #1961CE;
-  color: white;
+  color: black;
   font-size: 1rem;
   border: none;
   border-radius: 5px;
