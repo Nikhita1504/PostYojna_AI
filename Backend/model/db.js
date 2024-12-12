@@ -314,6 +314,66 @@ const accountSchema = new mongoose.Schema({
 });
 
 
+const LocationSchema = new mongoose.Schema({
+  location: {
+    type: String,
+    required: true,
+    description: "The location for which the schemes are listed."
+  },
+  schemes: [
+    {
+      scheme: {
+        type: String,
+        required: true,
+        description: "The name of the scheme."
+      },
+      score: {
+        type: Number,
+        required: true,
+        min: 0,
+        max: 1,
+        description: "The score of the scheme, between 0 and 1."
+      },
+      ROI: {
+        type: Number,
+        required: true,
+        description: "The rate of interest for the scheme."
+      },
+      target_gender: {
+        type: String,
+        enum: ["Male", "Female", "Both"],
+        required: true,
+        description: "The target gender for the scheme."
+      },
+      risk_level: {
+        type: String,
+        enum: ["Low", "Medium", "High"],
+        required: true,
+        description: "The risk level of the scheme."
+      },
+      genre: {
+        type: String,
+        required: true,
+        description: "The category or genre of the scheme."
+      },
+      best_month: {
+        type: String,
+        required: true,
+        description: "The best month to launch or invest in the scheme."
+      },
+      best_duration: {
+        type: String,
+        required: true,
+        description: "The optimal duration for the scheme."
+      }
+    }
+  ]
+});
+
+// Export the model
+const Location = mongoose.model("Location", LocationSchema);
+
+
 
 const Account = mongoose.model("Account", accountSchema);
 
@@ -341,6 +401,7 @@ module.exports = {
   ActiveSchemeModel,
   SchemeModel,
   RegionModel,
-  Account
+  Account,
+  Location
 };
 

@@ -5,7 +5,7 @@ import Dashboard from "../pages/dashboard/Dashboard";
 import DemographicInsights from "../pages/demographic-insights/DemographicInsights";
 import GraphComponent from "../pages/demographic-insights/graphs/GraphComponent";
 import Maps from "../pages/demographic-insights/Maps/Maps";
-import Recommendations from "../pages/Feedback/recommendations/Recommendations";
+
 import Calendar from "../pages/calender/Calendar";
 import Voiceinput from "../pages/Feedback/Voiceinput";
 import Login from "../LoginPage/login";
@@ -13,7 +13,8 @@ import Home from "../pages/Home";
 import PersonalizedRecommendations from "../pages/Personalized-recommendations/PersonalizedRecommendations";
 import Aiprediction from "../pages/Aiprediction/Aiprediction";
 import PredictAccountOpening from "../pages/PredictAccountOpening";
-
+import Recommendations from "../pages/Feedback/recommendations/Recommendations";
+import RecommendationPage from "../pages/demographic-insights/graphs/RecommendationPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -44,7 +45,7 @@ const router = createBrowserRouter([
             element: <Maps />,
           },
           {
-            path: "demographic-insights/maps/graphs",
+            path: "demographic-insights/maps/recommendations/graphs",
             element: <GraphComponent />,
           },
           {
@@ -53,7 +54,7 @@ const router = createBrowserRouter([
           },
           {
             path: "recommendations",
-            element: <Recommendations />,
+            element: <Recommendations/>,
           },
           {
             path: "Feedback",
@@ -69,6 +70,10 @@ const router = createBrowserRouter([
           {
             path:"Predict",
             element:<PredictAccountOpening/>
+          },
+          {
+            path:"demographic-insights/maps/recommendations",
+            element:<RecommendationPage/>
           }
         ],
       },

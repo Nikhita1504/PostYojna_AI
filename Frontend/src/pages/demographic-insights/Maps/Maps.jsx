@@ -99,7 +99,7 @@ const Maps = () => {
       markerInstance.bindPopup(createPopupContent(currentCity)).openPopup();
       const button = document.getElementById("viewDataButton");
       button.addEventListener("click", () => {
-        Navigate("/Home/demographic-insights/maps/graphs", { state: { locationName: cityRef.current } });
+        Navigate("/Home/demographic-insights/maps/recommendations", { state: { locationName: cityRef.current } });
         console.log("View data for:", cityRef.current);
       });
       markerInstance.on("popupopen", () => {

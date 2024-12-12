@@ -17,6 +17,7 @@ const AddSchemeRouter = require("./Router/AddSchemeRouter")
 const AddnewlocationDataRouter = require("./Router/AddnewlocationDataRouter")
 const GetSchemeRouter = require("./Router/GetSchemeRouter");
 const AccountsData = require("./Router/Accountsdata");
+const recommendations = require("./Router/recommendations");
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 require("./model/db")
@@ -38,7 +39,7 @@ app.use('/AddnewlocationData' ,AddnewlocationDataRouter )
 app.use("/getScheme" , GetSchemeRouter);
 app.use("/accounts",AccountsData)
 
-
+app.use("/location",recommendations)
 
 const Port = process.env.PORT || 3000;
 app.listen(Port, () => {

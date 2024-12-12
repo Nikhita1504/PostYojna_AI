@@ -1,0 +1,180 @@
+.bigCon {
+    height: 100vh;
+    margin-left: 270px;
+    padding: 10px 20px;
+}
+
+.innerCon {
+    padding: 20px;
+    text-align: center;
+    border-radius: 18px;
+    background-color: #1e2433;
+}
+.btnCon{
+    margin-top: 10px;
+width: 100%;
+display: flex;
+color: white;
+justify-content: space-between;
+align-items: center;
+position: relative;
+
+}
+.btnCon button{
+    
+    margin: 10px 0;
+    color: white;
+}
+
+
+.innerCon img {
+    width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.listCon {
+    width: 100%;
+    overflow-x: auto;
+    background-color: white;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.recommendationTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border: 1px solid #ddd;
+}
+
+.recommendationTable th,
+.recommendationTable td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.recommendationTable th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.recommendationTable tr:hover {
+    background-color: lightblue;
+}
+
+.schemeRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.schemeDetails {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.schemeDetails h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-right: 15px;
+    flex: 2;
+}
+
+.schemeDetails svg {
+    width: 80px;
+    height: 80px;
+    flex: 1;
+}
+
+.details {
+    flex: 3;
+    font-size: 14px;
+    color: #555;
+}
+
+.details p {
+    margin: 5px 0;
+}
+
+.addEventBtn,
+.viewBtn {
+    background-color: #4caf50;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+}
+
+
+.addEventBtn:hover,
+.viewBtn:hover {
+    background-color: #45a049;
+}
+
+@media (max-width: 768px) {
+    .schemeRow {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .schemeDetails h3 {
+        margin-right: 0;
+    }
+
+    .schemeDetails svg {
+        margin-bottom: 10px;
+    }
+}
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .modalContent {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .closeBtn {
+    background: #ff4d4d;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    margin-top: 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .closeBtn:hover {
+    background: #ff1a1a;
+  }
+  
