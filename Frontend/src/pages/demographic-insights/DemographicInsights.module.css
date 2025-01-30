@@ -7,7 +7,7 @@
   color: #ffffff;
   font-family: Arial, sans-serif;
   height: 100vh;
-  overflow: hidden;
+  overflow: hidden;  background-color: #f8f9fa;
   padding: 25px 40px;
 
 }
@@ -15,7 +15,8 @@
   height: 100%;
   width: 100%;
   border-radius: 18px;
-  background-color: #191d27;
+  /* background-color: #191d27; */
+  background-color: #f8f9fa;
   overflow: scroll;
   padding: 1.5rem;
   box-shadow: 0px 10px 20px 0px rgba(255, 255, 255, 0.1),
@@ -74,6 +75,11 @@ color: rgb(100, 100, 100);
   animation: slideIn 0.7s ease-out forwards;
 }
 
+.searchContainer .directviewonmapbutton{
+  background-color: #191d27;
+  color: white;
+}
+
 @keyframes slideIn {
   0% {
     opacity: 0;
@@ -102,8 +108,8 @@ color: rgb(100, 100, 100);
 
 button {
   padding: 10px 20px;
-  background-color: #1961CE;
-  color: black;
+  background-color: #191d27;
+  color: white;
   font-size: 1rem;
   border: none;
   border-radius: 5px;

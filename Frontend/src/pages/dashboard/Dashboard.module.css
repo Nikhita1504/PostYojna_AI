@@ -1,157 +1,173 @@
-.dashboard {
-  margin-left: 270px; /* Starts just after the sidebar */
-  /* background-color: #252B3A; */
-  background-color: white;
-  /* background-color: #D1D1D1; */
-  color: #ffffff;
-  font-family: Arial, sans-serif;
-  height: 100vh;
-  overflow: hidden;
-  padding: 25px 40px;
-  display: flex;
-  
-  flex-direction: column;
-}
-.dashboardCon{
-  height: 100%;
-  width: 100%;
-  border-radius: 18px;
-  background-color: #191d27;
-  /* background: linear-gradient(135deg, #ff952c, #FFFFFF, #108605); */
 
-  /* background-color: #555555; */
-  /* background-color: #FEAB00; */
-  overflow: scroll;
-  padding: 1.5rem;
-  box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.1),0px 5px 10px 0px rgba(255, 255, 255, 0.05);
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+.dashboard {
+  font-family: "Roboto", serif;
+  margin-left: 270px; /* Adjust for sidebar width */
+  background-color: #f8f9fa;
+  color: #333;
+  height: 100vh;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
 }
 
 .headerSection {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-  /* background: linear-gradient(135deg, #ff952c, #FFFFFF, #108605); */
-  /* background: linear-gradient(135deg, #3A57E8, #A033E5, #F283E6); */
-background-color: white;
-color: black;
-  border-radius: 18px;
-  padding: 1rem;
+  background-color: #ffffff;
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .headerContent h1 {
-  font-size: 36px;
+  font-size: 24px;
   margin: 0;
 }
 
 .headerContent p {
-  font-size: 18px;
-  color: rgb(54, 54, 54);
+  margin: 5px 0 0;
+  font-size: 14px;
+  color: #666;
 }
 .headerContent img{
-  width: 200px;
-}
-.controls {
-  display: flex;
-  align-items: center;
+  height: 100px;
 }
 
-.dropdown {
-  padding: 10px 15px;
-  font-size: 16px;
-  border: 1px solid grey;
+.controls .dropdown {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
   border-radius: 5px;
+  font-size: 14px;
   background-color: #ffffff;
-  color: #333333;
-}
-
-.dropdown:hover {
-  background-color: #f0f0f0;
+  color: #333;
 }
 
 .metricsSection {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
-  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .metricCard {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-  
+  /* border-radius: 10px; */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
 }
 
-.metricValues h4 {
-  font-size: 18px;
-  margin: 0;
-  color: black;
+.metricCard h6 {
+  font-size: 16px;
+  margin-top: 10px;
+  color: #333;
 }
 
-.metricValues p {
+.metricCard p {
   font-size: 24px;
   font-weight: bold;
-  color: black;
+  margin: 10px 0 0;
 }
 
-.mainContent {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
+
+
+.mainContent{
+  margin-top: 30px;
+ display: flex;
   gap: 20px;
-  overflow: scroll;
+}
+.progresschart {
+  flex: 2; /* 3/4 of the row */
+  background-color: #ffffff;
+  padding: 20px;
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.progresschartHeader{
+  display: flex;
+  justify-content: space-between;
+}
+.chartArea{
+  /* background-color: grey; */
+display: flex;
+justify-content: center;
+}
+.buttons button {
+  padding: 5px 16px;
+  border: none;
+  background-color: #f5f5f5;
+  color: #4B5563;
+  font-size: 14px;
+  cursor: pointer;
+
+  margin-right: 10px;
+  /* font-weight: bold; */
+  /* transition: background-color 0.3s ease, color 0.3s ease; */
 }
 
-.progresschart {
-  background-color: #FFFFFF;
-  padding: 20px;
-  border-radius: 10px;
+.buttons button:hover {
+  background-color: #e0e0e0;
+}
+
+button.activeButton {
+  background-color: #4B5563;
+  color: #fff;
 }
 
 .feedback {
-  background-color: #FFFFFF;
+  flex: 1; /* 1/4 of the row */
+  background-color: #ffffff;
   padding: 20px;
-  border-radius: 10px;
-overflow: scroll;
-}
 
-.feedback h3 {
-  margin-bottom: 20px;
-  font-size: 20px;
-  color: black;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.feedback h3{
+  font-size: 18px;
 }
 
 .transactionList {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  margin-top: 20px;
+  overflow-y: auto;
+  max-height: 300px; /* Optional: Set a max height with scroll */
 }
 
 .feedbackContainer {
-  background-color: white;
-  border-radius: 10px;
+  margin-bottom: 20px;
+  background-color: #EFF6FF;
   padding: 10px;
-  border: 1px solid grey;
+}
 
-color: black;
+.feedbackPoint {
+  font-size: 14px;
+  color: #333;
 }
 
 .lowercontainer {
   display: flex;
-flex-direction: column;
-
+  justify-content: space-between;
+  align-items: center;
   margin-top: 10px;
 }
-.feedbackPoint {
-  font-size: 16px;
-  color: #333; /* Slightly darker text for better readability */
-  font-weight: 500;
-  line-height: 1.5;
-  border: 1px solid grey;
-  padding: 5px;
-  border-radius: 10px;
-  background-color: #8aabfd;
-  
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.25); /* Black shadow with slight opacity */
+
+.feedbackLocation {
+  font-size: 12px;
+  color: #666;
+}
+@media (max-width: 768px) {
+  .headerSection {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .metricsSection {
+    grid-template-columns: 1fr;
+  }
+
+  .mainContent {
+    flex-direction: column;
+  }
 }

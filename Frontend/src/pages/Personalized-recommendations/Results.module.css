@@ -1,0 +1,163 @@
+.resultsContainer {
+    font-family: "Arial", sans-serif;
+    margin-left: 270px; /* Aligns content after sidebar */
+    padding: 20px 40px;
+    height: 100vh;
+    background-color: #f8f9fa;
+    background-color: #f9f9f9;
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .header h1 {
+    font-size: 24px;
+    margin: 0;
+    color: #333;
+  }
+  
+  .header p {
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+  }
+  
+  .filters {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 10px;
+  }
+  
+  .filters select {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 15%;
+    background-color: #fff;
+  }
+  
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+  }
+  
+  .progressSection {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .progressItem {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 15px;
+  }
+  
+  .schemeAbbr {
+    width: 50px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .progressBarContainer {
+    flex-grow: 1;
+    height: 16px;
+    background-color: #e6e6e6;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .progressBar {
+    height: 100%;
+    border-radius: 6px;
+    background: linear-gradient(to right, #4ADE80, #16A34A); 
+    transition: width 1s ease-in-out; 
+  }
+  
+  /* Gradient for Medium Risk */
+  .progressBar.mediumRisk {
+    background: linear-gradient(to right, #FACC15, #CA8A04); /* Distinct, warm yellow */
+  }
+  
+  /* Gradient for High Risk */
+  .progressBar.highRisk {
+    background: linear-gradient(to right, #F87171, #DC2626); /* Intense red tones */
+  }
+  
+  
+  .successScore {
+    width: 50px;
+    text-align: right;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .legend {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+  }
+  
+  .legendItem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .legendItem div {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+  
+  .detailsSection {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .detailsSection h2 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #333;
+    text-align: center;
+  }
+  
+  .tableHeader,
+  .tableRow {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr;
+    gap: 15px;
+    padding: 10px 0;
+    font-size: 14px;
+  }
+  
+  .tableHeader {
+    border-bottom: 1px solid #ddd;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .tableRow {
+    border-bottom: 1px solid #f1f1f1;
+    color: #333;
+  }
+  
+  .tableRow span:last-child {
+    text-align: right;
+  }
+  

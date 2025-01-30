@@ -1,15 +1,16 @@
 import * as React from 'react';
 import { PieChart, pieArcLabelClasses } from '@mui/x-charts/PieChart';
 
-const PieArcLabel = ({ data }) => {
+const AgeGroupChart = ({ data }) => {
   const desktopOS = [
-    { id: 'Male', value: data.Male || 0, color: '#34D399' },
-    { id: 'Female', value: data.Female || 0, color: '#A78BFA' },
+    { id: '0-29', value: data.Age_Group_0_29 || 0, color: '#34D399' },
+    { id: '30-50', value: data.Age_Group_30_49 || 0, color: '#A78BFA' },
+    { id: 'Above 60', value: data.Age_Group_50 || 0, color: '#FBBF24' },
   ];
 
   const size = {
     width: 400,
-    height: 300,
+    height: 400,
   };
 
   return (
@@ -54,4 +55,4 @@ const PieArcLabel = ({ data }) => {
   );
 };
 
-export default PieArcLabel;
+export default AgeGroupChart;

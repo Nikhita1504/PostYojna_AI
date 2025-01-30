@@ -1,0 +1,30 @@
+
+ 
+  {
+    "District_code": 444,
+    "State_name": "MADHYA PRADESH",
+    "District_name": "Bhopal",
+    "Population": 2371061,
+    "Male": 1236130,
+    "Female": 1134931,
+    "Literate": 1660690,
+    "Workers": 867457,
+    "Male_Workers": 644960,
+    "Female_Workers": 222497,
+    "Cultivator_Workers": 73346,
+    "Agricultural_Workers": 105195,
+    "Household_Workers": 24732,
+    "Hindus": 1755861,
+    "Muslims": 525434,
+    "Christians": 23432,
+    "Sikhs": 10789,
+    "Buddhists": 21688,
+    "Jains": 25950,
+    "Secondary_Education": 211371,
+    "Higher_Education": 178165,
+    "Graduate_Education": 266618,
+    "Age_Group_0_10_female": "194427,002",
+    "Age_Group_0_29": 1405814,
+    "Age_Group_30_49": 625594,
+    "Age_Group_50": 330291
+  }

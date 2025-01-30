@@ -1,24 +1,21 @@
-.bigCon {
-  margin-left: 270px; /* Starts just after the sidebar */
-  color: #ffffff;
-  font-family: Arial, sans-serif;
-  height: 100vh;padding: 20px 40px;
 
+.bigCon {
+  margin-left: 270px; /* Aligns content after sidebar */
+  padding: 20px 40px;
+  height: 100vh;
+  background-color: #f8f9fa;
 }
 
+/* Container Styling */
 .container {
   width: 100%;
-  /* max-width: 800px; Increased max width for a larger form layout */
   margin: 0 auto;
-  background-color: #191d27;
   border-radius: 8px;
-
- /* Ensures proper layout containment */
 }
 
+/* Header Section */
 .headerSection {
   width: 100%;
-  background-color: #252B3A;
   text-align: center;
   padding: 20px;
 }
@@ -28,18 +25,26 @@
   height: auto;
 }
 
+/* Form Container */
 .formContainer {
-  background-color: #ffffff;
+  background-color: white;
   padding: 20px;
-  color: #000000; /* Black text for better contrast */
+  color: #000000;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 }
 
+.formContainer h4 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Toggle Button Styles */
 .toggleButton {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px; /* Spacing between buttons */
+  gap: 10px;
   margin: 20px 0;
 }
 
@@ -48,17 +53,10 @@
   font-size: 16px;
   font-weight: bold;
   border: 2px solid #5989FF;
-  border-radius: 25px;
-  background-color: #CADAFF;
-  color: black;
+  background-color: #2C3E50;
+  color: white;
   cursor: pointer;
   transition: all 0.3s ease;
-}
-
-.toggle-option.active {
-  background-color: #FF3700; /* Highlight active button */
-  color: white;
-  border-color: #FF3700;
 }
 
 .toggle-option:hover {
@@ -69,11 +67,34 @@
   transform: scale(0.95);
 }
 
+/* Form Layout */
 .form {
   display: flex;
   flex-direction: column;
 }
 
+.formContent {
+  display: flex;
+  gap: 20px;
+}
+
+/* Left Section */
+.leftSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Right Section */
+.rightSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Form Fields */
 .formGroup {
   margin-bottom: 15px;
 }
@@ -81,9 +102,11 @@
 label {
   display: block;
   margin-bottom: 5px;
+  font-weight: bold;
 }
 
-input, select {
+input,
+select {
   width: 100%;
   padding: 8px;
   font-size: 14px;
@@ -91,12 +114,17 @@ input, select {
   border-radius: 4px;
 }
 
+input[type="range"] {
+  width: 100%;
+}
+
+/* Submit Button */
 .form button {
   margin-top: 20px;
   padding: 10px;
   font-size: 16px;
   font-weight: bold;
-  background-color: #4CAF50;
+  background-color: #2C3E50;
   color: white;
   border: none;
   cursor: pointer;
