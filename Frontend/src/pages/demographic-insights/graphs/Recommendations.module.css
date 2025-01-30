@@ -2,16 +2,18 @@
     height: 100vh;
     margin-left: 270px;
     padding: 10px 20px;
+    background-color: #F9FAFB;
 }
+
 
 .innerCon {
     padding: 20px;
     text-align: center;
-    border-radius: 18px;
+    border-radius: 8px;
     background-color: #1e2433;
 }
 .btnCon{
-    margin-top: 10px;
+    margin-top: 20px;
 width: 100%;
 display: flex;
 color: white;
@@ -20,49 +22,71 @@ align-items: center;
 position: relative;
 
 }
-.btnCon button{
+/* .btnCon button{
     
     margin: 10px 0;
     color: white;
-}
+} */
 
+.buttonblock{
+    display: flex;
+    gap: 10px;
+}
+.recommendationbtn{
+    background-color: #4caf50;
+    border-radius: 4px;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
 
 .innerCon img {
     width: 100%;
-    border-radius: 10px;
+    /* border-radius: 10px; */
     object-fit: cover;
 }
 
 .listCon {
     width: 100%;
     overflow-x: auto;
-    background-color: white;
-    padding: 20px;
+    /* background-color: white; */
+    /* padding: 20px; */
     margin-top: 20px;
 }
 
 .recommendationTable {
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    border: 1px solid #ddd;
-}
-
-.recommendationTable th,
-.recommendationTable td {
-    padding: 12px;
+    border-collapse: separate; 
+    border-spacing: 0 10px; /* Adds vertical space between rows */
+  }
+  
+  .recommendationTable th,
+  .recommendationTable td {
     text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-.recommendationTable th {
-    background-color: #f4f4f4;
+    padding: 10px;
+    background-color: #f9f9f9; /* Background color for rows */
+    /* border: 1px solid #ddd; Optional: Add borders */
+  }
+/*   
+  .recommendationTable tr {
+    transition: transform 0.2s ease; 
+  }
+  
+  .recommendationTable tr:hover {
+    background-color: #45a049;
+    transform: scale(1.02); }
+   */
+  .recommendationTable tbody tr {
+    background-color: white; /* Reset row color */
+  }
+  .recommendationTable tbody tr .schemeName{
     font-weight: bold;
-}
-
-.recommendationTable tr:hover {
-    background-color: lightblue;
-}
+    font-size: 16px;
+  }
+  .recommendationTable tbody tr:not(:last-child) {
+    margin-bottom: 10px; /* Space between rows */
+  }
+  
 
 .schemeRow {
     display: flex;
@@ -106,6 +130,11 @@ position: relative;
 .details p {
     margin: 5px 0;
 }
+.viewBtn{
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
 
 .addEventBtn,
 .viewBtn {
@@ -123,7 +152,7 @@ position: relative;
 
 .addEventBtn:hover,
 .viewBtn:hover {
-    background-color: #45a049;
+    background-color: #154CA4;;
 }
 
 @media (max-width: 768px) {

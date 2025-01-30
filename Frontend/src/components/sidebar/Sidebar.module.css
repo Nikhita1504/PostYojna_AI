@@ -2,7 +2,7 @@
     width: 270px;
     height: 100vh;
     /* background: #161A23; */
-    background-color: #EDEDED;
+    background-color: #ffffff;
     padding: 1rem;
     display: flex;
     flex-direction: column;
@@ -30,8 +30,8 @@
     gap: 1rem;
     margin-bottom: 2rem;
     padding: 0.5rem 0.5rem;
-    background-color: #676362;
-border-radius: 10px;
+    /* background-color: #676362; */
+border-bottom: 1px solid #E5E7EB;
   }
   
   .profile img {
@@ -45,13 +45,13 @@ border-radius: 10px;
     margin: 0;
     font-size: 1rem;
     font-weight: 600;
-    color: white;
+    /* color: white; */
   }
   
   .profile p {
     margin: 0;
     font-size: 0.9rem;
-    color: #d3d3d3;
+    /* color: #d3d3d3; */
   }
   
   .nav {
@@ -62,18 +62,21 @@ border-radius: 10px;
     display: flex;
     align-items: center;
     padding: 1rem;
+    margin-bottom: 10px;
+    
     color: black;
     text-decoration: none;
     border-radius: 10px;
+    font-size: 14px;
     transition: background 0.3s;
   }
   
   .navItem:hover {
-    background: #5d93f8b3;
+    background: lightslategray;
   }
   
   .navItem.active {
-    background: #174eb3;
+    background: #191d27;
     color: white;
   }
   

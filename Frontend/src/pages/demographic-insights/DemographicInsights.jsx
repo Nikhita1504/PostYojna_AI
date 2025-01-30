@@ -107,7 +107,7 @@ function DemographicInsights() {
                 ))}
               </div>
             )}
-            <button onClick={handleMapNavigate}>Directly Search in Map</button>
+            <button className={styles.directviewonmapbutton} onClick={handleMapNavigate}>Directly Search in Map</button>
           </div>
 
 

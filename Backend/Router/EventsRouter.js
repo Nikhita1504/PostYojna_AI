@@ -82,3 +82,5 @@ EventsRouter.put('/:id', async (req, res) => {
 });
 
 module.exports = EventsRouter;
+
+
