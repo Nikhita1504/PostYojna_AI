@@ -1,0 +1,323 @@
+[
+   {
+    "region_name": "Ariyalur",
+    "population_density": 754894,
+    "Male": 374703,
+    "Female": 380191,
+    "gender_ratio": 0.98556515,
+    "education_level": 90.18,
+    "income_level": 1095637,
+    "age_distribution": "22%, 23%, 38%, 17%"
+   },
+   {
+    "region_name": "Chennai",
+    "population_density": 4646732,
+    "Male": 2335844,
+    "Female": 2310888,
+    "gender_ratio": 1.010799312,
+    "education_level": 84.49,
+    "income_level": 13396756,
+    "age_distribution": "20%, 25%, 40%, 15%"
+   },
+   {
+    "region_name": "Coimbatore",
+    "population_density": 3458045,
+    "Male": 1729297,
+    "Female": 1728748,
+    "gender_ratio": 1.000317571,
+    "education_level": 84.03,
+    "income_level": 12263702,
+    "age_distribution": "18%, 24%, 42%, 16%"
+   },
+   {
+    "region_name": "Cuddalore",
+    "population_density": 2605914,
+    "Male": 1311697,
+    "Female": 1294217,
+    "gender_ratio": 1.013506236,
+    "education_level": 78.04,
+    "income_level": 4509743,
+    "age_distribution": "21%, 22%, 39%, 18%"
+   },
+   {
+    "region_name": "Dharmapuri",
+    "population_density": 1506843,
+    "Male": 774303,
+    "Female": 732540,
+    "gender_ratio": 1.057011221,
+    "education_level": 71.88,
+    "income_level": 2877466,
+    "age_distribution": "23%, 24%, 37%, 16%"
+   },
+   {
+    "region_name": "Dindigul",
+    "population_density": 2159775,
+    "Male": 1080938,
+    "Female": 1078837,
+    "gender_ratio": 1.001947468,
+    "education_level": 79.17,
+    "income_level": 3748716,
+    "age_distribution": "20%, 23%, 41%, 16%"
+   },
+   {
+    "region_name": "Erode",
+    "population_density": 2251744,
+    "Male": 1129868,
+    "Female": 1121876,
+    "gender_ratio": 1.007123782,
+    "education_level": 74.21,
+    "income_level": 7400844,
+    "age_distribution": "19%, 22%, 42%, 17%"
+   },
+   {
+    "region_name": "Kancheepuram",
+    "population_density": 3998252,
+    "Male": 2012958,
+    "Female": 1985294,
+    "gender_ratio": 1.01393446,
+    "education_level": 72.86,
+    "income_level": 11249275,
+    "age_distribution": "20%, 24%, 41%, 15%"
+   },
+   {
+    "region_name": "Kanniyakumari",
+    "population_density": 1870374,
+    "Male": 926345,
+    "Female": 944029,
+    "gender_ratio": 0.981267525,
+    "education_level": 74.63,
+    "income_level": 4513810,
+    "age_distribution": "18%, 25%, 40%, 17%"
+   },
+   {
+    "region_name": "Karur",
+    "population_density": 1064493,
+    "Male": 528184,
+    "Female": 536309,
+    "gender_ratio": 0.984850152,
+    "education_level": 68.54,
+    "income_level": 2117735,
+    "age_distribution": "21%, 23%, 39%, 17%"
+   },
+   {
+    "region_name": "Krishnagiri",
+    "population_density": 1879809,
+    "Male": 960232,
+    "Female": 919577,
+    "gender_ratio": 1.044210545,
+    "education_level": 71.46,
+    "income_level": 5086919,
+    "age_distribution": "22%, 24%, 38%, 16%"
+   },
+   {
+    "region_name": "Madurai",
+    "population_density": 3038252,
+    "Male": 1526475,
+    "Female": 1511777,
+    "gender_ratio": 1.009722333,
+    "education_level": 72.58,
+    "income_level": 6163027,
+    "age_distribution": "19%, 23%, 42%, 16%"
+   },
+   {
+    "region_name": "Nagapattinam",
+    "population_density": 1616450,
+    "Male": 798127,
+    "Female": 818323,
+    "gender_ratio": 0.975320259,
+    "education_level": 83.98,
+    "income_level": 2129342,
+    "age_distribution": "21%, 22%, 39%, 18%"
+   },
+   {
+    "region_name": "Namakkal",
+    "population_density": 1726601,
+    "Male": 869280,
+    "Female": 857321,
+    "gender_ratio": 1.013949268,
+    "education_level": 78.68,
+    "income_level": 5615880,
+    "age_distribution": "20%, 24%, 40%, 16%"
+   },
+   {
+    "region_name": "Perambalur",
+    "population_density": 565223,
+    "Male": 282157,
+    "Female": 283066,
+    "gender_ratio": 0.996788735,
+    "education_level": 85.2,
+    "income_level": 577549,
+    "age_distribution": "22%, 22%, 38%, 18%"
+   },
+   {
+    "region_name": "Pudukkottai",
+    "population_density": 1618345,
+    "Male": 803188,
+    "Female": 815157,
+    "gender_ratio": 0.985316939,
+    "education_level": 83.23,
+    "income_level": 2449893,
+    "age_distribution": "21%, 23%, 38%, 18%"
+   },
+   {
+    "region_name": "Ramanathapuram",
+    "population_density": 1353445,
+    "Male": 682658,
+    "Female": 670787,
+    "gender_ratio": 1.017697123,
+    "education_level": 75.6,
+    "income_level": 1978194,
+    "age_distribution": "20%, 24%, 39%, 17%"
+   },
+   {
+    "region_name": "Salem",
+    "population_density": 3482056,
+    "Male": 1781571,
+    "Female": 1700485,
+    "gender_ratio": 1.047684043,
+    "education_level": 74.32,
+    "income_level": 161971992,
+    "age_distribution": "19%, 25%, 41%, 15%"
+   },
+   {
+    "region_name": "Sivagangai",
+    "population_density": 1339101,
+    "Male": 668672,
+    "Female": 670429,
+    "gender_ratio": 0.99737929,
+    "education_level": 71.34,
+    "income_level": 6164171,
+    "age_distribution": "22%, 22%, 39%, 17%"
+   },
+   {
+    "region_name": "Thanjavur",
+    "population_density": 2405890,
+    "Male": 1182416,
+    "Female": 1223474,
+    "gender_ratio": 0.966441461,
+    "education_level": 82.64,
+    "income_level": 1786977,
+    "age_distribution": "21%, 23%, 39%, 17%"
+   },
+   {
+    "region_name": "The Nilgiris",
+    "population_density": 735394,
+    "Male": 360143,
+    "Female": 375251,
+    "gender_ratio": 0.959738948,
+    "education_level": 83.59,
+    "income_level": 4405249,
+    "age_distribution": "18%, 25%, 40%, 17%"
+   },
+   {
+    "region_name": "Theni",
+    "population_density": 1245899,
+    "Male": 625683,
+    "Female": 620216,
+    "gender_ratio": 1.008814671,
+    "education_level": 82.86,
+    "income_level": 1517664,
+    "age_distribution": "20%, 23%, 40%, 17%"
+   },
+   {
+    "region_name": "Thiruvallur",
+    "population_density": 3728104,
+    "Male": 1876062,
+    "Female": 1852042,
+    "gender_ratio": 1.012969468,
+    "education_level": 77.19,
+    "income_level": 1908918,
+    "age_distribution": "19%, 24%, 42%, 15%"
+   },
+   {
+    "region_name": "Thiruvarur",
+    "population_density": 1264277,
+    "Male": 626693,
+    "Female": 637584,
+    "gender_ratio": 0.982918329,
+    "education_level": 83.45,
+    "income_level": 6243422,
+    "age_distribution": "22%, 22%, 38%, 18%"
+   },
+   {
+    "region_name": "Thoothukudi",
+    "population_density": 1750176,
+    "Male": 865021,
+    "Female": 885155,
+    "gender_ratio": 0.977253701,
+    "education_level": 77.26,
+    "income_level": 14729078,
+    "age_distribution": "20%, 24%, 40%, 16%"
+   },
+   {
+    "region_name": "Tiruchirappalli",
+    "population_density": 2722290,
+    "Male": 1352284,
+    "Female": 1370006,
+    "gender_ratio": 0.98706429,
+    "education_level": 76.26,
+    "income_level": 1405748,
+    "age_distribution": "19%, 23%, 42%, 16%"
+   },
+   {
+    "region_name": "Tirunelveli",
+    "population_density": 3077233,
+    "Male": 1520912,
+    "Female": 1556321,
+    "gender_ratio": 0.977248267,
+    "education_level": 80.72,
+    "income_level": 3949617,
+    "age_distribution": "21%, 22%, 39%, 18%"
+   },
+   {
+    "region_name": "Tiruppur",
+    "population_density": 2479052,
+    "Male": 1246159,
+    "Female": 1232893,
+    "gender_ratio": 1.010760058,
+    "education_level": 80.15,
+    "income_level": 6953253,
+    "age_distribution": "18%, 25%, 40%, 17%"
+   },
+   {
+    "region_name": "Tiruvannamalai",
+    "population_density": 2464875,
+    "Male": 1235889,
+    "Female": 1228986,
+    "gender_ratio": 1.005616826,
+    "education_level": 79.85,
+    "income_level": 5568189,
+    "age_distribution": "19%, 24%, 42%, 15%"
+   },
+   {
+    "region_name": "Vellore",
+    "population_density": 3936331,
+    "Male": 1961688,
+    "Female": 1974643,
+    "gender_ratio": 0.99343932,
+    "education_level": 82.5,
+    "income_level": 8235108,
+    "age_distribution": "20%, 24%, 40%, 16%"
+   },
+   {
+    "region_name": "Viluppuram",
+    "population_density": 3458873,
+    "Male": 1740819,
+    "Female": 1718054,
+    "gender_ratio": 1.013250457,
+    "education_level": 86.16,
+    "income_level": 4313392,
+    "age_distribution": "21%, 23%, 39%, 17%"
+   },
+   {
+    "region_name": "Virudhunagar",
+    "population_density": 1942288,
+    "Male": 967709,
+    "Female": 974579,
+    "gender_ratio": 0.992950802,
+    "education_level": 91.75,
+    "income_level": 4500901,
+    "age_distribution": "19%, 22%, 41%, 18%"
+   }
+  ]
+  

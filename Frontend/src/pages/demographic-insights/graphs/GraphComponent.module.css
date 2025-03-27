@@ -1,0 +1,196 @@
+.pageContainer {
+  height: 100vh;
+  margin-left: 270px;
+  padding: 20px 40px;
+}
+
+.bannerContainer img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+.innerContainer {
+  background-color: #191d27;
+  padding: 20px 20px;
+  border-radius: 10px;
+}
+
+.contentContainer {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  background-color: #ffffff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.dropdown-container {
+  margin-bottom: 20px;
+}
+
+.select {
+  margin-right: 10px;
+  margin-bottom: 20px;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.submitButton {
+  padding: 8px 16px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.explainButtonContainer {
+  margin-top: 10px;
+}
+
+.explainButtonContainer button {
+  padding: 8px 16px;
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.toggleButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+  border-radius: 25px;
+}
+
+.toggleButtons button {
+  margin: 0 10px;
+  padding: 12px 24px;
+  background-color: transparent;
+  color: black;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.toggleButtons button:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+}
+
+.toggleButtons button.activeButton {
+  background-color: #FF3700;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.chartContainer {
+  background-color: #ffffff;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.schemeDetails {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.schemeDetails h3 {
+  margin-top: 0;
+  color: #333;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+.schemeDetails p {
+  margin: 10px 0;
+  font-size: 1.1rem;
+  color: #555;
+}
+
+/* 3D Pie Chart Styles */
+:global(.recharts-pie-sector) {
+  transition: transform 0.3s;
+}
+
+:global(.recharts-pie-sector:hover) {
+  transform: scale(1.05) translateY(-5px);
+}
+
+:global(.recharts-wrapper) {
+  filter: drop-shadow(0px 10px 10px rgba(0, 0, 0, 0.2));
+}
+
+:global(.recharts-pie-label-text) {
+  font-size: 12px;
+  fill: #333;
+}
+
+@media (max-width: 768px) {
+  .contentContainer {
+    padding: 20px;
+  }
+
+  .toggleButtons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .toggleButtons button {
+    margin: 5px 0;
+    width: 100%;
+  }
+}
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.explanationContainer {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.explanationContainer h3 {
+  margin-top: 0;
+  color: #333;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.explanationContainer pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #555;
+}
+

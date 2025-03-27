@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Merriweather:wght@700&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Ubuntu&display=swap');
+
+.container {
+  margin-left: 270px; /* Starts just after the sidebar */
+  /* background-color: #252B3A; */
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  overflow: hidden;  background-color: #f8f9fa;
+  padding: 25px 40px;
+
+}
+.demographicCon{
+  height: 100%;
+  width: 100%;
+  border-radius: 18px;
+  /* background-color: #191d27; */
+  background-color: #f8f9fa;
+  overflow: scroll;
+  padding: 1.5rem;
+  box-shadow: 0px 10px 20px 0px rgba(255, 255, 255, 0.1),
+  0px 5px 10px 0px rgba(255, 255, 255, 0.05);
+}
+
+.imageWrapper {
+  width: 100%;
+  /* background: linear-gradient(135deg, #3A57E8, #A033E5, #F283E6); */
+height: 300px;
+background: linear-gradient(135deg, #ff952c, #FFFFFF, #108605);
+
+  border-radius: 18px;
+}
+
+
+.searchContainer h2 {
+   position: absolute;
+  /*z-index: 100;
+  color: white;
+  top: 20%;
+  right: 22%; */
+  margin: 30px 0;
+  top: 0;
+  font-family: "Roboto Mono", monospace;
+color: rgb(100, 100, 100);
+  font-size: 24px;
+  text-align: center;
+}
+
+.bannerImage {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+}
+
+.searchContainer {
+  position: absolute;
+  top: 50%; /* Center vertically */
+  left: 53%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Adjust for the element's dimensions */
+  
+  background-color: white; 
+  height: 300px;
+  width: 100%;
+  max-width: 600px; 
+  padding: 20px;
+  z-index: 2;
+  border-radius: 10px; 
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  align-items: center;
+  justify-content: center; /* Center align items horizontally */
+  
+  /* Animation properties */
+  animation: slideIn 0.7s ease-out forwards;
+}
+
+.searchContainer .directviewonmapbutton{
+  background-color: #191d27;
+  color: white;
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translate(-38%, 38%); /* Start slightly below center */
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-38%, -38%); /* End perfectly centered */
+  }
+}
+
+
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding: 0.8rem 1rem;
+  border-radius: 50px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+
+  margin:30px 20px; /* Space between the input and the button */
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #191d27;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #154CA4; /* Slightly darker shade on hover */
+}
+
+.icon {
+  color: #ff6347;
+  margin-right: 10px;
+  font-size: 1.2rem;
+}
+
+.input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 1rem;
+  color: #333;
+
+}
+
+.input::placeholder {
+  color: #aaa;
+  font-size: 0.95rem;
+}
+
+.suggestions {
+  position: absolute;
+  top: 50%; 
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 400px;
+  border-radius: 8px;
+  overflow-y: auto;
+  max-height: 250px;
+  z-index: 3;
+ /* Ensure it's above other content */
+}
+
+.suggestionItem {
+  padding: 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: #333;
+  display: flex;
+  align-items: center;
+}
+
+.suggestionItem:hover {
+  background-color: #f1f1f1;
+}
+
+.locationIcon {
+  color: #ff6347;
+  margin-right: 10px;
+  font-size: 1.2rem;
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background-color: rgba(128, 128, 128, 0.514);
+}
+
+.spinner {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid #1961CE;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

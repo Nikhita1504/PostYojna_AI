@@ -1,0 +1,126 @@
+.header {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    /* background: #F2F3FA;
+     */
+     background-color: #070917;
+    /* border-bottom: 1px solid #eee; */
+    position: fixed;
+    top: 0;
+    left: 280px; /* Adjust the header's left position to account for sidebar */
+    right: 0;
+    z-index: 00; /* Ensure the header is above the sidebar */
+}
+.dateTime {
+    display: flex;
+gap: 10px;
+    align-items: flex-end;
+    margin-right: 1rem;
+    color: #D3D3D3;
+    font-size: 1rem;
+    text-align: right;
+    font-weight: 600;
+  }
+  
+  .dateTime p {
+    margin: 0;
+    line-height: 1.2;
+  }
+  
+
+.search {
+    position: relative;
+    width: 300px;
+}
+
+.searchInput {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    outline: none;
+    font-size: 0.875rem;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.25rem;
+    height: 1.25rem;
+    color: #666;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.actionButton {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.actionButton:hover {
+    background: #f5f5f5;
+}
+
+.actionIcon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: #666;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-left: 1rem;
+    /* border-left: 1px solid #eee; */
+}
+
+.profileImage {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.profileInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.profileName {
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.profileRole {
+    font-size: 0.75rem;
+    color: #666;
+}
+
+/* Media Query for smaller screens */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+    .header {
+        left: 200px; /* Adjust header when the sidebar is smaller */
+    }
+}
