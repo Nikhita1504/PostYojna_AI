@@ -43,7 +43,7 @@ EventsRouter.post('/add', async (req, res) => {
 });
 
 // Route to delete an event by ID
-EventsRouter.delete('/:id', async (req, res) => {
+EventsRouter.delete('/delete/:id', async (req, res) => {
     const { id } = req.params;
 
     try {
