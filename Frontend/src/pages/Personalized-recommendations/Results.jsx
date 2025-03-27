@@ -117,38 +117,50 @@ const Results = () => {
       <main className={styles.content}>
         {/* Progress Bars */}
         <section className={styles.progressSection}>
-          {filteredSchemes.map((scheme, index) => (
-            <div key={index} className={styles.progressItem}>
-              <span className={styles.schemeAbbr}>{scheme.abbreviation}</span>
-              <div className={styles.progressBarContainer}>
-                <div
-                  className={`${styles.progressBar} ${
-                    scheme.successScore > 70
-                      ? styles.lowRisk
-                      : scheme.successScore > 30
-                      ? styles.mediumRisk
-                      : styles.highRisk
-                  }`}
-                  style={{
-                    width: `${scheme.successScore}%`,
-                  }}
-                ></div>
-              </div>
-              <span className={styles.successScore}>{scheme.successScore}%</span>
-            </div>
-          ))}
-          <div className={styles.legend}>
-            <div className={styles.legendItem}>
-              <div style={{ backgroundColor: "#34c759" }}></div> Low Risk (71-100%)
-            </div>
-            <div className={styles.legendItem}>
-              <div style={{ backgroundColor: "#ffcc00" }}></div> Medium Risk (31-70%)
-            </div>
-            <div className={styles.legendItem}>
-              <div style={{ backgroundColor: "#ff3b30" }}></div> High Risk (0-30%)
+  <h2>Scheme Performance</h2>
+  <div className={styles.progressGrid}>
+    {filteredSchemes.map((scheme, index) => {
+      const riskLevel = getRiskLevel(scheme.successScore);
+      return (
+        <div key={index} className={styles.progressCard}>
+          <div className={styles.progressHeader}>
+            <span className={styles.schemeAbbr}>{scheme.abbreviation}</span>
+            <span className={styles.schemeName}>{scheme.fullName}</span>
+          </div>
+          
+          <div className={styles.progressContainer}>
+            <div 
+              className={`${styles.progressBar} ${styles[riskLevel.toLowerCase() + 'Risk']}`}
+              style={{ '--progress': `${scheme.successScore}%` }}
+            >
+              <span className={styles.progressText}>{scheme.successScore}%</span>
             </div>
           </div>
-        </section>
+          
+          <div className={styles.progressMeta}>
+            <span>Interest: {scheme.interestRate}</span>
+            <span>Min: {scheme.minInvestment}</span>
+          </div>
+        </div>
+      );
+    })}
+  </div>
+  
+  <div className={styles.legend}>
+    <div className={styles.legendItem}>
+      <div className={`${styles.legendColor} ${styles.lowRisk}`}></div>
+      <span>Low Risk (71-100%)</span>
+    </div>
+    <div className={styles.legendItem}>
+      <div className={`${styles.legendColor} ${styles.mediumRisk}`}></div>
+      <span>Medium Risk (31-70%)</span>
+    </div>
+    <div className={styles.legendItem}>
+      <div className={`${styles.legendColor} ${styles.highRisk}`}></div>
+      <span>High Risk (0-30%)</span>
+    </div>
+  </div>
+</section>
 
         <section className={styles.detailsSection}>
           <h2>Scheme Details</h2>

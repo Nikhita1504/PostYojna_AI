@@ -7,6 +7,7 @@ import styles from './Calendar.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faList, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
 
 const localizer = momentLocalizer(moment);
 
@@ -52,6 +53,7 @@ const CalendarComponent = () => {
 
         try {
             const response = await axios.post('http://localhost:3000/events/add', newEvent);
+            toast.success("Event added successfully")
             if (response.status === 201) {
                 setEvents((prevEvents) => [...prevEvents, newEvent]);
                 setIsModalOpen(false);
@@ -69,21 +71,27 @@ const CalendarComponent = () => {
 
     const handleDeleteEvent = async () => {
         if (!eventToDelete) return;
-        console.log(eventToDelete)
-
+        console.log('Deleting event with ID:', eventToDelete._id);
+    
         try {
-            const response = await axios.delete(`http://localhost:3000/events/${eventToDelete._id}`);
-            if (response.status === 200) {
-                setEvents((prevEvents) =>
-                    prevEvents.filter((event) => event.id !== eventToDelete.id)
+            const response = await axios.delete(`http://localhost:3000/events/delete/${eventToDelete._id}`);
+    
+            if (response.status >= 200 && response.status < 300) {
+                setEvents(prevEvents => 
+                    prevEvents.filter(event => event._id !== eventToDelete._id)
                 );
+                toast.error("Event removed successfully")
                 setIsDeleteModalOpen(false);
                 setEventToDelete(null);
+                
+                // Optional: Show success message
             } else {
                 console.error('Error deleting event:', response.data.message);
+                // Show error to user
             }
         } catch (error) {
             console.error('Error deleting event:', error);
+            // Show error to user
         }
     };
 
@@ -97,6 +105,7 @@ const CalendarComponent = () => {
     };
 
     return (
+        <>
         <div className={styles.bigCon}>
             <div className={styles.calendarContainer}>
             <div className={styles.imageWrapper}>
@@ -224,6 +233,8 @@ const CalendarComponent = () => {
             )}
         </div>
         </div>
+        <ToastContainer/>
+        </>
     );
 };
 

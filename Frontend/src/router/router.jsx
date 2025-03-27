@@ -16,6 +16,7 @@ import PredictAccountOpening from "../pages/PredictAccountOpening";
 import Recommendations from "../pages/Feedback/recommendations/Recommendations";
 import RecommendationPage from "../pages/demographic-insights/graphs/RecommendationPage";
 import Results from "../pages/Personalized-recommendations/Results";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
       },
       {
         path: "login",
+
         element: <Login></Login>,
       },
       {
