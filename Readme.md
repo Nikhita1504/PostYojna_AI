@@ -15,9 +15,19 @@
 
 - 🎙 **Voice-Based Feedback Analysis (NLP)**  
   Uses Natural Language Processing to analyze feedback from events, enabling continuous service improvement.
-  
-![WeFit Banner](Frontend/src/assets/postyojnaai.png)    
-![WeFit Banner](Frontend/src/assets/2.png)    
-![WeFit Banner](Frontend/src/assets/3.png)    
+ <br><br> 
+![WeFit Banner](Frontend/src/assets/postyojnaai.png)  
+<br><br>
+
+![WeFit Banner](Frontend/src/assets/2.png)  
+<br><br>
+
+![WeFit Banner](Frontend/src/assets/3.png)  
+<br><br>
+
+![WeFit Banner](Frontend/src/assets/4.png)  
+<br><br>
+
+![WeFit Banner](Frontend/src/assets/5.png)  
 
   
