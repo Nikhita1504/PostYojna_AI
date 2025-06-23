@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChartSimple, faEye } from '@fortawesome/free-solid-svg-icons';
 
-// Sample data
+
 const staticRecommendations = 
   [
     {
@@ -319,7 +319,46 @@ const RecommendationPage = () => {
 
   }, []);
 
+  // Updated useEffect in your React component
+useEffect(() => {
+  const { state, district } = currlocation;
+  if (!state || !district) return;
 
+  const callModelAPI = async () => {
+    try {
+      console.log('Calling model API with:', { state, district });
+      
+      const response = await axios.post('http://localhost:6000/api/analyze', 
+        {
+          state,
+          district_id: null
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          timeout: 10000, // 10 second timeout
+        }
+      );
+      
+      console.log("Model Output:", response.data);
+    } catch (err) {
+      console.error("Error calling model API:", err);
+      
+      // More specific error handling
+      if (err.code === 'ERR_NETWORK') {
+        console.error("Network error - check if Flask server is running on port 6000");
+      } else if (err.response) {
+        console.error("Server responded with error:", err.response.status, err.response.data);
+      } else {
+        console.error("Other error:", err.message);
+      }
+    }
+  };
+
+  callModelAPI();
+}, [currlocation]);
+  
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -403,7 +442,7 @@ const RecommendationPage = () => {
       <div className={styles.innerCon}>
         <img src="/assets/fullbanner.png" alt="Banner" />
         <div className={styles.btnCon}>
-          <h4>Scheme Recommendations 
+          <h4>Scheme Recommendations for {currlocation.district}
             {/* for {currlocation.district} */}
             </h4>
           <div className={styles.buttonblock} >

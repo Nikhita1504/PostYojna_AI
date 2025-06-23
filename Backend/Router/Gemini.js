@@ -5,7 +5,7 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 const { json } = require("body-parser");
 const {FeedbackModel} = require("../model/db");
 
-const genAI = new GoogleGenerativeAI("AIzaSyCn5UAt76WC7GZ--09qAzHd29mgz8G86TI");
+const genAI = new GoogleGenerativeAI("AIzaSyBTlidK061nEN1SkJ3A1XIy_DbpX_5ZdoQ");
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 
