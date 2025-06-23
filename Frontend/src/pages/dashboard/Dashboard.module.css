@@ -3,7 +3,7 @@
 
 .dashboard {
   font-family: "Roboto", serif;
-  margin-left: 270px; /* Adjust for sidebar width */
+  margin-left: 270px; 
   background-color: #f8f9fa;
   color: #333;
   height: 100vh;
