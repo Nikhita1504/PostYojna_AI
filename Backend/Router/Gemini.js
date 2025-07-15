@@ -17,7 +17,7 @@ GeminiRouter.post("/listen", async (req, resq) => {
   const result = await model.generateContent(prompt);
 
   try {
-    // Assuming the response is an object, you may need to access the content like this:
+
     if (result && result.response && result.response.text) {
       console.log(result.response.text());
       const res = result.response.text();
@@ -58,7 +58,7 @@ GeminiRouter.post("/get-district/", async (req, res) => {
 
     const result = await model.generateContent(prompt);
     var r;
-    // Assuming the response is an object, you may need to access the content like this:
+
     if (result && result.response && result.response.text) {
       const res = result.response.text();
 

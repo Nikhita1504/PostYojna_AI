@@ -181,56 +181,55 @@ const staticRecommendations =
   
 
 const ProgressCircle = ({ score }) => {
-  const scaledScore = Math.round(score * 100); // Scale score to 0-100
-  const radius = 40; // Circle radius
+  const scaledScore = Math.round(score * 100); 
+  const radius = 40; 
   const circumference = 2 * Math.PI * radius;
-  const [offset, setOffset] = useState(circumference); // Start with full offset (0% progress)
-  const [count, setCount] = useState(0); // State to track the counting number
+  const [offset, setOffset] = useState(circumference); 
+  const [count, setCount] = useState(0); 
 
-  // Animate progress circle and count
+
   useEffect(() => {
     let start = 0;
-    const end = scaledScore; // Final value (scaled)
-    const duration = 1000; // Duration of the counting animation in ms
-    const stepTime = end > 0 ? duration / end : duration; // Avoid divide-by-zero
+    const end = scaledScore; 
+    const duration = 1000; 
+    const stepTime = end > 0 ? duration / end : duration;
 
-    // Smoothly animate stroke-dashoffset
+
     const progressTimeout = setTimeout(() => {
       setOffset(circumference - (scaledScore / 100) * circumference);
-    }, 400); // Delay for better animation syncing
+    }, 400); 
 
-    // Animate the count
+
     const interval = setInterval(() => {
       if (start < end) {
         start++;
         setCount(start);
       } else {
-        clearInterval(interval); // Stop once the count reaches the target
+        clearInterval(interval); 
       }
     }, stepTime);
 
     return () => {
-      clearTimeout(progressTimeout); // Cleanup timeout
-      clearInterval(interval); // Cleanup interval
+      clearTimeout(progressTimeout); 
+      clearInterval(interval); 
     };
   }, [scaledScore, circumference]);
 
-  // Function to get dynamic gradient based on the scaled score
+
   const getGradientColors = () => {
     if (scaledScore >= 85) {
-      return { start: "#28a745", end: "#85d94e" }; // Green gradient
+      return { start: "#28a745", end: "#85d94e" };
     } else if (scaledScore >= 60) {
-      return { start: "#ffc107", end: "#ffeb3b" }; // Yellow gradient
+      return { start: "#ffc107", end: "#ffeb3b" };
     } else {
-      return { start: "#dc3545", end: "#ff6b6b" }; // Red gradient
-    }
+      return { start: "#dc3545", end: "#ff6b6b" };   }
   };
 
   const { start, end } = getGradientColors(); // Destructure gradient colors
 
   return (
     <svg width="120" height="120" style={{ display: "block", margin: "auto" }}>
-      {/* Gradient Definition */}
+
       <defs>
         <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" stopColor={start} />
@@ -238,7 +237,7 @@ const ProgressCircle = ({ score }) => {
         </linearGradient>
       </defs>
 
-      {/* Background Circle */}
+
       <circle
         cx="60"
         cy="60"
@@ -247,29 +246,29 @@ const ProgressCircle = ({ score }) => {
         stroke="#eee"
         strokeWidth="8"
       />
-      {/* Progress Circle */}
+
       <circle
         cx="60"
         cy="60"
         r={radius}
         fill="transparent"
-        stroke="url(#progressGradient)" // Apply gradient as stroke
+        stroke="url(#progressGradient)" 
         strokeWidth="8"
         strokeDasharray={circumference}
         strokeDashoffset={offset}
         style={{
-          transition: "stroke-dashoffset 1s ease-in-out", // Smooth animation for progress
-          transform: "rotate(-90deg)", // Rotate to start at 12 o'clock
-          transformOrigin: "50% 50%", // Set the transform origin to the center of the circle
+          transition: "stroke-dashoffset 1s ease-in-out", 
+          transform: "rotate(-90deg)", 
+          transformOrigin: "50% 50%",
         }}
       />
-      {/* Percentage Text */}
+
       <text
         x="50%"
         y="50%"
         dy=".3em"
         textAnchor="middle"
-        fontSize="24" // Increased font size for better readability
+        fontSize="24" 
         fill="#333"
       >
         {count}%
@@ -309,17 +308,17 @@ const RecommendationPage = () => {
     } catch (error) {
       console.log(error)
     } finally {
-      setFetchingDistrict(false); // Stop loading for district
+      setFetchingDistrict(false); 
     }
   }
-  // console.log(currlocation.district);
+
 
   useEffect(() => {
     fetchingDistrict(locationName);
 
   }, []);
 
-  // Updated useEffect in your React component
+
 useEffect(() => {
   const { state, district } = currlocation;
   if (!state || !district) return;
