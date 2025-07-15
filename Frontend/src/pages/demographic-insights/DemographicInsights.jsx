@@ -11,9 +11,9 @@ function DemographicInsights() {
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation(); // Hook to access the current location
+  const location = useLocation(); 
 
-  // Function to handle the search and fetch data from backend
+
   const handleSearch = async (e) => {
     e.preventDefault();
     if (searchQuery.trim() === '' || searchQuery.length <= 3) return;
@@ -33,7 +33,7 @@ function DemographicInsights() {
     }
   };
 
-  // Function to handle selecting a location from the list
+
   const handleSelectLocation = (location) => {
     setSelectedLocation({
       display_name: location.display_name,
@@ -49,16 +49,15 @@ function DemographicInsights() {
   };
 
 
-  // Reset selectedLocation if user navigates back from the graph page
+
   useEffect(() => {
     if (location.pathname !== '/demographic-insights/graphs') {
       setSelectedLocation(null);
     }
-  }, [location.pathname]); // Trigger the effect whenever the location changes
+  }, [location.pathname]); 
 
 
 
-  // Effect to trigger search after 3 characters are typed
   useEffect(() => {
     if (searchQuery.length > 3) {
       handleSearch({ preventDefault: () => { } });
@@ -111,7 +110,7 @@ function DemographicInsights() {
           </div>
 
 
-        {/* Show Loading Spinner */}
+
         {loading && (
           <div className={styles.loader}>
             <div className={styles.spinner}></div>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import L, { marker } from "leaflet";
-import "leaflet/dist/leaflet.css"; // Leaflet styles
-import { MaptilerLayer } from "@maptiler/leaflet-maptilersdk"; // Import MaptilerLayer properly
+import "leaflet/dist/leaflet.css"; 
+import { MaptilerLayer } from "@maptiler/leaflet-maptilersdk"; 
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./Maps.module.css";
 
@@ -10,14 +10,14 @@ const Maps = () => {
   const [currentCity, setCurrentCity] = useState("Bihar");
   const [markerInstance, setMarkerInstance] = useState(null);
 
-  const cityRef = useRef(currentCity); // Use a ref to store the latest city name
+  const cityRef = useRef(currentCity); 
   cityRef.current = currentCity;
   const location = useLocation();
 
   const locationpoint = location.state?.locationpoint;
   const coordinatess = locationpoint
     ? [locationpoint.lat, locationpoint.lon]
-    : [23.2599, 77.4126]; // Default to India's center
+    : [23.2599, 77.4126];
   function createPopupContent(city) {
     return `
       <div>
@@ -29,7 +29,7 @@ const Maps = () => {
   }
 
   function getLocationDetailsFromMapTiler(lat, lng) {
-    const apiKey = "HueEivR2h00OamtE2H00"; // Replace with your API key
+    const apiKey = "HueEivR2h00OamtE2H00"; 
     const url = `https://api.maptiler.com/geocoding/${lng},${lat}.json?key=${apiKey}`;
 
     fetch(url)
@@ -78,14 +78,14 @@ const Maps = () => {
 
     // Add the MapTiler Layer
     const mtLayer = new MaptilerLayer({
-      apiKey: "HueEivR2h00OamtE2H00", // Replace with your MapTiler API key
-      style: "https://api.maptiler.com/maps/basic-v2/style.json", // Choose a MapTiler style
+      apiKey: "HueEivR2h00OamtE2H00", 
+      style: "https://api.maptiler.com/maps/basic-v2/style.json",
     });
 
-    // Add the layer to the map
+
     mtLayer.addTo(map);
 
-    // Optional: Add scale or other controls
+
     L.control.scale().addTo(map);
 
     return () => {

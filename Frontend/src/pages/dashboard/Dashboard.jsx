@@ -1,30 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { ResponsivePie } from "@nivo/pie"; // For the pie chart
-import styles from "./Dashboard.module.css"; // Import the CSS module
+import styles from "./Dashboard.module.css"; 
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import HashLoader from "react-spinners/HashLoader";
-import {
-  Chart as ChartJS,
-  ArcElement, // Required for Pie Chart
-  LineElement, // Required for Line Chart
-  CategoryScale, // X-axis scale
-  LinearScale, // Y-axis scale
-  PointElement, // Points on Line Chart
-  Tooltip, // Tooltip plugin
-  Legend, // Legend plugin
-} from "chart.js";
-import { Line } from "react-chartjs-2";
-import { Pie } from "react-chartjs-2";
-import { FaMapMarkerAlt } from "react-icons/fa";
-import { FaUsers, FaChartLine, FaUserPlus, FaDollarSign } from "react-icons/fa"; // Import the icons
+import { FaUsers, FaChartLine, FaUserPlus, FaDollarSign } from "react-icons/fa"; 
 import { BiRupee } from "react-icons/bi";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import DashboardBarChart from "./DashboardLineChart";
 import CountUp from "react-countup";
-import CylindricalColumn from "../demographic-insights/graphs/charts/CylindricalColumn";
-import CylindricalColumnDashboard from "./DashboardLineChart";
 
 import ReactStars from "react-rating-stars-component";
 
@@ -56,59 +39,29 @@ const getIcon = (iconName) => {
     case "BiRupee":
       return <BiRupee size={30} color="#000000" />;
     default:
-      return null; // Fallback in case the icon name is not recognized
+      return null; 
   }
 };
 
 const Dashboard = () => {
   const [Feedback, SetFeedback] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
+  // const [searchQuery, setSearchQuery] = useState("");
   const [locations, setLocations] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+
+
   const location = useLocation();
   const [selectedScheme, setSelectedScheme] = useState(schemes[0]);
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState("");
   const [locationName, setlocationName] = useState("");
   const [dashboardData, setDashboardData] = useState({});
-  // Debounce logic
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedSearchQuery(searchQuery);
-    }, 500); // 500ms debounce
 
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [searchQuery]);
+  
 
   const handleSchemeChange = (e) => {
     setSelectedScheme(e.target.value);
   };
 
-  const handleSearch = async (query) => {
-    if (!query || query.trim() === "" || query.length <= 3) return;
-
-    setLoading(true);
-    try {
-      const response = await axios.get(
-        "http://localhost:3000/search/location",
-        {
-          params: { query },
-        }
-      );
-      setLocations(response.data);
-    } catch (error) {
-      console.error("Error fetching location data:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    handleSearch(debouncedSearchQuery);
-  }, [debouncedSearchQuery]);
-
+  
   const fetchfeedback = async () => {
     SetFeedback([]);
     const response = await axios(
@@ -199,7 +152,7 @@ const Dashboard = () => {
                 <div
                   className={styles.metricCard}
                   key={index}
-                  style={{ background: gradients[index % gradients.length] }} // Apply gradient dynamically
+                  style={{ background: gradients[index % gradients.length] }} 
                 >
                   <div className={styles.metricValues}>
                     {getIcon(metric.icon)}

@@ -12,13 +12,13 @@ SearchRouter.get('/location', async (req, res) => {
     }
   
     try {
-        // Making a request to the Nominatim API to search for the place
+
         const response = await axios.get('https://nominatim.openstreetmap.org/search', {
             params: {
                 q: query,
                 format: 'json',
                 addressdetails: 1,
-                countrycodes: 'IN', // Restrict to India (you can modify this as needed)
+                countrycodes: 'IN', 
             },
         });
 
